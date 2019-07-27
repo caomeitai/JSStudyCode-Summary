@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+// 在函数中使用变量的值，如何确定？
+//     let a = 1;
+//     function f(){
+//       console.log(a);
+//    }
+//    function g(){
+//        let a = 2;
+//        f(); 
+//    }
+//    g()
+// 为什么函数内部的变量，在函数的外部无法访问
+// 因为定义在函数内部的变量都是局部变量，
+//而在函数外部访问的代码是全局代码，必须去全局执行上下文中寻找变量，而全局变量中并没有，所以无法访问
+  function f(){
+      let a = 1;
+
+  }
+  f();
+  console.log(a);   
+</script>
+</html>

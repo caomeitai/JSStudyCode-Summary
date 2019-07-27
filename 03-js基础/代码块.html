@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 虽然说本代码块因为没有定义a变量导致错误，
+    // 但并不影响下面其它代码块
+   console.inf(a);
+   console.log(a);
+</script>
+<script>
+    //console.log(a);
+    var a = 10;
+    console.log(a);
+</script>
+<script>
+    // 注意声明与调用的顺序
+    //console.log(b);
+    function  f(){
+        var b = 12;
+        console.log(b);
+        // 上面代码块的值在下面代码块可以使用，但下面的代码块内容上面不能使用
+        console.log(a);
+    }
+    f()
+     console.log(a);
+</script>
+
+
+</html>

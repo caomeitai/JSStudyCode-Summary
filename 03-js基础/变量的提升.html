@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+   console.log(a);
+   console.log(b);
+//    if不是函数，在此时提升的时候就仅仅是变量的提升
+   if(true){
+       var a = 1;
+   }else{
+       var b = 1;
+   }
+   console.log(a);
+//    因为代码else中没有执行，仍然为undifined
+   console.log(b);
+</script>
+<script>
+    // 循环变量的提升
+   console.log(i);
+//    for是全局变量
+   for(var i = 0;i<=5;i++)
+   console.log(i);
+</script>

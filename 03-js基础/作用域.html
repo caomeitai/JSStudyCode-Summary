@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 全局作用域，与局部作用域的区别与联系
+    // 定义的在函数外边，是全局作用域
+    // let a = 100;
+    // function f(){
+        // 在函数里面定义的叫做局部作用域
+        // let b = 2;
+        // 在局部作用域中,可以访问外面的全局变量
+    //     console.log(a);
+    //     console.log(b);
+    // }
+    // f()
+    // 在全局范围中,不可以访问局部作用域中的局部变量
+    // console.log(b);
+// 块级作用域  let{}
+  let a = 12;//这虽然有let 但仍然没有形成块级作用域
+  {
+      let c = 3;
+      console.log(c);
+  }
+  function f(){
+    //   只有在{}里面才存在着块级作用域
+      let b = 1;
+      console.log(b);
+  }
+  f()
+</script>
+</html>

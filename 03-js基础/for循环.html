@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    // for循环的基本结构
+    // for(let i=1;i<=5;i++){
+    //     console.log(i);
+    // }
+//案例1：计算0~100的和
+// let sum = 0;
+// for(let i=0;i<=100;i++){
+//      sum=sum+i;
+// } 
+// console.log(sum);
+// 案例2：操场一圈是400m   跑10圈   一共跑了多少m？
+// let distance = 0;
+// for(let i=1;i<=10;i++){
+//     distance+=400;
+// }
+// console.log(distance);
+// 案例3：九九乘法表 
+// let string="";
+// for(let i=1;i<=9;i++){
+//    for(j=1;j<=i;j++){
+//        string+=i+"*"+j+"="+i*j;//空字符串加上乘法算数式的格式
+//        string+=" ";//因为并成一排，所以通过加上空格来使其有空隙
+//     }
+//    string+="\n";//换行
+// }
+// console.log(string);
+//案例4：百钱买百鸡  今有鸡翁一，值钱伍；鸡母一，值钱三；鸡鶵三，值钱一。
+//凡百钱买鸡百只，问鸡翁、母、鶵各几何？
+// 初始化每种鸡的个数
+// let cock = 0;
+// let hen = 0;
+// let chick = 0;
+// for(cock=0;cock<=100;cock++){
+//     for(hen=0;hen<=100;hen++){
+//         for(chick=0;chick<=100;chick++){
+//             if(cock+hen+chick==100 && cock*5+hen*3+chick/3==100)
+//             {
+//                 console.log(cock+"--"+hen+"--"+chick);
+//             }
+//         }
+//     }
+// }
+</script>
+<!-- 靠记忆来码的代码 -->
+<script>
+//案例1：计算0~100的和
+// let sum = 0;
+// for(let i=0;i<=100;i++){
+//     sum+=i;
+// }
+// console.log(sum);//答案为5050
+//案例2：操场一圈是400m   跑10圈   一共跑了多少m？
+// let distance = 0;
+// for(let i=1;i<=10;i++){
+//     distance+=400;
+// }
+// console.log(distance);
+// 案例3：九九乘法表 
+// let string="";
+// for(let i=1;i<=9;i++){
+//     for(let j=1;j<=i;j++){
+//         string+=i+"*"+j+"="+i*j;
+//         string+=" ";
+//     }
+//     string+="\n"
+// }
+// console.log(string);
+//案例4：百钱买百鸡  今有鸡翁一，值钱伍；鸡母一，值钱三；鸡鶵三，值钱一。
+//凡百钱买鸡百只，问鸡翁、母、鶵各几何？
+// let cock = 0;
+// let hen = 0;
+// let chick = 0;
+// for(let cock=0;cock<=100;cock++){
+//     for(let hen=0;hen<=100;hen++){
+//         for(let chick=0;chick<=100;chick++){
+//             if(cock+hen+chick==100&&cock*5+hen*3+chick/3==100){
+//                   console.log(cock+"---"+hen+"---"+chick);
+//             }
+
+//         }
+//     }
+// }
+</script>
+<script>
+//  如果给你一堆数据[5,4,3,2,1]  把数据进行排序（冒泡排序）
+// function  bubbleSort(arr){
+//     for(let i=0;i<arr.length;i++){
+//         for(let j=0;j<arr.length-1-i;j++){
+//             if(arr[j]>arr[j+1]){
+//                 let c = arr[j+1];
+//                 arr[j+1]=arr[j];
+//                 arr[j]=c;
+//             }
+//         }
+
+//     }
+//     return arr;
+// }
+// let arr =[5,4,3,2,1]//定义完数组后
+// // 利用一个函数来进行排序
+// let newarr =bubbleSort(arr);
+// console.log(newarr); 
+function  f(arr){
+    for(let i=0;i<arr.length;i++){
+        for(let j=0;j<arr.length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                let c = arr[j+1];
+                arr[j+1]=arr[j];
+                arr[j]=c;
+
+            }
+        }
+     
+    }
+    return arr;
+}
+let arr =[6,5,4,3,2,1];
+let newarr = f(arr);
+console.log(newarr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+</script>
+</html>

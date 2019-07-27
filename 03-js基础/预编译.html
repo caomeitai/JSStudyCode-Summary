@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<!-- 预编译中的变量提升 -->
+<script>
+    // 如果变量存在提升，那么其值应为undefined
+    // console.log(a);
+    // var a = 10;
+    // console.log(a); 
+    //所以可以说变量的提升主要是var的提升
+    // console.log(b);//b is not defined
+    // b = 15;
+    // console.log(b);
+  
+</script>
+<!-- 预编译中的函数的提升 -->
+<script>
+
+    // function f(){
+        // 这时因为函数中存在着var a 所以就提升的了
+        // 以下代码转换成这样
+        //   var a;
+        //   console.log(a);//undefined
+        //   a = 10;
+        //   console.log(a);//10
+        // console.log(a);
+        // var a = 10;
+        // console.log(a);
+    // }
+    // f()
+    // 函数表达式的话是不会提升的，因为它相当于是一个变量
+    // 可以改写为这样
+    var b;//b 不是一个函数
+    b();
+    b = function g(){
+        var a = 10;
+        console.log(a);
+    }
+    b()
+    // b()
+    // var b = function g(){
+    //     var a = 10;
+    //     console.log(a);
+    // }
+    // b()
+</script>
+</html>

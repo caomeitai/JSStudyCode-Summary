@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //立即执行函数表达式是在一个函数声明后加上（）并将其整个用（）包起来或者只包起来函数声明，不包含函数调用
+    // (function f(){
+    //     console.log("g...");
+    // }())
+    // f()//这是手动函数调用，需要自己编写代码使函数调用
+    // (function f(){
+    //     console.log("f...");
+    // })()
+    // 还有其它几种立即函数执行表达式的写法
+
+    // +function g(){
+    //     console.log("g...");
+    // }()
+
+    // -function g(){
+    //     console.log("g...");
+    // }()
+
+    //  * function g(){
+    //     console.log("g...");
+    // }()
+    // !function g(){
+    //     console.log("g...");
+    // }()
+    // 在每次函数立即调用后不加分号当多个这样的立即执行函数表达式出现时是会出错的
+    (function f(){
+        console.log("f....");
+    }());
+    (function f(){
+        console.log("f....");
+    }())//(intermediate value)(...) is not a function
+</script>
+</html>

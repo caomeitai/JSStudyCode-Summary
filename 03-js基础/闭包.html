@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul> -->
+    
+</body>
+<script>
+    // 如果在一个函数中嵌套一个函数，并且里面函数引用外面函数变量
+    // function f(){
+    //     let a =110;
+    //     function g(){
+    //         console.log(a);//引用外面函数变量形成闭包
+    //     }
+    //     g()
+    // }
+    // f()
+
+    // debugger;
+    // function f(){
+    //     let a = 1;
+    //     function g(){
+    //         console.log(a);//形成闭包
+    //     }
+    //     return g;
+    // }
+    // f()()
+
+
+
+    // 点击事件问题解决方案：
+// 定义一个变量拿到li的元素的名字，即获得每一个li存放在lis中
+    //  var lis =document.getElementsByTagName("li")
+    // //  for 循环会立即执行
+    // for(var i=0;i<lis.length;i++){
+    //     // 事件的三要素  事件源  事件  事件发生后出现的结果（监听器）
+    //     lis[i].onclick = function(){
+    //         console.log(i)//每次出来结果都为4  for 循环会立即执行
+    //     }
+    // }
+// 解决方案1：使用let
+// let lis = document.getElementsByTagName("li")
+// for(let i=0;i<lis.length;i++){
+//     lis[i].onclick = function(){
+//         console.log(i);
+//     }
+// }
+// 解决方案2：利用的是this
+//  var lis = document.getElementsByTagName("li")
+// //  遍历拿到所有li的元素，但只可能从开始到数组长度结束
+//  for(var i=0;i<lis.length;i++){
+//     //  因为for是立即执行，所以就会直接显示出i的值
+//     //  console.log(i);//为了验证下标是否能打印出来
+//     //  此时拿到的是lis数组的下标属性，所以可以认为是将i保存到了lis数组的下标属性中即lis[i].index
+//     // 保存拿到元素的下标
+//      lis[i].index=i;
+//      lis[i].onclick = function(){
+//         //  console.log(lis[i].index);//Cannot read property 'index' of undefined
+//         // 在监听器中事件源需要使用this写代码
+//         console.log(this.index);
+
+//      }
+//  }
+// 解决方案3：使用闭包
+// var lis = document.getElementsByTagName("li");
+// for(var i= 0;i<lis.length;i++){
+//     // 分别打印出下标的值
+//     // console.log(i);
+//     // 将事件发生时出现的现象（监听器）也就是function（）{}变成立即调用函数表达式
+//     lis[i].onclick=(function(index){
+//         return function(){
+//              console.log(index);
+//         }
+//     }(i))
+// }
+// 练习
+// var lis = document.getElementsByTagName("li");
+// for(var i=0;i<lis.length;i++){
+//     // lis[i].onclick =function(){
+//     //     console.log(i);
+//     // }
+//     lis[i].onclick =(function(index){
+//         return function(){
+//             console.log(index);
+//         } 
+        
+//     }(i))
+// }
+
+</script>
+<script>
+    // 对于对象它可以拿到数据
+    var obj ={name:"wangcai"};
+    obj.age = 100;
+    console.log(obj.age);
+
+</script>
+
+</html>

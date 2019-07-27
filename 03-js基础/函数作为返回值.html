@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 定义一个函数表达式
+    let f =function(){
+        let g = function(){
+            console.log("g...");
+        }
+        // return g();//只有有返回值才可打印出来
+        // 在函数内部可以返回一个函数
+        return g;
+    } 
+    // 这两行代码表示将f函数的调用赋给了一个变量，这个变量代表着函数f调用后得到的返回值g而g是一个函数就会再次调用
+    // let res = f();
+    // res();
+    // f()()//f()表示调用了f函数得到返回值为g又加了个()便是调用了g函数
+
+    // console.log(f());
+</script>
+</html>

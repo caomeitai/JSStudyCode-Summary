@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body></body>
+<script>
+//   {
+//     // 只有在书写在let所在的块级作用域时，才会起作用，否则会出错。
+//       let a = 1;
+//       console.log(a);    
+//   }
+//   console.log(a);// a is not defined
+// {
+//     let a = 12;
+//     let b = 1;
+//     {
+//         let c = 2;
+        // 这一行中的a,b,起作用是因为它代码在装有a,b,c,
+        //声明和定义的大括号里，满足块级作用域
+//         console.log(a,b,c);
+//     }
+// }
+// console.log(a);
+// console.log(b);
+// console.log(c);
+</script>
+<script>
+    // function  f(){
+    //     let a = 10;
+    //     console.log(a);
+    // }
+    // f();
+</script>
+<script>
+    //let是不存在变量的提升的
+//     console.log(a);//Cannot access 'a' before initialization
+//    let a = 12;
+//    console.log(a);
+// var 具有变量提升的效果，let是不存在的
+// console.log(b);
+// console.log(a);
+// let a = 1;
+// var b = 2;
+
+</script>
+<script>
+//    var a = 1;
+//    let b = 2;
+//    console.log(window.a);
+//    因为let不会成为window对象的属性，所以其值为undefined
+//    console.log(window.b);
+</script>
+<script>
+    // let a = 0;
+    // let a = 1;
+    // var b = 0;
+    // var b = 1;
+    // 
+    // console.log(a);//Identifier 'a' has already been declared
+    // 对于var与let是不一样的，var如果出现重复声明，
+    //但仍然会有值的出现，不会出错
+    // console.log(b);
+</script>
+<script>
+//    暂存性死区:不能在声明之前就使用变量
+// console.log(a);//会出现这样的错误Cannot access 'a' before initialization
+// let a = 1;
+let a = 1;
+function f(){
+    // 在这也存在着在声明之前就调用的情况
+     console.log(a);
+     let a = 2;
+}
+f()
+
+</script>
+</html>

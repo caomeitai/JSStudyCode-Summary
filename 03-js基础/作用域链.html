@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+   let a  = 1;
+   let f = function(){
+       let a = 2;
+       let b = 1;
+       let f1 = function(){
+           let c = 1;
+           let f11 = function(){
+               console.log(a,b,c)
+           }
+           f11();
+       }
+       f1();
+       console.log(a,b)
+    //    console.log(c)
+
+   }
+   f()
+//    把一个函数定义到另一个函数内部原因
+//    f1()//此时f1（）被封装到定义到一个函数内部，它不能够在外面调用，不能直接被访问
+</script>
+</html>

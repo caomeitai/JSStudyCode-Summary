@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//    arguments是函数内部的属性（类数组），所以只能在函数内部访问，而不能在函数外部访问
+    // let a =[1,2,3];
+    // function f(){
+    //     console.log(arguments);//直接表示为实参传递给形参的数据
+    // }
+
+    // // console.log(arguments);//会出错的，它只能在函数内部访问
+    // f(23,34,45);
+    // f("f...")
+    // arguments与形参之间的关系
+    function f(x,y){
+        console.log(x);
+        arguments[0]=2;
+        console.log(arguments);
+        console.log(x);
+        console.log(y);
+        return x+y;
+    }
+
+</script>
+</html>

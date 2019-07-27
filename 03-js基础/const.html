@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 不能够重复声明
+//    const  PI = 3.14;//Identifier 'PI' has already been declared
+//    const  PI = 2.5;
+// 立即进行初始化
+// const  a = 1;
+//Missing initializer in const declaration
+// const b;//给常量进行声明必须赋予变量值
+// 不存在提升现象
+// console.log(b);//Cannot access 'b' before initialization
+// const b = 1;
+// console.log(b);
+</script>
+<script>
+    // 定义完后，不能修改值(基本数据类型，也可能是地址)
+    // 是变量在栈区的值不能改动，保存的数据在堆区的信息是可以改动的
+    // 仅仅是在定义常量以后，又修改了常量的值（基本数据类型）
+    // const a = 1;
+    // a = 3;
+    // console.log(a);
+    // 仅仅是在定义常量以后，又修改了常量的值（地址）
+    const obj = {name:"wangcai"};
+    console.log(obj);
+    // 要想避免这种错误可以单单添加或修改定义常量所对应的一个属性
+    // obj.age = 100;
+    // console.log(obj);
+    // 此时相当于又重新分配了个新的内存地址赋值给了obj这个常量
+     obj = {age:100};
+</script>
+</html>

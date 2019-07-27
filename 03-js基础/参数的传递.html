@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//参数传递中，对于基本数据类型的传递当形参改变时，实参不变 
+    // let x = 1;
+    // function f(a){
+    //     a = 2;
+    // }
+    // f(x);
+    // console.log(x);
+//参数传递中，对于应用数据类型的传递当形参改变时，实参也会发生变化
+//    let x = [1,2];
+//    function f(a){
+//        a[0] = 3;
+//    }  
+//    f(x);
+//    console.log(x);   
+// let a = [1];
+// function f(a){
+//     a[100]= 3;
+//     a=[1,2,3];
+// }
+// f(a);
+// console.log(a);//这是打印的是全局变量的a值为：【1............................3】
+// let a = [1];
+// function f(xy){
+//     xy[100]=3;
+// }
+// f(a);
+// console.log(a);//和前面挺相似的
+//函数可以作为另一个函数的参数
+
+</script>
+<script>
+//    function add(a,b){
+//        return a+b;
+//     }
+//     function sub(a,b){
+//         return a-b;
+//     }
+//     function compute(f,a,b){//此处的f指的是函数，同时也是形参，a,b为形参
+//         return f(a,b);
+//     }
+//     let rs = compute(add,1,2);//相当于调用了compute这个函数return add(1,2),同时调用了add函数，最后发回add函数的返回值
+//     console.log(rs);
+// 常见写法形式
+function compute(f,a,b){
+    return f(a,b);
+}
+let res = compute(function add(x,y){
+    return x+y;
+},1,2);
+console.log(res);
+// 典型例子：定时器
+// setTimeout(function(){
+//    console.log(123)
+// },3000)
+</script>
+</html>

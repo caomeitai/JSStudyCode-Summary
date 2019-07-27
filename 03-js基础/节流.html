@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+       .box{
+           width: 400px;
+           height: 400px;
+           background-color: skyblue;
+       }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    // 应用1：实现节流函数
+    // let f = document.getElementsByTagName("div")[0]
+    // // console.log(div);
+    // // 绑定事件的两种方式：div.onclick = function(){}   div.addEventListener("onclick",function(){})
+    // // 功能是：发生的事件是只要鼠标一移动就打印
+    // f.addEventListener("mousemove",function(){
+    //     console.log("鼠标移动了"+Date.now())
+    // })
+    // 功能是：鼠标在盒子上移动每隔2000ms打印一次
+    // let div = document.getElementsByTagName("div")[0]
+    // function k(){
+    //     let now =Date.now()
+    //     function m(){
+    //         if(Date.now()-now>2000){
+    //            console.log("鼠标移动了"+Date.now())
+    //            now = Date.now();
+    //         }else{
+    //             console.log("时间还没到...")
+    //         }
+    //     }
+    //     return m;
+
+    // }
+    // var g = k();//调用了k函数,只不过把函数赋给了一个变量
+    // div.addEventListener("mousemove",g)
+
+    // 练习理解加默写
+    let div = document.getElementsByTagName("div")[0];
+    console.log(div);
+    div.addEventListener("mousemove",function(){
+        console.log("鼠标移动了"+Date.now());
+    })
+
+
+    // let div = document.getElementsByTagName("div")[0];
+    // function k(){
+    //     let now= Date.now();//记录一下鼠标移动前的时间
+    //     function m(){
+    //         if(Date.now()-now>2000){
+    //             console.log("鼠标移动了"+Date.now());
+    //             now = Date.now();//在打印完鼠标在移动后重新更新当前时间
+    //         }else{
+    //             console.log("时间还未到")
+    //         }
+    //     }
+    //     return m;//记住要返回调用函数值
+    //     // console.log(m);
+    // }
+    // let g = k();
+    // div.addEventListener("mousemove",g);
+</script>
+<script>
+//  应用2:让一个函数只能被调用指定次数（之前不是想调用几次就几次吗）
+function  f(){
+    console.log(1)
+}
+f()
+f()
+</script>
+</html>

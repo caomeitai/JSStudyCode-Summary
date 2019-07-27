@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 由此可见局部变量只可在函数内部调用，而全局变量可以在函数内外任意调用。
+    var a = 12;
+    function g(){
+        var b = 11;
+        console.log(b);
+        console.log(a);
+    }
+    g()
+    console.log(a);
+    console.log(b);
+
+</script>
+</html>
