@@ -1,0 +1,14 @@
+/* 在css选择器中ID选择器优先级更高，紧接着是class选择器，最后才是标签选择器 */
+p{color: red;}
+       .p1{
+           color: blue;
+       }
+       .box{
+           color: pink;
+       }
+       #haha{
+           color: purple;
+       }
+       #you{
+           color: aqua;
+       }

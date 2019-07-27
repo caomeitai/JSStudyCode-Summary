@@ -1,0 +1,13 @@
+*{margin: 0;padding: 0;}
+div{
+    /* 宽高表示着盒子的内容，边框在书写时一般情况下先写粗细程度，边框的线型，最后为颜色。 */
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    background: yellow;
+    padding: 20px;
+    margin: 50px;
+    background: url(../imgs/1.jpg)
+    
+
+}
