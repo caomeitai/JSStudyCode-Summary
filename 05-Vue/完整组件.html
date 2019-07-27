@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       <hello></hello>
+    </div>
+    <template id="yo">
+        <div>
+            <h1>防弹少年团</h1>
+            <ul>
+                <li>jin</li>
+                <li>suga</li>
+                <li>hope</li>
+            </ul>
+            <p>{{info}}</p>
+        </div>
+    </template>
+</body>
+<script>
+    // 1，定义一个组件
+    let hello = {
+        template:"#yo",
+        // 除了app这个父组件之外，后面子组件数据都是data函数，并且要return一个对象，数据放对象中
+      data(){
+          return{
+              info:"hello bts~"
+          }
+      }
+    }
+   let app = new Vue({
+       el:"#app",
+       data:{},
+       components:{
+        // 2，注册组件
+           hello,
+       }
+   })
+</script>
+</html>

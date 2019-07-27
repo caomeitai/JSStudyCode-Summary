@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 练习 -->
+        <!-- 直接使用插值表达式 -->
+        <p>{{pi}}</p>
+        <p>{{pi | fixed}}</p>
+        <p>{{pi | fixed1(2)}}</p>
+        <p>{{pi | fixed1(4)}}</p>
+        <p>{{pi|insertBefore}}</p>
+        <p>{{pi|fixed|insertBefore}}</p>
+        <p>{{pi|fixed|insertBefore1("%")}}</p>
+
+
+
+
+        <!-- <p>{{pi}}</p>
+        <p>{{pi|fixed}}</p>
+        <p>{{pi|fixed1(2)}}</p>
+        <p>{{pi|fixed1(4)}}</p>
+        <p>{{pi|fixed|insertBefore}}</p>
+        <p>{{pi|insertBefore1("#")}}</p> -->
+         <!-- 不带参数的过滤器 -->
+        <!-- <p>{{pi|fixed}}</p> -->
+        <!-- 带参数的过滤器 -->
+        <!-- <p>{{pi|fixed1(1)}}</p>
+        <p>{{pi|fixed1(3)}}</p> -->
+         <!-- 两个过滤器一起使用 -->
+        <!-- <p>{{pi | fixed | insertBefore }}</p>
+        <p>{{pi | insertBefore2("&") }}</p> -->
+    </div>
+</body>
+<script>
+    let app = new Vue({
+        el:"#app",
+        data:{
+            pi:3.1415926,
+        },
+        methods:{},
+        computed:{},
+        filters:{
+            fixed(data){
+                return data.toFixed(2);
+            },
+            fixed1(data,n){
+                return data.toFixed(n);
+            },
+            insertBefore(data){
+                return "$"+data;
+
+            },
+            insertBefore1(data,s){
+                return s+data;
+
+            }
+        }
+    })
+
+//    var app = new Vue({
+//        el:"#app",
+//        data:{
+//            pi:3.1415926
+//        },
+//        methods:{},
+//        computed:{},
+//        filters:{
+//            fixed(data){
+//                return data.toFixed(2);
+
+//            },
+//            fixed1(data,n){
+//                return data.toFixed(n)
+//            },
+//            insertBefore(data){
+//                return "$"+data;
+//            },
+//            insertBefore1(data,s){
+//                return s+data;
+//            }
+
+        //    不带参数，仅仅传的数据
+        //    fixed(data){
+        //        return  data.toFixed(2)
+        //    },
+        //    fixed1(data,n){
+        //        return data.toFixed(n)
+        //    },
+        //    给每个数前面加上$
+        //    insertBefore(d){
+        //        return "$"+d;
+        //    },
+        //    insertBefore1(d,s){
+        //        return s+d;
+        //    }
+    //    }
+    // })
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue选项卡</title>
+    <script src="../Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="tablink">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+        </div>
+        <!-- 下面的内容会随着鼠标的点击隐藏或者说显示这样就联想到指令v-show -->
+        <div class="tabbody">
+            <!-- 这样只有当其相匹配时才可显示内容，否则隐藏 -->
+            <div v-show="currentname=='HTML'">HTML的内容</div>
+            <div v-show ="currentname=='CSS'">CSS的内容</div>
+            <div v-show ="currentname=='JS'">JS的内容</div>
+        </div>
+    </div>
+</body>
+<script>
+    // 选项卡功能就是当点击上面的列表时，下面内容随之变化
+    var app=new Vue({
+        el:"#app",
+        data:{
+            // 写这个数据仅仅为了判断当前点击时出现的内容是否与其下面的内容相对应
+            currentname:"HTML"//这里可以说是默认情况为HTML
+        }
+    })
+    // 为了实现选项卡事件，需要加一个点击事件
+    // 首先需要取到所用标签
+    // let spans=document.getElementsByTagName("span");//得到的是伪数组
+    let spans = document.querySelectorAll("span");
+    // forEach循环遍历一个数组
+    spans.forEach(function(abc){
+        abc.addEventListener("click",()=>{
+            app.currentname = abc.innerHTML;
+
+        })
+        
+    });
+</script>
+
+</html>

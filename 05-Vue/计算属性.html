@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{methods()}}</p>
+        <p>{{methods()}}</p>
+        <p>{{methods()}}</p>
+        <p>{{computed}}</p>
+        <p>{{computed}}</p>
+        <p>{{computed}}</p>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            age: 38,
+        },
+        methods: {
+            // 就是在这里面写一个方法，来判断是否过了三十,超过三十则返回三十而立
+            methods:function(){
+                console.log("方法")
+                if(this.age>30){
+                    return "三十而立";
+                }
+
+            }
+        },
+        computed:{
+            computed:function(){
+                console.log("计算属性")
+                if(this.age>30){
+                    return "三十而立";
+                }
+            }
+        },
+
+    })
+</script>
+
+</html>

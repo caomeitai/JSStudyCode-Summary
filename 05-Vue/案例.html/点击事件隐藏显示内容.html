@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../Vue.js"></script>
+    <style>
+      .plane{
+          width: 400px;
+          height: 400px;
+          border: 2px solid yellowgreen;
+      }
+      .plane h1{
+          background-color: skyblue;
+          height: 40px;
+      }
+      .plane h1 span{
+          float: right;
+          font-size: 12px;
+          color: pink;
+          height: 40px;
+          line-height: 40px;
+          margin-right: 10px;
+      }
+      .plane content{
+          background-color: blue;
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 仅仅使用v-on来绑定事件 -->
+        <button v-on:click="f">注册</button>
+        <button id="btn">点击事件</button>
+        <div class="plane">
+            <!-- <h1>标题<span v-on:click="isShow=!isShow">{{isShow?"收起":"展开"}}</span></h1> -->
+            <h1>标题<span v-on:click="f1">{{isShow?"收起":"展开"}}</span></h1>
+            <!-- 内容的显示与否用v-show来判断 -->
+            <div class="content" v-show="isShow">
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+                <p>内容</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let app = new Vue({
+        el:"#app",
+        data:{
+            isShow:true,
+
+        },
+        methods:{
+            f(){
+                alert("仅仅是使用v-on");
+            },
+            f1(){
+                // 这里使用或者是判断需要拿到数据时需要this
+                 this.isShow=!this.isShow;
+            }
+        }
+    })
+    // document.getElementById("btn").onclick=function(){
+    //     alert("原始调用点击事件，且是利用onclick")
+    // }
+    document.getElementById("btn").addEventListener("click",function(){
+        alert("这是addeventlistener函数点击事件")
+    })
+</script>
+</html>
