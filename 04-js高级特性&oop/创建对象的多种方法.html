@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+//   （1）字面量方式创建对象   不足之处：要一个对象就需要写一个对象
+    // let obj = {
+    //     name:"wangcai",
+    //     age:12,
+    //     say:function(){
+    //         // 方法也是函数，写在对象里的函数称为方法
+    //         // 在方法中访问name：在一个方法中，要访问一个对象属性，使用this.来访问
+    //         console.log(obj.name);
+    //         console.log(this.name);//这里的this指的是obj
+    //     }
+    // }
+    // obj.say()
+
+    // 创建一个矩形对象，属性有宽度和高度，方法有求周长和面积
+    // let rect = {
+    //     width:10,
+    //     height:20,
+    //     getC:function(){
+    //         return (this.width+this.height)*2;
+    //     },
+    //     getS:function(){
+    //         return this.width*this.height;
+    //     }
+    // }
+    // console.log(rect.getC())
+    // console.log(rect.getS())
+
+
+    // let rect = {
+    //     width:20,
+    //     height:10,
+    //     getC:function(){
+    //         // 在一个方法中，要访问一个对象属性，使用this.来访问
+    //         return (this.height+this.width)*2;
+    //     },
+    //     getS:function(){
+    //         return this.width*this.height;
+    //     }
+    // }
+    // console.log(rect.getC())//调用方法
+    // console.log(rect.getS())//调用方法
+</script>
+<script>
+   // （2）工厂模式  直接调用函数
+//   function factory(w,h){
+//     //   批量产生矩形对象
+//       let obj ={};
+//       obj.width = w;
+//       obj.height = h;
+//       obj.getC = function(){
+//           return (this.width+this.height)*2;
+//       }
+//       obj.getS = function(){
+//           return this.width*this.height;
+//       }
+//       return obj;
+//   }
+//   let r1 = factory(1,2);
+//   let r2 = factory(4,3);
+//   let r3 = factory(4,5);
+//   console.log(r1.getC())
+//   console.log(r1.getS())
+//   console.log(r2.getC())
+//   console.log(r2.getS())
+//   console.log(r3.getC())
+//   console.log(r3.getS())
+
+// function factory(w,h){
+//     let obj={};
+//     obj.width = w;
+//     obj.height = h;
+//     obj.getC=function(){
+//         return (this.width+this.height)*2;
+//     }
+//     obj.getS=function(){
+//         return this.width*this.height;
+//     }
+//     return obj;
+// }
+// let r1 = factory(1,2);
+// console.log(r1.getC());
+// console.log(r1.getS());
+</script>
+<script>
+    //（3）构造器模式  new函数-->变成一个对象
+    function F() {
+
+    }
+// 不加new的效果
+// let obj =F();
+// console.log(obj);//函数没有返回值
+// console.log(typeof obj)  //undefined的类型就是undefined
+
+// 加new的效果
+// let obj = new F();
+// console.log(obj);  //只要new，就是一个新对象F{}
+// console.log(typeof obj);  //对象的类型肯定是object
+
+</script>
+<script>
+//   （4）利用构造器优化工厂模式
+// function Rect(w,h){
+//     this.wight=w;
+//     this.height = h;
+//     this.getC=function(){
+//         return (this.wight+this.height)*2;
+//     }
+//     this.getS=function(){
+//         return this.wight*this.height;
+//     }
+// }
+// let r1=new Rect(1,2);
+// console.log(r1.getC())
+// console.log(r1.getS())
+
+// function Rect(w,h){
+//     this.width=w;
+//     this.height=h;
+//     this.getC=function(){
+//         return (this.width+this.height)*2;
+//     }
+//     this.getS=function(){
+//         return this.width*this.height;
+//     }
+// }
+// let r1 = new Rect(1,2)
+// console.log(r1.getC())
+// console.log(r1.getS())
+</script>
+<script>
+    //   （5）构造器+原型
+    function Rect(w, h) {
+        this.width = w;
+        this.height = h;
+    }
+    Rect.prototype.getC = function () {
+        rturn(this.width + this.height) * 2;
+    }
+    Rect.prototype.getS = function () {
+        return this.width * this.height;
+    }
+    let r1= new Rect(1,2);
+    console.log(r1.getC())
+    console.log(r1.getS())
+</script>
+
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    // Array.isArray() 判断一个数据是否是数组
+    // let arr = [1,2,3];
+    // console.log(Array.isArray(arr));
+
+
+    // let arr = [1,2,3];
+    // let a = Array.isArray(arr);
+    // console.log(a);
+    // console.log(Array.isArray(arr));
+
+
+    // function f(){
+    //     console.log(Array.isArray(arguments));
+    // }
+    // f()
+
+// rest参数是一个真实的数组
+    // function f(...rest){
+    //     console.log(rest);
+    //     console.log(Array.isArray(rest));
+    // }
+    // f(1,2,"hello")
+
+// arguments（收集实参）不是一个真实的数组，长得虽然像数组，但叫伪数组或者类数组
+// function f(...args){
+//   console.log(arguments);
+//   console.log(Array.isArray(arguments));
+// }
+// f(1,2,3)
+</script>
+<script>
+//forEach：对数组进行循环。
+//一般情况下，对于数组循环使用方法，将数组里面的元素都遍历一遍
+// let arr = [1,2,3,4];
+// for(let i=0;i<arr.length;i++){//使用let会形成块级作用域，它在函数外部{}不能够调用
+//     // console.log(i);
+//     // console.log(arr[i]);
+// }
+// console.log(i);
+// // 当写循环时未使用let，则可调用i出现undefined，因为遍历到最后时数组的第四个值并没有数值可赋。
+// console.log(arr[i]);//undefined
+
+// forEach是一个方法，在这个方法中又嵌套了一个方法 
+// let array = [1,2,3,4,5];
+//  array.forEach(function(item,index,arr){
+//     //  console.log(item);
+//     //  console.log(index);
+//     //  console.log(`下标为${index}的元素值为${item}`);
+//     //  console.log(arr);
+//      item = 666;
+//      console.log(item);
+//      console.log(array);
+     
+//  });
+//  console.log(array);
+
+// 因为是基本数据类型，不会改变原数组
+// let arr =[100,2,3];
+// arr.forEach(function(item,index,arr){
+//     item = 100;
+//     console.log(arr);
+//     // console.log(`下标为${index}的元素的值为${item}`);
+
+// })
+// console.log(arr);
+
+// 引用数据类型会改变原数组
+// let arr = [1,2,3];
+// arr.forEach(function(item,index,arr){
+//     arr[index]= 100;
+//     console.log(arr);//在里面是每循环一次赋值一次且打印一次
+// })
+// console.log(arr);
+
+// 不能break
+// let arr = [1,2,3];
+// arr.forEach(function(item,index,arr){
+//     if(index==1){
+//         break;//Illegal break statement会报错的
+//     }
+//     arr[index]= 100;
+//     console.log(arr);
+// })
+// console.log(arr);
+</script>
+<script>
+    // map： 逐一处理原数组元素，返回一个新数组。
+    // let arr = [1,2,3];
+    //  let arr1=arr.map(function(item,index,arr){
+    //     return item+10;//这就是所说的对每个元素逐一处理，并且有返回值
+
+    // }) 
+    // console.log(arr1);
+    // console.log(typeof arr1)
+    // let arr = [10,11,13];
+    // let arr1 = arr.map(function(item,index,arr){
+    //     // 具有返回值的
+    //     return item-5;
+    // })
+    // console.log(arr);
+    // console.log(arr1);
+
+
+
+//试试箭头函数
+// let arr = [1,23,34];
+// let newarr = arr.map(item=>item+10)
+// console.log(newarr)
+// let arr = [1,2,3,4,5,6];
+// let arr1 = arr.map(item=>item+1)//箭头函数还是仅仅使用一个小括号将item加上个箭头指向返回值
+// console.log(arr1);
+
+
+// 操作对象数组:也就是说数组中全部是对象
+// let arr =[
+//     {name:"z3",score:100},
+//     {name:"l4",score:10},
+//     {name:"w5",score:120},
+// ];
+
+// let arr1 = arr.map(function(item,index,arr){
+//     console.log(`${item.name}考了${item.score}`);
+//    return  item.score=item.score+10;
+
+// })
+
+// let arr2 =[1,2,3,4,5];
+// let arr3 = arr2.map(function(item,index,arr){
+//     item = 100;
+//     return item;
+    
+// })
+// console.log(arr2);
+// console.log(arr)
+
+
+// 模拟map
+// 这是别人的
+// let arr = [1,2,3,4,5,6,7];
+//  let arr1 = arr.map(function(item,index,arr){
+//     return item+1;
+// })
+// console.log(arr1);
+// 自己写的
+// let arr = [1,2,3,4,5,6,7];
+// Array.prototype.mymap = function(f){
+//     let newArray = [];
+//     for(let i = 0;i<this.length;i++){
+//         newArray.push(f(this[i],i,this))
+//     }
+//     return newArray;
+
+// }
+// // 这与调用系统函数一致，只不过现在的mymap是自己写的
+// let newarr = arr.mymap(function(item,index,arr){
+//     return item+1;
+// })
+// console.log(newarr);
+
+
+// 理解加记忆
+// let arr  = [1,2,3,4,5];
+// Array.prototype.mymap=function(f){
+//     let newArray= [];
+//     for(let i=0;i<this.length;i++){
+//         newArray.push(f(this[i],i,this))
+//     }
+//     return newArray;
+// }
+// let newarr = arr.mymap(function(item,index,arr){
+//     return item+1;
+// })
+// console.log(newarr);
+// Array.prototype.mymap=function(f){
+//     let newArray =[];
+//     for(let i=0;i<this.length;i++){   
+//         newArray.push(f(this[i],i,this));
+//     }
+//     return newArray;
+// }
+// let arr = [1,2,3];
+// let arr1 = arr.mymap(function(item,index,arr){
+//     return item+1;
+// })
+// console.log(arr1)
+// 模拟map记忆
+// let arr = [1,2,3];
+// Array.prototype.mymap=function(f){
+//     let newArray = [];
+//     for(let i=0;i<this.length;i++){
+//         newArray.push(f(this[i],i,this))
+//     }
+//     return newArray;
+// }
+// let newarr = arr.mymap(function(item,index,arr){
+//     return item+1;
+// })
+// console.log(newarr);
+</script>
+<script>
+// filter： 逐一过滤原数组元素，留下符合条件的元素得到一个新数组。
+//    let arr = [1,2,3,4,5];
+// //    let arr1 =arr.filter(function(item,index,arr){
+// //        return item>2;
+// //    })
+//   let arr1=arr.filter(item=>item>2)
+//    console.log(arr1);
+
+// 模拟filter
+// let arr = [1,2,3,4,5];
+// Array.prototype.myfilter=function(f){
+//     let newArray= [];
+//     for(let i=0;i<this.length;i++){
+//         if(f(this[i])){
+//             newArray.push(this[i])
+//         }
+//     }
+//     return newArray;
+
+// }
+// let newarr=arr.myfilter(function(item){
+//     return item<2;
+// })
+// console.log(newarr);
+
+
+//练习
+// let arr =[1,2,3,4,5,6];
+// let newarr = arr.filter(function(item,index,arr){
+//     return item>5;
+// }) 
+// console.log(newarr);
+</script>
+<script>
+ // reduce： 不断地将前一项和后一项的值进行运算（累加和）
+//  传统方式计算总成绩
+// let arr = [66,80,61,60,55];
+// let sum = 0;
+// for(let i=0;i<arr.length;i++){
+//     sum+=arr[i];
+// }
+// console.log(sum);
+// 使用reduce
+// let arr = [66,80,61,60,55];
+// let sum = 0;
+// sum=arr.reduce(function(prev,next){
+//     return prev+next;
+// })
+// console.log(sum);
+
+// 验证reduce原理
+// let arr = [66,80,61,60,55];
+// let sum =0;
+// let i=1;
+// sum=arr.reduce(function(prev,next){
+//     console.log(`第${i++}轮:前一项值：${prev}，后一项值：${next}`);
+//     console.log(`本轮结果：${prev+next}`)
+//     // console.log(sum);
+//     return prev+next;
+    
+// })
+// console.log(sum);
+
+// 练习
+// 从传统方式
+// let arr = [66,80,61,60,55];
+// let sum = 0;
+// for(let i=0;i<arr.length;i++){
+//     sum+=arr[i];
+// }
+// console.log(sum);
+// reduce方法
+// let arr = [66,80,61,60,55];
+// let sum  = 0;
+// sum=arr.reduce(function(prev,next){
+//     return prev+next;
+// })
+// console.log(sum);
+// 验证reduce方法
+// let arr = [66,80,61,60,55];
+// let sum = 0;
+// let i = 1;
+// sum = arr.reduce(function(prev,next){
+//     console.log(`第${i++}轮:前一项：${prev},后一项：${next}`)
+//     console.log(`本轮结果：${prev+next}`)
+//     return prev+next;
+// })
+// console.log(sum);
+
+// 带初始值的话
+// let arr = [66,80,61,60,55];
+// let sum = 0;
+// let i = 1;
+// sum = arr.reduce(function(prev,next){
+//     console.log(`第${i++}轮:前一项：${prev},后一项：${next}`)
+//     console.log(`本轮结果：${prev+next}`)
+//     return prev+next;
+// },100)
+// console.log(sum);
+
+// 数组元素是对象的话
+// let arr = [
+//     {name:"z3",score:78},
+//     {name:"l4",score:98},
+//     {name:"w5",score:68},
+// ];
+// let obj = arr.reduce(function(prev,next){
+//     return {score:prev.score+next.score}//因为数组元素都是对象，所以最终返回值也为对象{}
+// })
+// // let {score}=arr.reduce(function(prev,next){
+// //     return {score:prev.score+next.score};
+// // })
+// console.log(obj);
+</script>
+<script>
+// some： 只要数组中的某一个元素符合指定的条件，就会返回真，否则返回假。
+// let arr= [
+//     {name:"z3",score:58},
+//     {name:"l4",score:38},
+//     {name:"w5",score:58},
+// ];
+// // 是否有人及格
+// let r = arr.some(function(item){
+//     return item.score>=60//这是条件，只要有一个人满足条件即为true，否则为false
+// })
+// console.log(r);
+// 练习
+// let arr= [
+//     {name:"z3",score:58},
+//     {name:"l4",score:38},
+//     {name:"w5",score:58},
+// ];
+// // 检测是否有人超过了90分
+// let a = arr.some(function(item){
+//     return item>=90;
+// })
+// console.log(a);
+</script>
+<script>
+// every： 数组中的每一个元素符合指定的条件，就会返回真，否则返回假。
+// let arr= [
+//     {name:"z3",score:58},
+//     {name:"l4",score:78},//当遇到不满足条件的值，循环结束并返回false
+//     {name:"w5",score:68},
+// ];
+// let res = arr.every(function(item){
+//     console.log(item);
+//     return item.score<=60;
+// })
+// console.log(res);
+</script>
+
+
+
+<script>
+//    ES5中新增方法
+// Array.isArray()用来判断一个数据是不是数组
+// 单纯数据
+// let a = [1,2,3];
+// let b = Array.isArray(a);
+// console.log(b);
+// rest
+// function f(...rest){
+//     console.log(rest);
+//     console.log(Array.isArray(rest));
+// }
+// // f(1,2,3)//可以传递实参也可以不传
+// f()
+// arguments
+// function f(...args){
+//     console.log(arguments);
+//     console.log(Array.isArray(arguments))
+// }
+// f(1,2,3)//可以传递实参也可以不传
+</script>
+<script>
+    // forEach 进行数组的循环    //仅仅是遍历数组而已
+    let arr = [1,2,3,4,5];
+     arr.forEach(function(item,index,arr){
+       console.log(item);
+       console.log(index);
+       console.log(arr);
+    })
+    console.log(arr);
+    ///////////////////////////////////////////////////////////////////////
+    // forEach是一个方法，在这个方法中又嵌套了一个方法 
+// let array = [1,2,3,4,5];
+//  array.forEach(function(item,index,arr){
+//     //  console.log(item);
+//     //  console.log(index);
+//     //  console.log(`下标为${index}的元素值为${item}`);
+//     //  console.log(arr);
+//      item = 666;
+//      console.log(item);
+//      console.log(array);
+     
+//  });
+//  console.log(array);
+
+    
+</script>
+<script>
+//    map:逐一处理数组，形成新的数组
+    // let arr = [1,2,3,4,5];
+    // let newarr = arr.map(function(item,index,arr){
+    //     return item+5;
+    // })
+    // console.log(newarr);
+    // 模拟map
+    // let arr = [1,2,3,4,5];
+    // Array.prototype.mymap=function(f){
+    //     let newArray=[];
+    //     for(let i=0;i<this.length;i++){
+    //         newArray.push(f(this[i],i,this))
+    //     }
+    //     return newArray;
+    // }
+    // let newarr = arr.mymap(function(item,index,arr){
+    //     return item+5;
+    // })
+    // console.log(newarr);
+
+</script>
+<script>
+//    filter:逐一处理数据，选出符合条件的数形成新数组
+    // let arr = [1,2,3,4,5];
+    // let newarr = arr.filter(function(item,index,arr){
+    //     return item<5;
+    // })
+    // console.log(newarr);
+</script>
+<script>
+    // reduce：累加和数据前一项的值与后一项相加，赋给前一项，不断累加
+    // let arr = [1,2,3,4,5];
+    // let newarr = arr.reduce(function(prev,next){
+    //     return prev+next;
+    // })
+    // console.log(newarr);
+</script>
+<script>
+//    some：只要数组中有一个数据满足条件即为true
+// let arr = [1,2,3,4,5];
+// let newarr = arr.some(function(item){
+//     return item>5;
+// })
+// console.log(newarr);
+</script>
+<script>
+//   every：要求所有数据满足条件才为true
+// let arr = [1,2,3,4,5];
+// let newarr = arr.every(function(item){
+//     return item<=5;
+// })
+// console.log(newarr);
+</script>
+</html>

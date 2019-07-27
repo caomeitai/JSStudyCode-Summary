@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+    // 继承原型对象上面的方法say
+    // function Parent(yourname){
+    //     this.name = yourname;
+    // }
+    // Parent.prototype.say=function(){
+    //     console.log(this.name);
+    // }
+    // function Son(yourname){
+    //     this.name=yourname;
+    // }
+    // Son.prototype=Parent.prototype;//让Son来继承Parent上的say方法
+    // Son.prototype.constructor = Son;
+    // let p = new Parent("hello");
+    // // console.log(p.name)  //不使用继承时，可通过.运算符来打印函数中的属性
+    // p.say();  //使用挂在Parent上面的方法
+    // let s = new Son("world");
+    // console.log(s.name)  //不使用继承时，可通过.运算符来打印函数中的属性
+   // s.say();
+
+
+    // 继承练习
+    // function Parent(yourname){
+    //     this.name = yourname;
+    // }
+    // Parent.prototype.say=function(){
+    //     console.log(this.name);
+    // }
+    // Son.prototype = Parent.prototype;
+    // Son.prototype.constructor = Son;
+    // function Son(yourname){
+    //     this.name=yourname;
+    // }
+    // let p = new Parent("hello bts");
+    // console.log(p.name);
+    // p.say();
+    // let s = new Son("hello tanni");
+    // console.log(s.name);
+    // s.say();
+</script>
+<script>
+//在继承Parent上面的属性时
+//   function Parent(yourname){
+//       this.name = yourname;
+//   }
+// Parent.prototype.say=function(){
+//     console.log(this.name)
+// }
+// Son.prototype=Parent.prototype;
+// Son.prototype.constructor = Son;
+//  function Son(yourname){
+//      Parent.call(this,yourname);//在继承Parent上面的属性时，使用call,()里面表明着谁去调用了属性，再加上参数
+//     //  this.name=yourname;
+//  }
+//  let p = new Parent("hello");
+//  p.say();
+//  let s = new Son("bts");
+//  s.say();
+
+// 练习加记忆
+// function Parent(yourname){
+//     this.name=yourname;
+// }
+// Parent.prototype.say=function(){
+//     console.log(this.name);
+// }
+// Son.prototype = Parent.prototype;
+// Son.prototype.constructor = Son; 
+// function Son(yourname){
+//     Parent.call(this,yourname);
+//     // this.name=yourname;
+// }
+// let p = new Parent("hello");
+// p.say();
+// let s = new Son("bit");
+// s.say();
+
+</script>
+<script>
+    // 换一种继承父级方法的方法
+    // function Parent(yourname) {
+    //     this.name = yourname;
+    // }
+    // Parent.prototype.say = function () {
+    //     console.log(this.name);
+    // }
+    // // 共用了一个原型对象
+    // // Son.prototype = Parent.prototype;
+    // // Son.prototype.constructor = Son;
+
+    // // copy一份原型对象
+    // for(let i in Parent.prototype){
+    //     Son.prototype[i]=Parent.prototype[i]
+    // }
+    // Son.prototype.constructor = Son;
+    // function Son(yourname) {
+    //     Parent.call(this, yourname);
+    //     // this.name=yourname;
+    // }
+    // let p = new Parent("hello");
+    // p.say();
+    // let s = new Son("bit");
+    // s.say();
+
+    // 练习加记忆
+    function Parent(yourname) {
+        this.name = yourname;
+    }
+    Parent.prototype.say = function () {
+        console.log(this.name);
+    }
+    // 共用了一个原型对象
+    // Son.prototype = Parent.prototype;
+    // Son.prototype.constructor = Son;
+
+    // copy一份原型对象
+    for(let i in Parent.prototype){
+        Son.prototype[i] =Parent.prototype[i];
+    }
+    Son.prototype.constructor = Son;
+    function Son(yourname) {
+        Parent.call(this, yourname);
+        // this.name=yourname;
+    }
+    let p = new Parent("hello");
+    p.say();
+    let s = new Son("bit");
+    s.say();
+
+
+</script>
+
+<script>
+
+</script>
+
+<script>
+
+</script>
+
+</html>

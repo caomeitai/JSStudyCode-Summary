@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // console.log(this);//全局  window
+    // function f() {
+    //     console.log(this);//window 这是全局函数
+    // }
+    // f()
+
+    // let obj ={
+    //     name:"wangcai",
+    //     age:10,
+    //     say:function(){
+    //         // 谁调用了包含this的方法，那么this就指向谁
+    //         // obj调用了包含this的方法，那么this就指向obj
+    //         console.log(this)//obj
+    //     }
+    // }
+    // obj.say()  //这里是调用了say这个方法，所以加了（）
+    // let fn = obj.say;//这里是将obj.say这个属性赋给了fn
+    // fn()//fn调用了包含this的方法，所以this指向fn,又因为fn在全局中，所以是window
+
+</script>
+<script>
+    // 如果在调用函数之前加一个new的话，会创建并返回一个新的对象，而这个函数内部的this就会指向这个对象。
+    // function f(){
+    //     console.log(this)
+    // }
+    // let b = new f()//this指向了b,即新new的这个对象
+    // console.log(b)
+</script>
+<script>
+    // function f() {
+    //     console.log(this)
+    // }
+    // 把f当用一个普通的函数进行调用了
+    //  f()
+
+
+    // 把f当作一个构造器进行new  new--->对象
+    // let d = new f()
+    // function Person() {
+    //     console.log(this)
+    // }
+    // let lisi = new Person();
+
+    //  function Person(name,age){
+    //     this.name = name;
+    //     this.age = age;
+    // }
+    // // 因为new了，所以this就指向a,Person内部的this就指向a
+    // let a = new Person("lisi",30)
+    // console.log(a.name)//lisi
+    // // 在后面再次new，则this就指向new的这个新对象，Person内部的this就指向了b
+    // let b = new Person("wangwu",40);
+    // console.log(b.name)  //wangwu
+</script>
+<script>
+    // 可以通过Function对象的apply和call方法来指定函数内部的this的值。
+    // function f(){
+    //     console.log(this)
+    // }
+    // let obj = {
+    //     name:"wangcai"
+    // }
+    // // f函数是对象，有两个方法，一个是call  一个是apply
+    // // 让一个对象去借用一个方法
+    // // 让obj去借用f方法，借用完，也就调用了
+    // f.call(obj)  
+    // f()//原本的话this指向的是window
+
+    // function f(){
+    //     console.log(this)
+    // }
+    // let obj={
+    //     name:"wangcai",
+    //     age:12,
+    // }
+    // f.call(obj)  //后面的借用前面的  方法.call(对象)  让一个对象去借用一个方法
+    // f()//window
+
+    // function f(a, b) {
+    //     console.log(a, b)
+    // }
+    // let obj = {
+    //     name: "wangcai"
+    // }
+    // f.call(obj, 1, 2)
+
+    // function f(a, b) {
+    //     console.log(a, b)
+    // }
+    // let obj = {
+    //     name: "wangcai"
+    // }
+    // f.apply(obj, [1, 2])
+</script>
+<script>
+// 判断数据类型 typeof instanceof  不太准确
+// toString    Object.prototype.toString(),它是挂在函数原型对象上的方法
+let a = [1,2,3];//它是数组，其函数是Array
+let b = {name:"wangcai"};// 它是对象，其构造器或者说函数是Object
+let c = function(){} // Function
+console.log(Object.prototype.toString.call(a))  // [object Array]
+console.log(Object.prototype.toString.call(b))  // [object Object]
+console.log(Object.prototype.toString.call(c))  // [object Function]
+  
+</script>
+
+</html>

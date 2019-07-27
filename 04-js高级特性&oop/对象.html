@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>CSS</li>
+        <li>HTML</li>
+        <li>JS</li>
+    </ul>
+</body>
+<script>
+    // window对象
+    // 全局变量都挂在window上，window是一个对象，a作为window对象的一个属性直接用.运算符来访问
+    // var a = 1;
+    // console.log(window.a);
+
+    // 全局函数也会挂在window上，window作为一个对象，f作为window对象上的方法
+    // 方法也是函数，只不过写在对象里面（window里面）的函数叫方法。
+    // function f(){
+    //     console.log("f......")
+    // }
+    // console.log(f())
+    // console.log(window.f())//通过window.来访问
+  
+//   window这个对象上调用的系统定义的方法
+    // window.alert("hello")
+</script>
+<script>
+    // Dom对象  document文档--->html文档
+    // console.log(document);     //  #docunment得到的是整个的html文档
+
+    // let lis = document.getElementsByTagName("li")
+    // console.log(lis);
+</script>
+<script>
+    // 基本数据类型中string
+    // let str = "helloworld"
+    // // 从之前所学来看string是基本数据类型，但在这里它使用了.length，那么它也就成为了一个对象，它是被瞬间包装成对象的（包装类型对象）
+    // console.log(str.length)
+    // let str = "helloword";
+    // console.log(typeof str);  //string  此时str还是一个字符串
+    // console.log(str.name);   //undefined  当一出现.运算符是就会被包装成对象，又因为在str中并不存在str.name，所以结果为undefined
+
+    // 包装类型对象，不能够直接赋值
+    // let str = "helloword";
+    // console.log(str.name);
+    // str.name = "wangcai";
+    // console.log(str.name)
+
+    // 对于str还有很多的方法  str本身是一个基本数据类型，当你调用方法时，它也会包装成对象
+
+    // 如果new了，肯定是返回一个对象
+    // let str = new String("hello");
+    // console.log(typeof str);
+</script>
+<script>
+// 引用类型的数据是对象 
+// 1，函数也是对象  使用instanceof来判断类型看看变量是否是对象object,
+// typeof来判断类型
+// function f(a,b){
+    
+// }
+// // f.length代表着函数形参的个数
+// console.log(f.length)
+// console.log(f.name)  //f
+// console.log(typeof f)  //function
+// console.log(typeof null)  //它是基本数据类型，但在使用typeof测试时结果object
+// 使用typeof测试一个数据的数据类型，有时候是不准确的
+
+//   instanceof来判断类型，判断变量是不是对象
+// 判断函数是否为对象
+// function f(){
+
+// }
+// console.log(typeof f);
+// console.log(f instanceof Object);
+
+// 判断数组是否为对象
+// let arr =[1,2,3,4];
+// console.log(arr instanceof Object);
+
+// 基本数据类型number不是对象
+// let a =110;
+// console.log(a instanceof Object);
+
+// let arr = [1,2,3];
+// console.log(arr.length);
+// console.log(arr instanceof Object);
+
+//  arr和str不一样，str在调用方法或属性时，会包装成一个对象形成包装类型对象，这个包装是瞬间的。
+// arr是一个正经对象，那你就可以给这个对象上面挂属性或方法
+
+// let str = "helloworld";
+// str.name = "hello";
+// console.log(str.name);//undefined
+// console.log(str)
+
+
+// let arr =[1,2,3]
+// arr.name = "hello"
+// console.log(arr.name)
+// console.log(arr)
+
+// 对象也是对象
+// let obj = { name:"tanni"};
+// console.log(obj.name);
+// console.log(obj instanceof Object)
+
+// let a =123;
+// console.log(typeof a);
+// console.log(a instanceof Object);
+// let b;
+// console.log(b);
+// console.log(b instanceof Object)
+// let f = false;
+// console.log(typeof f);
+// console.log(f instanceof Object);
+
+// let str = "hello" 
+// console.log(typeof str);
+// console.log(str instanceof Object);   //string是不可以通过instanceof来判断是不是对象的，它的包装是瞬间的事
+
+
+
+</script>
+</html>

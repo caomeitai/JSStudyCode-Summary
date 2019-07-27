@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    // 每个函数都有一个prototype的属性
+    // function f(){
+
+    // }
+    // console.log( typeof f.prototype)
+    // console.log( f.prototype)
+    // console.log(Array)
+    // console.log(Array.prototype)
+
+
+// 每个函数上都有一个prototype属性，其值是一个对象叫原型对象，原型对象上有一个constructor属性。
+// function f(){
+
+// }
+// console.log(f.prototype.constructor==f)//构建原型对象的是f函数
+
+// 每一个对象都有一个__proto__属性，它对应的值是一个对象，这个对象叫隐式原型。
+
+// 对象
+// let obj = {};
+// console.log(obj);//  __proto__:Object  它对应的值是一个对象
+
+// 数组
+// let arr =[1,2,3];
+// console.log(arr);  //__proto__:Array(0)
+
+// 函数
+// function f(){}
+// console.log(f)
+// console.log(typeof f) 
+</script>
+<script>
+    // 对象的__proto__属性　指向　创建这个对象的函数的prototype
+    // let obj = {name:"wangcai",age:12};//这是一个对象,创建它的函数是Object
+    // console.log(obj);//每个对象都有一个__proto__属性
+    // console.log(obj.__proto__==Object.prototype)
+
+    // let arr =[1,2,3];
+    // console.log(arr);//数组也是对象
+    // console.log(arr.__proto__==Array.prototype)
+</script>
+<script>
+// let arr = [1,2,3]
+// console.log(arr)// 这里来表明arr数组是一个对象，里面有__proto__这个属性
+// // 一个对象的__proto__属性指向了创建该对象的函数的prototype，即原型对象。
+// console.log(arr.__proto__) // arr.__proto__  叫原型对象
+// console.log(arr.__proto__.__proto__) 
+// console.log(arr.__proto__.__proto__.__proto__) //一级一级的向上访问Object的原型对象，直到null
+
+// console.log(arr.abc())
+// console.log(arr)
+// console.log(arr.__proto__)
+let arr = [1,2,3]
+Array.prototype.abc = function(){
+    alert("123")
+}
+console.log(arr.abc())
+</script>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+//数组解构赋值---------------------------------- 
+// 此时是按照下标一一对应的关系
+    // let arr = [1,2,3];
+    // let [a,b,c] = arr;
+    // console.log(a);
+    // console.log(b);
+    // console.log(c);
+    // console.log([a,b,c]);
+
+// 左右数量不等
+// let arr = [1,2,3,4,5];
+// let [a,b,c]=arr;
+// console.log([a,b,c]);
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// --------------------------------
+// let arr = [1,2];
+// let [a,b,c]=arr;
+// console.log([a,b,c]);
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+// 跳过部分 
+// let [a, ,c] =[1,2,3];
+// console.log(a);
+// console.log(c);
+// console.log([a,,c]);
+
+// 默认值
+// let [a,b,c,d=10]=[1,2,3];
+// console.log([a,b,c,d=10]);
+
+// let [a,b,c,d=10]=[1,2,3,11];
+// console.log([a,b,c,d=10]);
+
+// 嵌套
+// let [a,b,c,d]=[1,2,3,[4]];
+// console.log(d);
+//   let [a,b,c,[d]]=[1,2,3,[4]];
+//   console.log(d);
+
+// let [a,b,[c]] = [1,2,["m"]]
+//     console.log(a)
+//     console.log(b)
+//     console.log(c)//此时c的值是m而非“m”
+</script>
+<script>
+    // 对象的解构赋值--------------------------------
+    // （1）按属性名的一一对应关系来进行赋值
+    // let {name,age}={name:"wangcai",age:100};
+    // console.log(name);
+    // console.log(age);
+
+    // （2）本质-按属性名的一一对应关系来进行赋值
+    // var {age1:age,name:name1} = {name:"wangcai",age1:100}
+    //    console.log(name1)
+    //    console.log(age)//这样对应是OK的
+
+    //   var {age1:age,name:name} = {name:"wangcai",age:100}
+    //   console.log(name)
+    //   console.log(age)//出来结果undefined
+
+    // var {age1:age,name:name} = {name:"wangcai",age1:100}
+    // console.log(name)
+    // console.log(age)
+
+    //(3){}只能放键值对，如果键和值是一样，可以只写一个
+    // let {name:name,age:age}={name:"wangcai",age:100};
+    // console.log(name)
+    // console.log(age)
+    // 可简写为：
+    // let {name,age}={name:"wangcai",age:100};
+    // console.log(name)
+    // console.log(age)
+
+    //  (4)对象是属性的无序集合
+    // let {name,age}={age:100,name:"wangcai"};
+    // console.log(name);
+    // console.log(age);
+
+    //（6）将现有对象(Math)的属性，赋值到某个变量
+    // console.log(Math.ceil(1.2));
+    // console.log(Math.floor(2.1));
+    // console.log(Math.random());
+    // let {ceil,floor,random}=Math;
+    // console.log(ceil(3.1))
+   
+//（7）沿着原型链进行
+// let {push} =[]//对于空数组来说，他是一个对象，虽然它本身没有一个属性名为push，但它的隐式原型上有
+// console.log(push)
+
+//（8）函数参数中的解构赋值,传递的参数肯定是对象
+//   function f({name}){//传过来接收到name该属性名对应的值
+//       console.log(name)
+//   }
+//   f({name:"wangcai"})//给函数参数赋了一个对象
+
+
+// function f(obj){
+//     console.log(obj.name,obj.age);
+// }
+// f({
+//     name:"tanni",
+//     age:10
+// });
+
+
+// 数组的解构赋值指的是位置的对应关系
+    // let a = 1;
+    // let b = 2;
+    // [b,a] = [a,b]
+    // console.log(a)
+    // console.log(b)
+
+
+// 函数的解构赋值指的是将一个函数作为对象给了一个新的变量，访问函数中的内容时要使用.运算符
+// function f(){
+//         return {name:"wangcai",age:100}
+// }
+//  console.log(f())
+//  let obj = f();
+//  console.log(obj.name)
+//  console.log(obj.age)
+
+// function f(){
+//         return {name:"wangcai",age:100}
+// }
+//     let {name,age} = f()//这是obj的简化形式直接写一个对象，让它的键值明与键值都一一对应
+//     console.log(name)//这样也可直接拿到相应的值
+//     console.log(age)
+    
+</script>
+</html>

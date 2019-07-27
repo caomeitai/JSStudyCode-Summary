@@ -1,0 +1,115 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+ </head>
+ <body>
+     <ul>
+         <li>CSS</li>
+         <li>HTML</li>
+         <li>JS</li>
+     </ul>
+ </body>
+ <script>
+//  Array.from：这个方法是Array构造器的静态方法，将把类数组对象转成真正的数组
+// 要想拿到上面元素方法：
+// let lis = document.getElementsByTagName("li")
+// console.log(lis);
+// console.log(Array.isArray(lis));
+// let newlis = Array.from(lis);
+// console.log(newlis);
+// console.log(Array.isArray(newlis));
+// 伪数组arguments
+// function f(...ags){
+//     console.log(arguments);
+//     console.log(Array.isArray(arguments));
+//     let b = Array.from(arguments);
+//     console.log(b);
+//     console.log(Array.isArray(b));
+// }
+// f(1,2,3)
+
+
+// 类似于map的功能
+// function f(){
+//     let newarr = Array.from(arguments,function(item,index,arr){
+//         return item+1;
+//     })
+//     console.log(newarr);
+// }
+// f(1,2,3)
+// function f(){
+//     let newArr = Array.from(arguments,function(item,index,arr){
+//         return item+1;
+//     })
+//     console.log(newArr);
+// }
+// f(1,2,3)
+ </script>
+ <script>
+    //  Array.of：将一组值转换为数组。与Array.from功能相似，理解用来创建数组。
+    // 原来创建数组：
+    // let arr = new Array(3);
+    // console.log(arr);
+    // let arr1 = new Array("3");
+    // console.log(arr);
+    // 使用Array.of创建数组
+    // let arr = Array.of(3);
+    // console.log(arr);
+    // let arr1 = Array.of("3")
+    // console.log(arr1);
+ </script>
+ <script>
+    //  find：用于找出第一个符合条件的数组元素。找不到则是undefined 。
+    // findIndex： 返回第一个符合条件的数组元素的索引。找不到则是-1。
+    // let arr = [1,2,3,4,6,7,8];
+    // let newarr = arr.find(function(item,index){
+    //     return item==5;
+    // })
+    // console.log(newarr);
+    // let Newarr = arr.findIndex(function(item,index){
+    //     return item==5;
+    // })
+    // console.log(Newarr);
+    // let arr = [1,22,34,5,5,68,88,88,87];
+    // let newarr =arr.find(function(item,index){//这是找到第一个就结束寻找
+    //     return item==5;
+    // })
+    // let Newarr =arr.findIndex(function(item,index){
+    //     return item==5;
+    // })
+    // console.log(newarr);
+    // console.log(Newarr);
+    // let bewarr =arr.filter(function(item,index){
+    //     return item==5;
+    // })
+    // console.log(bewarr);//这是找出所有符合条件的数据打印出来
+ </script>
+ <script>
+    // includes:判断一个元素是否在一个数组中,返回值是true或者false
+    // let arr = [1,2,4,5,7];
+    // console.log(arr.includes(3));
+    // let arr1 = [1,2,4,5,7];
+    // console.log(arr1.includes(7));
+ </script>
+ <script>
+//    fill: 给数组填充指定的值
+// 给空数组赋值时
+// console.log(new Array(10));//()里面写了10，表示创建一个长度为10的空数组
+// 给有值的数组赋值时会发生覆盖
+// let arr = new Array(1,2,3);
+// let arr1=arr.fill(4);//一个值就表示将这个值赋值给每一个元素
+// console.log(arr1);
+// 有多个参数时
+let arr = new Array(1,2,3);
+let arr1=arr.fill(4,1,2);//一多个值时代表第一个为赋值的数，后面的代表位置，包括前面位置不包括后面位置
+console.log(arr1);
+
+
+
+ 
+ </script>
+ </html>
+ 
+ 
