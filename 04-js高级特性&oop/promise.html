@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+// JS的异步：JS中存在同步任务和异步任务，因为它的主线程是单线程的，那么它会先执行同步任务，再去执行异步任务（耗时）
+// 常见的异步任务有：setTimeout,setInterval,读文件，去服务器请求数据...
+
+// console.log("防弹的开始");//同步任务
+// window.setTimeout(function(){
+//     console.log("定时器是耗时任务");
+// },10000);//耗时，放到任务队列中，异步任务
+// console.log("防弹的延续");
+
+
+// 有三个任务console.log(1)console.log(2)console.log(3)
+// 过5s执行任务1，任务1执行完后，再过5s执行任务2.....,因为有时间间隔，就肯定使用了计时器，进行了嵌套
+
+// window.setTimeout(function(){
+//     console.log(1);
+//     window.setTimeout(function(){
+//         console.log(2);
+//         window.setTimeout(function(){
+//             console.log(3)
+//         },5000)
+//     },5000)
+// },5000)//异步解决方案会出现回调函数形成回调地狱
+</script>
+<script>
+    // Promise学习,Promise本质上是一个函数，方法。
+    // console.log(Promise);   //ƒ Promise() { [native code] }
+    // console.log(typeof Promise);  //function
+
+    // let p = new Promise();
+    // Promise构造器必须要传一个参数
+    // console.log(p);  //Promise resolver undefined is not a function
+    // console.log( typeof p);
+
+    // Promise构造器参数是一个回调函数，它包含两个参数：resolve,reject
+    // let p = new Promise(function(resolver,reject){
+    // })
+    // console.log(p);   //Promise {<pending>}，此时Promise对象已被创建完成，且处于pending状态
+
+    // 回调函数中的两个参数，其作用就是用于转换状态：
+    // resolve，将状态从pending –> fullFilled；reject，将状态从pending –> rejected
+    // let p = new Promise(function(resolver,reject){
+    // 可以理解为事情已经解决了，也就转换了状态fullFilled
+    // resolver("去看了防弹演唱会")  // Promise {<resolved>: "去看了防弹演唱会"}
+    //     reject("没钱去看防弹演唱会");  //Promise {<reject>: "没钱去看防弹演唱会"}
+    // });
+    // console.log(p);//事情只会有两种状态，要么成功，要么失败
+
+    // 设置随机函数来随即决定可能性
+    // let p = new Promise(function (resolved, reject) {
+    //     let b = Math.random();//设置一个随机函数
+    //     if (b > 0.5) {
+    //         resolved("去看了防弹演唱会")
+    //     } else {
+    //         reject("没钱去看防弹演唱会")
+    //     }
+
+    // })
+    // console.log(p);
+
+    // 获得两种状态的终值或者说原因
+    // let p = new Promise(function (resolved, reject) {
+    //     let m = Math.random();
+    //     if (m > 0.5) {
+    //         resolved("成功");
+    //     } else {
+    //         reject("失败")
+    //     }
+    // })
+    // 获得两种状态的终值res或者说原因err
+    // p.then(function (res) {
+    //     console.log(res);
+    // }, function (err) {
+    //     console.log(err)
+    // })
+    // console.log(p);
+
+    // 利用了定时器，加上函数简写
+    // let p = new Promise((resolved, reject) => {
+    //     setTimeout(() => {
+    //         let m = Math.random();
+    //         if (m > 0.5) {
+    //             // 使用定时器使得得到结果要迟一些
+    //             resolved("有钱去消遣");
+    //         } else {
+    //             reject("没闲钱");
+    //         }
+
+    //     }, 5000)
+    // })
+    // p.then((res) => {
+    //     console.log(res);
+    // }, (err) => {
+    //     console.log(err);
+    // })
+    // console.log(p);
+
+    let p = new Promise((resolved, reject) => {
+        setTimeout( () =>{
+            let m = Math.random();
+            if (m > 0.5) {
+                resolved("有闲钱娱乐")
+            } else {
+                reject("没余钱")
+            }
+        },5000)
+
+    })
+    p.then((res) => {
+        console.log(res);
+    }, (err) => {
+        console.log(err);
+    })
+    console.log(p);
+
+
+
+
+
+
+
+</script>
+
+</html>

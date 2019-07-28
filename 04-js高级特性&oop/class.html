@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 最初始的构造器与原型之间的写法与关系
+    // 利用的是函数
+    // function NBA(name,age,height){
+    //     // 将属性扔到构造器上
+    //      this.name = name;
+    //      this.age = age;
+    //      this.height = height;
+    // }
+    // NBA.prototype.say=function(){
+    //     console.log("我是，年龄，身高")
+    // }
+    // NBA.prototype.jump=function(){
+    //     console.log("chdhuhf")
+    // }
+    // let p = new NBA("tanni",13,180);
+    // p.say()
+    // p.jump()
+
+    // 使用class属性，直接创建对象
+    // class NBA{
+    //     // 创建完对象以后在里面利用constructor属性，也是个函数来将属性扔到构造器上去
+    //     // 构造方法（写在对象里面的函数称之为方法）  当对象创建后会自动调用
+    //     constructor(name,age,height){
+    //         this.name=name;
+    //         this.age = age;
+    //         this.height=height;
+    //     }
+    //     say(){
+    //         console.log("这是之前原型上的方法1")
+    //     }
+    //     jump(){
+    //         console.log("这是之前原型上的方法2")
+    //     }
+    // }
+    // let p = new NBA("tanni",18,178);
+    // p.say();
+    // p.jump();
+
+
+
+// 这都是new上一个对象来调方法
+    // function NBAPlayer(name, age, height) {
+    //     // 将属性扔到构造器上去
+    //     this.name = name;
+    //     this.age = age;
+    //     this.height = height;
+    // }
+    // // 这是构造器原型上的方法say,jump。
+    // NBAPlayer.prototype.say = function () {
+    //     console.log(`我是${this.name},今年${this.age},我的身高是${this.height}`)
+    // }
+    // NBAPlayer.prototype.jump = function () {
+    //     console.log("jump...")
+    // }
+    // // 需要创建一个函数将MVP的信息属性传到构造器上去
+    // // 继承属性
+    //  function MVP(name,age,height,year){
+    //     //  因为之前已有相应的属性的继承，那么从那个上面继承过来，利用call
+    //     // 这里表示的是MVP从NBAPlayer上继承属性，后面带的是继承过来的属性参数
+    //     NBAPlayer.call(this,name,age,height)
+    //      this.year=year;
+    //  }
+    //   // MVP本身带有的方法
+    // MVP.prototype.showMVP=function(){
+    //     console.log("我啊是MVP本身的方法")
+    // }
+    // //  继承方法
+
+    // // 比较简单的，直思想，MVP从相应的地方得到相应的方法
+    // // MVP.prototype=NBAPlayer.prototype
+    // // MVP.prototype.constructor = MVP
+
+    // // 稍微复杂，需要循环的
+    // // 使用for in遍历的是NBAPlayer,遍历过之后，赋给对应的需要方法的对象（构造器）
+    // for(let i in NBAPlayer.prototype){
+    //    MVP.prototype[i]=NBAPlayer.prototype[i]
+    // }
+    // MVP.prototype.constructor=MVP;
+    // // 这是new上的是有关NBAPlayer的构造器
+    // // let m1 = new NBAPlayer("xiaoqiang", "30", "191", 2010)
+    // // m1.say();
+    // // m1.jump();
+    // // 要想找到某一年的MVP
+    // let b1 = new MVP("xiaoqiang", "30", "191", 2010)
+    // b1.say();//需要NBAPlayer上的方法
+    // b1.showMVP();//需要NBAPlayer上的属性
+
+    // 静态方法
+    // class Animal{
+    //     static eat(){
+    //         console.log("eat....")
+    //     }
+    // }
+    // Animal.eat()//使用了类来调用
+    // let p = new Animal()
+    // p.eat()
+
+    class Animal{
+        // m就不能叫变量  属性
+        static m = 1;
+    }
+    // console.log(Animal.m)  //1
+    let a = new Animal()
+    console.log(a.m)  // undefined也就是说静态方法不能使用实例来调用
+
+</script>
+
+</html>
