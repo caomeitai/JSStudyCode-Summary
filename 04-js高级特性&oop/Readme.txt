@@ -244,15 +244,15 @@ ES6新增方法:
 
 
 ----------------ES6对象的扩展
-    1，Object.getOwnPropertyDescriptor() 得到某个对象中某个属性的特征
-    2，Object.defineProperty()   精细化设置一个对象的属性
-    3，Object.defineProperties()  精细化设置一个对象的多个属性
-    4，Object.getOwnPropertyNames()  得到对象中自已内部的所有的属性，放到一个数组中
-    5，Object.keys()  得到对象中所有的属性（包含它自己的和它原型上），放到一个数组中
-    6，Object.values()  得到对象中所有的属性（包含它自己的和它原型上）的值，放到一个数组中
-    7，Object.create()  用于对字面量对象实现继承
-    8，Object.getPrototypeOf()  得到一个对象的原型对象
-    9，Object.assign()  用于对象的合并
+1，Object.getOwnPropertyDescriptor() 得到某个对象中某个属性的特征
+2，Object.defineProperty()   精细化设置一个对象的属性
+3，Object.defineProperties()  精细化设置一个对象的多个属性
+4，Object.getOwnPropertyNames()  得到对象中自已内部的所有的属性，放到一个数组中
+5，Object.keys()  得到对象中所有的属性（包含它自己的和它原型上），放到一个数组中
+6，Object.values()  得到对象中所有的属性（包含它自己的和它原型上）的值，放到一个数组中
+7，Object.create()  用于对字面量对象实现继承
+8，Object.getPrototypeOf()  得到一个对象的原型对象
+9，Object.assign()  用于对象的合并
 防篡改的方法:
   （1）preventExtensions()：不允许新增，但可以修改，也可以删除
   （2）seal：密封，不允许新增、也不允许删除，但可以修改

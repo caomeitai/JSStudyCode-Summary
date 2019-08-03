@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body></body>
+<!-- <script>
+let obj = {name:"wangcai"}
+// 得到某个对象中某个属性的特征
+console.log(Object.getOwnPropertyDescriptor(obj))  // undefined
+console.log(Object.getOwnPropertyDescriptor(obj,"name"))  
+let b = 110;
+console.log(window.b)  // undefined
+var a = 110;
+console.log(Object.getOwnPropertyDescriptor(window,"a"))  
+</script> -->
+
+<script>
+// Object.defineProperty()  精细化设置一个对象的属性
+// Object.defineProperties()  精细化设置多个对象的属性
+// let obj = {
+//     name:"wangcai",
+//     age:100
+// }
+// 得到对象中自已内部的所有的属性，放到一个数组中
+// console.log(Object.getOwnPropertyNames(obj)) // ["name", "age"]
+// 得到对象中所有的属性（包含它自己的和它原型上），放到一个数组中
+// console.log(Object.keys(obj))  
+// let obj = {
+//     company:"百度",
+//     address:"北京"
+// }
+// let rs = Object.getOwnPropertyNames(obj);
+// let e = Object.keys(obj);
+// let q = Object.values(obj);
+// console.log(rs)
+// console.log(e)
+// console.log(q)
+
+// console.log(Object.values(obj))
+</script>
+
+<!-- <script>
+let obj = {
+    name:"wangcai",
+    age:100
+}
+// 让obj2继承obj中的nameage
+let obj2 = Object.create(obj)
+console.log(obj2.name)
+console.log(obj2.age)
+</script> -->
+
+<!-- <script>
+    // 数组和对象都是引用数据类型，全部都是对象
+let obj = {
+    name:"wangcai",
+    age:100
+}
+let arr = []
+console.log(Object.getPrototypeOf(obj) === Object.prototype)  // true
+console.log(Object.getPrototypeOf(arr) === Array.prototype)  // true
+</script> -->
+
+<!-- <script>
+let obj = {
+    name:"wangcai",
+    age:100
+}
+Object.preventExtensions(obj)
+console.log(obj)
+obj.abc = "hello"
+console.log(obj)
+</script> -->
+
+
+<!-- <script>
+    let name = "wangcai"
+    // let obj = {
+    //     // 没有加引号当成变量
+    //     name: name,
+    //     age: 100
+    // }
+     let obj = {
+        // 没有加引号当成变量
+        name,
+        age: 100
+    }
+    console.log(obj.name)
+</script> -->
+
+<!-- <script>
+    let obj = {
+        say: function () {
+        }
+    }
+    let obj1 = {
+        say: ()=>{
+        }
+    }
+    let obj2 = {
+        say(){
+        }
+    }
+</script> -->
+
+<!-- <script>
+    let name = "wangcai"
+    let age = 110
+    let obj = {}
+    let obj1 = {
+        name
+    }
+    let obj2 = {
+        age
+    }
+    console.log(obj)
+    console.log(obj1)
+    console.log(obj2)
+    Object.assign(obj,obj1,obj2)
+    console.log(obj.name)
+    console.log(obj.age)
+</script> -->
+</html>
