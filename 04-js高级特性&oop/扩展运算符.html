@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <ul>
+        <li>html</li>
+        <li>css</li>
+        <li>js</li>
+    </ul> -->
+</body>
+<script>
+    // 类数组转换成数组
+//    let lis = document.getElementsByTagName("li")
+//    console.log(lis)
+//    let arr = [...lis]
+//    console.log(arr,Array.isArray(arr))
+</script>
+<script>
+// 数组中的扩展运算符
+// 数组的复制
+// var arr = [1,2,3];
+// var arr2 = [...arr];
+// console.log(arr2);
+</script>
+<script>
+//   字符串转换成数组
+// let a ="asdfddfd".split("");
+// console.log(a);  // ["a", "s", "d", "f", "d", "d", "f", "d"]
+
+// let str = "tanni";
+// let arr = [...str];
+// console.log(arr,Array.isArray(arr));  // ["t", "a", "n", "n", "i"] true
+
+// let arr1 = [1,2];
+// let arr2 = [3,4];
+// let arr = [...arr1,...arr2];
+// let arr3 = [...arr2,...arr1];
+// console.log(arr,Array.isArray(arr));
+// console.log(arr3,Array.isArray(arr3))
+// let arr = arr1.concat(arr2);
+// let arr3 = arr2.concat(arr1);
+// console.log(arr,Array.isArray(arr));
+// console.log(arr3,Array.isArray(arr3))
+
+
+
+// 深拷贝
+// let school = {name:'bjdx'};
+// console.log(school);
+// let my = {age:{count:18},name:'yjb'};
+// console.log(my);
+// // 把原来的my放在新对象里，
+// // 用一个新的age 把原来的age也拷贝一份
+// let newMy = {...my,age:{...my.age}}
+// console.log(newMy)
+// let all = {...school,...newMy}
+// my.age.count = 100;
+// console.log(my);
+// console.log(all);  
+
+let arr = [100,2,-1];
+ //max方法接收的参数不能是数组，只能是列表，通过apply去掉用Math.max
+let res = Math.max.apply(null,arr); 
+let rs = Math.max(...arr);  //...是拓展运算符，是用来将一个数组"打散"
+console.log(typeof [...arr])  //打散之后得到对象 object
+console.log(rs)
+
+function f(...b){  //...是rest参数，它是将零散的参数列表打包成一个数组
+    console.log(b);
+}
+f(1,2,3,4,5);
+
+</script>
+</html>
