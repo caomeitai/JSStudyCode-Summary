@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双向数据绑定</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        单向绑定:数据变化，视图更新    v-bind
+        双向绑定:数据变化，视图更新，视图变化，数据更新  v-model  作用于表单元素
+        v-model仅仅是语法糖  v-model = :value+@input
+        input事件：当输入框中的数据改变时发生
+    -->
+    <div id="app">
+        <!-- input输入框的双向绑定 -->
+        <!-- 使用value将数值绑定到input框中 -->
+        <!-- input事件是将视图中的数据拿到,需要传递事件对象 -->
+        <!-- <input type="text" :value="msg" @input="f($event)"> -->
+        <!-- 简写成箭头函数可为如下 -->
+        <!-- <input type="text" :value="msg" @input="e=>msg=e.target.value"> -->
+        <!-- v-model是前两者的语法糖，可直接简写 -->
+        <!-- <input type="text" v-model="msg"> -->
+        <!-- 视图的改变会影响data数据 -->
+        <!-- <p>{{msg}}</p> -->
+
+
+        <!-- 常见表单项进行双向数据绑定select -->
+        <!-- key尽量不要绑定index，如果有id尽量绑定id -->
+        <!-- select默认绑定的是option与option中间的内容，如果有value，那么它绑定就是value中的内容 -->
+        
+        <select v-model="selectValue">
+            <option :value="0">请选择</option>
+            <option v-for="(list,index) in lists" :key="list.id" :value="list.id">{{list.value}}</option>
+        </select>
+        <h4>{{selectValue}}</h4>
+        <hr>
+        <!-- 出来单选框时 -->
+        男：<input type="radio" v-model="radioValue" value="男" name="sex">
+        女：<input type="radio" v-model="radioValue" value="女" name="sex">
+        <h1>{{radioValue}}</h1>
+
+        <!-- 出来复选框时 -->
+        全选：<input type="checkbox" v-model="checkboxValue">
+        <h4>{{checkboxValue}}</h4>
+        <!-- 爱好 -->
+        <br>
+        <!-- 在对表单进行绑定时，value不能省 -->
+        游戏：<input type="checkbox" v-model="checkboxValues" value="游戏">
+        电视：<input type="checkbox" v-model="checkboxValues" value="电视">
+        睡觉：<input type="checkbox" v-model="checkboxValues" value="睡觉">
+        <h4>{{checkboxValues}}</h4>
+
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg:"hello bts",
+            selectValue:[],
+            lists:[
+                {value:'菜单1',id:1},
+                {value:'菜单2',id:2},
+                {value:'菜单3',id:3},
+            ],
+            radioValue:"男",
+            checkboxValue:false,
+            checkboxValues:[],
+
+        },
+        methods:{
+            // f(e){
+            //     // console.log(e);
+            //     this.msg=e.target.value
+            // }            
+        }
+    }).$mount('#app')
+</script>
+
+</html>

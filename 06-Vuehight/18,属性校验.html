@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-button :msg="content" a="123" b="2"></my-button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            content:"点我吧"
+        },
+        components:{
+            'MyButton':{
+                props:{
+                    // 需要进行属性校验，赋予属性类型
+                    msg:String,
+                    a:{
+                        type:String
+                    },
+                    b:{
+                        type:String,
+                        // 这是一个属性校验的方法，自己的逻辑，要求
+                        // validator(value){
+                        //     return value>3
+                        // },
+                        default:"666"
+                    }
+                },
+                template:`<div>子组件--{{a}}---{{b}}--{{msg}}</div>`,
+               
+            }
+        }
+    })
+</script>
+</html>

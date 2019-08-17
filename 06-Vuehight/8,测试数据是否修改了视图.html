@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 案例一 -->
+        <!-- <h2>{{msg}}</h2>
+        <h2>{{info.xxx}}</h2>
+        <h3>{{info.address}}</h3> -->
+
+        <!-- 案例二 -->
+        <!-- <h2>{{info.xxx}}</h2>
+        <h3>{{info.address}}</h3> -->
+
+        <!-- 案例三 -->
+        <!-- <h2>{{info.xxx}}</h2>
+        <h3>{{info.address}}</h3> -->
+
+        <!-- 案例四 -->
+        <!-- <h2>{{info.xxx}}</h2>
+        <h3>{{info.address}}</h3> -->
+
+        <!-- 案例五测试数组 -->
+        <h2>{{arr}}</h2>
+    </div>
+</body>
+<script>
+    // 案例一
+    // let vm = new Vue({
+    //     el:"#app",
+    //     data:{
+    //         msg:"hello",
+    //         info:{xxx:"xxxx"}
+    //     }
+    // })
+    // vm.info.address = "hello"//在这里拿不到数据
+</script>
+<script>
+    // 案例二
+//    let vm = new Vue({
+//         el:"#app",
+//         data:{
+//             msg:"hello",
+//             info:{xxx:"xxxx"}
+//         }
+//     })
+//     vm.info = {address:'回龙观',xxx:"xxx"};//改变了data中info的数值
+</script>
+<script>
+    // 案例三
+    // let vm = new Vue({
+    //     el:"#app",
+    //     data:{
+    //         msg:"hello",
+    //         info:{xxx:"xxxx"}
+    //     }
+    // })
+    // vm.info = {address:'回龙观',xxx:"xxx"};//改变了data中info的数值
+    // vm.info.address="hello"//改变了data中info中的address数值
+</script>
+<script>
+    // 案例四，只想增加一个属性
+//   let vm = new Vue({
+//         el:"#app",
+//         data:{
+//             msg:"hello",
+//             info:{xxx:"xxxx"}
+//         }
+//     })
+//     vm.$set(vm.info,'address','韩国首尔')
+</script>
+<script>
+  let vm = new Vue({
+        el:"#app",
+        data:{
+            arr:[1,2,3,4]   
+        }
+    })
+    // vm.arr.length--;//它不会改变数组值的
+    // vm.arr.push("hello"); //直接调用数组上的方法
+    vm.arr = [1,3,4];
+</script>
+
+</html>

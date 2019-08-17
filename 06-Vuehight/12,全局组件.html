@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件 -->
+        <my-button></my-button>
+    </div>
+    <div id="app1">
+        <!-- 使用组件 -->
+        <my-button></my-button>
+    </div>
+</body>
+<script>
+    // 声明，注册全局组件，组件名字
+    Vue.component("my-button", {
+        data() {//传递数据，为了每个组件中的数据互不影响
+            return { msg: "点我" }
+        },
+        // 内部模板
+        template: `<button>{{msg}}</button>`
+    });
+    let vm = new Vue({
+        el: "#app",
+    })
+    let vn = new Vue({
+        el: "#app1",
+    })
+</script>
+
+</html>

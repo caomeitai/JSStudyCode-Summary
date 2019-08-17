@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方法，计算属性</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 调用方法,方法没有缓存，它每调用一次就改变一次 -->
+        <!-- <h1>{{getFullname()}}</h1>
+        <h1>{{getFullname()}}</h1>
+        <h1>{{getFullname()}}</h1> -->
+
+        <!-- 计算属性，有缓存，如果没有值的更改会从缓存中取 -->
+        <!-- <h1>{{fullName}}</h1> -->
+        <!-- <h1>{{fullName}}</h1> -->
+        <!-- <h1>{{fullName}}</h1> -->
+
+        <!-- watch方法,渲染出来的是数据data -->
+        {{fullname}}
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            firstname: '张',
+            lastname: '三',
+            msg: 'hello',
+            fullname: ''
+        },
+        // watch第一次是不会被触发的，需要钩子函数
+        mounted() {
+            this.getFullname()
+        },
+        methods: {
+            getFullname() {
+                // console.log("haha")//方法是每调用一次就打印一次
+                // console.log(this.msg)//改变非数值以外的数也打印啦
+                // return this.fullname = this.firstname+this.lastname
+                this.fullname = this.firstname + this.lastname
+            }
+        },
+        watch: {
+            // 监控谁,监控的是数据的改变，谁就是一个函数
+            firstname: {
+                handler(newValue) {
+                    this.getFullname();
+                },
+                immediate: true
+            },
+            lastname(){
+                this.getFullname()
+            }
+        }
+    //         firstname() {
+    //             // 异步通信      
+    //             setTimeout(() => {
+    //                 this.getFullname()
+    //             }, 10000)
+
+    //             // 同步通信
+    //             // this.getFullname()
+    //         }
+    // },
+    //     lastname() {
+    //         // setTimeout(()=>{
+    //         //     this.getFullname()
+    //         // },10000)
+
+    //         //this.getFullname()
+    //     }
+    // },
+        // computed: {
+        //     fullName() {
+        //         console.log("heihei")//只有当真正的数据改变时才会打印
+        //         console.log(this.msg)
+        //         return this.firstname + this.lastname
+        //     }
+        // }
+    })
+</script>
+
+</html>
+<!-- 
+    计算属性和方法的区别？
+    computed有缓存   method没有缓存
+    computed和watch有什么区别？
+    大多数情况下，computed和watch都可以互换，
+    watch中可以写异步，
+    watch中的写法复杂一点，
+    watch可以实现一些简单的功能
+    watch和方法有区别？
+    watch主要是用来监控数据变化
+    方法里面就是写一些常规的方法
+    能使用computed就不要使用watch 
+ -->

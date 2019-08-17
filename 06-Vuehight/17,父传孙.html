@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- :代表着数据单向绑定，需要从data中拿数据绑上去,a,b代表着字面量 -->
+        <my-button :msg="content" a="1" b="2"></my-button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            content:"点我吧"
+        },
+        components:{
+            // 子组件中不使用数据
+            'MyButton':{
+                // 使用mounted来获取数据，this.$attrs代表着子接收的数据没有用到，把数据保存到$attrs中
+                mounted(){
+                console.log(this.$attrs)//里面保存了父中的所有数据
+                },
+                // 传递数据，需要绑定数据，在模板当中不需要this，所有的数据都在this.$attrs中
+                // template:`<div>子组件--<my :as="$attrs" ></my></div>`,
+                template:`<div>子组件--<my v-bind="$attrs" ></my></div>`,
+                components:{
+                    'my':{
+                        props:['a','b'],//通过数组只需拿到自己需要的数据即可
+                        // props:{},//使用对象接收数据时需要指定数据类型
+                        template:`<span>孙组件--{{a}}--{{b}}</span>`
+                    }
+                }
+
+            }
+        }
+    })
+</script>
+</html>

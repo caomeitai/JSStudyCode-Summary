@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vm上的方法</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <!-- vm上的方法有$el（div边界，与innerHTML合用）,$options（挂载项）,$nextTick（数据更新之后函数直接调用）,$watch（观察数据变化） -->
+    <div id="app">
+        <h3>{{arr}}</h3>
+        <h1>{{info}}</h1>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            arr:[1,2,3,4],
+            info:{xxx:"xxxx"},
+        }
+    })
+    vm.$watch('info.xxx',function(newValue,oldValue){
+        console.log(newValue,oldValue);
+    })
+    // 数据驱动视图是批量操作
+    vm.arr = [5,6,7,8];
+    vm.arr = [1,2,4,7];//数据改变会更新视图
+    // console.log(vm.$el)//打印出的是el边界的那个div整体
+    console.log(vm.$el.innerHTML);//得到div里面的标签及内容，它得到的还是老的数据
+    console.log(vm.$options);//挂载项，vm本身上的数据啦，方法啦，组件啦
+    //  当视图中的数据批量更新后，会自动调用这个方法
+    vm.$nextTick(()=>{
+    // 它会改变数值，上面得到的是老数据
+    console.log(vm.$el.innerHTML);//得到div里面的标签及内容，它得到的还是老的数据
+    console.log(vm.$options);
+    })
+
+</script>
+</html>

@@ -1,0 +1,84 @@
+<!-- 
+    组件之间交互的方案：
+        上面：props,$emit,$attrs,$lisenters,
+        下面：$parent,$children,provide,inject,$refs
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <style>
+        .title {
+            width: 100px;
+            border: 1px solid red;
+            line-height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <collapse>
+            <!--collapse 需要个插槽来存放collapse-item -->
+            <!-- collapse-item它里面存放着标题和对应内容，需要个插槽来放内容1,2,3，并且控制内容显示与否show -->
+            <collapse-item title="vue">内容1</collapse-item>
+            <collapse-item title="react">内容2</collapse-item>
+            <collapse-item title="node">内容3</collapse-item>
+        </collapse>
+    </div>
+</body>
+<script>
+    // $parent 获取父组件的实例   $children获取所有的儿子
+    // 需要定义组件
+
+    // 父组件
+    Vue.component("Collapse", {
+        methods:{
+            // 传过来唯一表识
+            cut(childId){
+                // 获取所有儿子进行遍历
+                this.$children.forEach(child=>{
+                    // 判断当前点击的id不与其相对应
+                    if(child._uid!==childId){
+                      child.show = false
+                    }
+                })
+
+            }
+        },
+        template: `<div class="wrap">
+            <slot></slot>
+        </div>`
+    });
+
+    // 子组件
+    Vue.component("CollapseItem", {
+        data(){return {show:false}},
+        // 传递过去title就需要给一个title
+        props: ['title'],
+        template: `<div>
+            <div class="title" @click="change">{{title}}</div>
+            <div v-show="show">
+                <slot></slot>
+            </div> 
+        </div>`,
+        methods:{
+            change(){
+                console.log(this)//得到每一项的唯一id    _uid
+                console.log(this._uid)
+                // 父组件中不存在.cut这个方法
+                this.$parent.cut(this._uid)
+                // 当点击当前内容，显示
+                this.show=!this.show;
+            }
+        }
+    })
+    let vm = new Vue({
+        el: "#app",
+    })
+</script>
+
+</html>

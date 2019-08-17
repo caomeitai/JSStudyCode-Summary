@@ -1,0 +1,43 @@
+<!-- 
+    组件之间交互的方案：
+        上面：props,$emit,$attrs,$lisenters,
+        下面：$parent,$children,provide,inject,$refs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <template v-for="i in 5">
+            <div ref="me">我的DOM元素</div>
+        </template>
+        <my ref="com"></my>
+    </div>
+</body>
+<script>   
+    let vm = new Vue({
+        el: "#app",
+        mounted(){
+            // 使用钩子函数来拿到子组件,它可以拿到实例
+            console.log(this.$refs.me)//如果遇到循环，那么就是多个元素，以数组的形式拿到
+            console.log(this.$refs.com)//给组件增加ref获取实例
+            console.log(this.$refs.com.show)//它可调用组件实例上的方法
+        },
+        components:{
+           'my':{
+               methods:{
+                   show(){
+                       alert("子组件的方法")
+                   }
+               },
+               template:`<div>局部组件my</div>`
+           }
+        }
+        
+    })
+</script>
+
+</html>

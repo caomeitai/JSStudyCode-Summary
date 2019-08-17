@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        v-for 循环数组 循环对象 整数
+        vue2.5版本以上，要使用v-for，需要加上key  key要唯一
+        template上面是不能绑定key
+        key的作用：区分元素
+    --->
+    <div id="app">
+        <!-- 1,不管报不报错误都要加上key且key不要重复，div支持v-for的使用 -->
+        <!-- <div v-for="i in 5":key="i">
+           <p>{{i}}</p>
+       </div> -->
+
+        <!-- 2,v-for支持template标签的，但是template上不能有key -->
+        <!-- <template v-for="i in 10" :key="i" >
+           <p>{{i}}</p>
+       </template> -->
+
+        <!-- 3,key值是要唯一的 -->
+        <!-- <template v-for="i in 5">
+           <div :key="i">{{i}}</div>
+           <div :key="i">{{i}}</div>
+       </template> -->
+        <!-- 解决方法，加标识 -->
+        <!-- <template v-for="i in 5">
+            <div :key="i+'1'">{{i}}</div>
+            <div :key="`${i}_2`">{{i}}</div>
+        </template> -->
+        <!-- 4,key可以用来区分元素，当没有key时，它会对比不一样的地方，若只有数据不同，那么框将不发生变化 -->
+        <div v-if="flag">
+            <span>张三</span>
+            <input type="text" key="1">
+        </div>
+        <div v-else>
+            <span>李四</span>
+            <input type="text" key="2">
+        </div>
+
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:true
+
+        }
+    })
+</script>
+
+</html>

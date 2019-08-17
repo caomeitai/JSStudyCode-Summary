@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 父组件（根组件）使用子组件my-button -->
+        <my-button :msg="content"></my-button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            // 父组件中的数据传递给子，在子组件上需要绑定属性
+            content:"点我"
+        },
+        components:{
+            // 子组件MyButton
+            "MyButton":{
+                data(){
+                    return {}
+                },
+                // 子组件要想接收数据props
+                props:{
+                    // 若是以对象形式接收对象，需要指定接收过来的属性
+                    msg:String,//进行属性校验，就可通过
+                },
+                template:`<div>子组件---{{msg}}---<my></my></div>`,
+                // 孙组件my
+                components:{
+                    'my':{
+                        template:`<span>孙组件my</span>`
+                    }
+                }
+            }
+        }
+
+    })
+</script>
+</html>

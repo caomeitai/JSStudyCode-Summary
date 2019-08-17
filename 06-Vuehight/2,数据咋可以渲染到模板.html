@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <!-- 这个div是一个模板 -->
+    <div id="app">
+        <!-- 只要是模板上使用了数据，就必须在实例上声明，将数据务必放在data中 -->
+      <h1>{{msg}}</h1>
+      <h1>{{info}}</h1>
+      <h2>{{info.xxx}}</h2>
+      <h1>{{arr}}</h1>
+      <p>{{getData()}}</p>
+      <h2>{{ info.address }}</h2>
+    </div>
+</body>
+<script>
+    // new上的就是一个实例，vue是数据驱动视图的
+   let vm = new Vue({
+       el:"#app",
+       data:{
+        //  用来存放数据的，它是一个对象
+        msg:'hello',
+        info:[],//没有定义数值变量时
+        // info:{xxx:"tanni"},
+        arr:[1,2,3,4]
+       },
+       methods:{
+           getData(){
+            console.log(this)//this指的是new上的vue实例
+            console.log(this.info)//会打印出改变后的obj对象
+            console.log(this.info.xx)//打印出两次值，tanni,hello
+           }
+           
+       }
+   });
+   
+   // vue的实例会代理data中的数据
+    vm.info.xxx = "hello", // 这数据写在外面，在{{}}中是得不到数据
+    vm.info.address = "mmmmmmmmm"
+    vm.info = {address:"bts",xx:"xx"}//将info对象中赋予了好多属性
+    vm.info.address = "world"//改变info中的好多属性中的一个
+    vm.$set(vm.info,"address","abc")
+
+//    console.log(vm.info)
+</script>
+</html>

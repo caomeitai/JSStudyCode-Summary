@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>使用子组件：</span>
+        <my-button :msg="content"></my-button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            content:"点我吧"
+        },
+        components:{
+            'MyButton':{
+                data(){
+                    return {}
+                },
+                props:{
+                    msg:String
+                },
+                template:`<div>子组件--{{msg}}--使用孙组件:<my :as="msg"></my></div>`,
+                components:{
+                    'my':{
+                        data(){
+                            return {}
+                        },
+                        props:{
+                            as:String
+                        },
+                        template:`<span>孙组件--{{as}}</span>`
+                    }
+                }
+
+            }
+        }
+    })
+</script>
+</html>

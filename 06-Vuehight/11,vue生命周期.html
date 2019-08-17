@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue生命周期</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <!-- 学习vue的生命周期就是学习一堆的钩子函数 -->
+    <div id="app">
+        <h1>{{a}}</h1>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            a:1,
+            b:2,
+        },
+        // 初始化生命周期，并且绑定自己的事件
+        beforeCreate(){//在创建之前的函数，用的比较少，此时拿不到数据
+           console.log("beforeCreate");
+        },
+        // created就可以获取数据data中的数据啦
+        created(){//可以调用ajax 用的比较多，ajax是异步的  不会在这里中断
+            console.log("created");
+            // console.log(this.a);//它可以获取数据，调用方法
+            // console.log(this.$data);
+        },
+        // 第一次调用渲染函数之前，也可以发送ajax请求，一般不会在这里发送
+        beforeMount(){
+            console.log("渲染前的beforeMount")
+        },
+        // 获取真实的DOM，因为页面已经渲染完毕，此时也可发送ajax
+        mounted(){
+            console.log("渲染后的mounted")
+            console.log(this.$el.innerHTML)//拿到真实的DOM元素
+            this.a = 100;
+            this.timer = setInterval(()=>{
+
+            })
+        },
+        beforeUpdate(){//一般不用，也用不到
+            this.b = 200;
+            console.log("更新前的beforeUpdate")
+        },
+        // 可能会使用到，尽量不要在updated钩子函数中操作数据，可能会陷入死循环
+        Updated(){
+          console.log("Updated");
+          this.b = 300;
+        },
+        beforeDestroy(){
+            // 此时实例还是可以使用
+            // 在真正销毁之前做一些清理工作
+            clearInterval(this.timer);
+            console.log("销毁之前的beforeDestroy")
+        },
+        destroyed(){
+            // 实例上的方法，监听都被移除掉啦
+            console.log("销毁后的destroyed")
+        }
+    })//将方法销毁的第一种方法：路由切换，手动销毁
+    vm.$destroy();//销毁之后，数据恢复原状，方法清除
+</script>
+</html>
+<!-- 
+    所有的钩子函数，形成的生命周期
+    beforecreate(),created()
+    beforemount(),mounted()
+    beforeUpdate(),updated()
+    beforedestroy(),destroyed()
+ -->

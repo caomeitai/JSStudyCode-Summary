@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+    <!-- 
+        子要触发父中的方法：
+            方式一：@click.native="change"
+            方式二：@click="$listeners.click()"
+            方式三：@click="$emit('click')"
+            触发父传递的多个事件：v-on="$listeners"
+    -->
+
+        <!-- 
+            如果父传递了数据  子需要通过props接收
+            如果父传递了事件  子需要通过$emit触发 
+         -->
+        <!-- 标签里写的都是属性，属性都可以往下（子组件里）传递，数据需要接收，事件需要触发 -->
+        <!-- my-button是自己定义的组件 v-on:click=""相当于@clik它们都是属性，而非真正的点击事件-->
+        <!-- <my-button @click="change"  a = "1"></my-button> -->
+
+        <!-- 触发事件方式一:加上native是把click当成真正的事件而非属性 -->
+        <!-- 它是将my-button这个组件看作一个整体，当在下面将组件加上一个div时会出现点击div也可发生点击事件 -->
+        <!-- <my-button @click.native="change"  a = "1"></my-button> -->
+
+        <!-- 触发事件方式二:所有v-on绑定的事件都会放到$listeners，而这里是点击事件 -->
+        <!-- <my-button @click="change"  a = "1"></my-button> -->
+
+        <!-- 触发事件方式三:$emit('发生的事件click') -->
+        <!-- <my-button @click="change"></my-button> -->
+
+        <!-- 触发父中传递的多个事件 -->
+        <my-button @click="change" @mouseup = "change"></my-button>
+
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        methods: {
+            change() {
+                alert(1)
+            }
+        },
+        components: {
+            'MyButton': {
+                // 触发事件方式一
+                // template: `<div><button>点我</button></div>`,
+
+                // 触发事件方式二 
+                // template: `<div><button @click="$listeners.click()">点我</button></div>`
+
+                // 触发事件方式三
+                // template: `<div><button @click="$emit('click')">点我</button></div>`,
+
+                // 触发父中多个事件
+                template: `<div><button v-on="$listeners">点我</button></div>`,
+
+            }
+        }
+    })
+</script>
+
+<!-- 
+    自己总结：
+    在组件上写方法是不可能发生的，因为它是属性，而非真正的方法
+    解决方法有：
+    @click.native直接在组件方法上添加，但是如若在组件内部模板上加上一个div它会点击div也发生点击事件
+    v-on的所有事件都存放到了$lisenters上面@click=$lisenters.click()
+    $emit('click')
+    多个事件同时触发v-on="$lisenters"
+ -->
+</html>

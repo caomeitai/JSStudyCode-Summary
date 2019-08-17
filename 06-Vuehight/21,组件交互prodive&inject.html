@@ -1,0 +1,36 @@
+<!-- 
+    组件之间交互的方案：
+        上面：props,$emit,$attrs,$lisenters,
+        下面：$parent,$children,provide,inject,$refs
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my></my>
+    </div>
+</body>
+<script>
+    
+    Vue.component("my", {
+        // 谁用到相应属性就是用inject来接收一下
+        inject:['a', 'msg'],
+        template: `<div>{{a}}---{{msg}}</div>`
+    });
+    let vm = new Vue({
+        el: "#app",
+        // provide在根组件上提供了一个a属性，所有的子组件都可以获取
+        provide:{
+            a:1,
+            msg:"hello",
+        }
+    })
+</script>
+
+</html>

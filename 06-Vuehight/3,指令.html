@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>指令</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <!-- 在模板中，this表示vm实例 -->
+    <!-- v-html,v-if,v-show,v-for -->
+    <!-- v-html: 会解析html标签，xss攻击-->
+    <div id="app">
+        <!-- 
+        v-if v-show 
+        v-if控制dom元素有还是没有  支持template标签
+        v-show控制是css样式  不支持template标签
+    -->
+        <!-- <template v-if="flag">
+        <p>v-if控制dom元素有无，支持template标签</p>
+    </template> -->
+        <!-- <template v-show="flag">
+            <p>v-show控制css样式，不支持template标签，也就是不起作用</p>
+        </template> -->
+
+        <div v-show="flag">
+            <!-- false相当于display：none -->
+            <p>v-show控制css样式，不支持template标签，也就是不起作用</p>
+        </div>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello",
+            flag: false
+        }
+    })
+</script>
+
+</html>
