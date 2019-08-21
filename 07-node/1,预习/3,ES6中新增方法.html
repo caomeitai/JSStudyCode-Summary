@@ -1,0 +1,54 @@
+<!-- 1，defineProperty精细化设置一个对象的属性 -->
+<!-- <script>
+  var dog = {};
+// 第一个参数是对象，然后是对象里要设置的属性名,再者就是要详细设置的内容
+  Object.defineProperty(dog,"name",{
+   configurable:true,//删除与否
+   writable:true,//修改与否
+   enumerable:true,//枚举与否
+// value:false  // 不设置的话，默认值为undefined
+   value:"tanni" //默认值会被覆盖掉
+  })
+  console.log(dog.name)
+</script> -->
+
+<!-- 2，keys得到的是对象中所有的键名，包括它内部和原型上的，得到的是一个数组 -->
+<!-- 比较容易乱的几个：keys得到的键名；getOwnPropertyNames获得的是对象内部的属性；values得到的是对象内部及原型上的属性值 -->
+<!-- <script>
+  let obj = {
+      name:"tanni",
+      age:"12",
+      address:"beijing",
+      company:"zhengtai"
+  }
+ console.log(Object.keys(obj)) 
+</script> -->
+
+<!-- 3，create实现的是字面量的继承，使得一个对象继承了另一个对象的属性 -->
+<!-- <script>
+  let obj = {
+      name:"tanni",
+      age:16
+  }
+ let obj1 = Object.create(obj)
+//  可以拿到属性
+ console.log(obj1)  //{}  ？
+ console.log(obj1.name) //tanni
+ console.log(obj1.age) //16
+</script> -->
+
+<!-- 4，getPrototypeOf() 得到一个对象的原型对象，数组与对象都是引用数据类型都是对象 -->
+<!-- <script>
+  let obj ={
+      name:"tanni",
+      age:12
+  }
+  let arr = [];
+//   前两者的原型对象取法
+let a = Object.getPrototypeOf(obj) === Object.prototype  //prototype直接得到的是obj这个对象的原型
+let b = Object.getPrototypeOf(arr) === Array.prototype  //prototype直接得到的是obj这个对象的原型
+console.log(a,b)
+</script> -->
+<script>
+  
+</script>

@@ -1,0 +1,33 @@
+<!-- <script>
+// 变量必须先定义后使用，不能使用隐式的全局变量不起作用
+"use  strict";
+a = 110;
+console.log(a);  
+</script> -->
+
+
+<!-- <script>
+    // 系统不能使用8进制
+    "use strict";
+    var a = 010;
+    console.log(a);
+</script> -->
+
+
+<!-- <script>
+    // 系统不能使用8进制 ,如果不是在第一行写的use strict是不起作用的
+    var a = 010;
+    "use strict";
+    console.log(a);
+</script> -->
+
+
+<script>
+    // 在函数中如果不是在第一行写的use strict也是不起作用的
+   function f(){
+       "use strict"
+       a = 110;
+       console.log(a)
+   }
+   f()
+</script>

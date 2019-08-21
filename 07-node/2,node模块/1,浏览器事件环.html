@@ -1,0 +1,41 @@
+<!-- <script>
+setTimeout(() => {
+    console.log('setTimeout1');
+    Promise.resolve().then(data => {
+        console.log('then3');
+    });
+},1000);
+Promise.resolve().then(data => {
+    console.log('then1');
+});
+Promise.resolve().then(data => {
+    console.log('then2');
+    setTimeout(() => {
+        console.log('setTimeout2');
+    },1000);
+});
+console.log(2);
+// 2 then1 then2  settimeout1  then3 settimeout2
+</script> -->
+
+<!-- <script>
+setImmediate(() => {
+    console.log('setImmediate1');
+    setTimeout(() => {
+        console.log('setTimeout1')
+    }, 0);
+});
+Promise.resolve().then(res=>{
+    console.log('then');
+})
+setTimeout(() => {
+    process.nextTick(() => {
+        console.log('nextTick');
+    });
+    console.log('setTimeout2');
+    setImmediate(() => {
+        console.log('setImmediate2');
+    });
+}, 0);
+// then setImmediate2 nextTick setImmediate1   setTimeout2 setTimeout1   
+</script> -->
