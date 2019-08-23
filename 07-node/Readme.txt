@@ -181,25 +181,133 @@
    使用：> nodemon 文件名
 
 18，node框架：express  koa  基于koa进行二次封装
-  1，Express是基于Node.js平台，快速、开放、极简的web开发框架。
-   1) express上的路由分两种：
-        针对应用级别的路由，在app上进行创建；
-        针对router实例对象的路由，在router对象上进行创建；
-   2) 创建一个针对应用级别的路由，是分步骤：
-        a, 通过express()创建一个app实例
-        b, METHOD是一个HTTP的请求方法，如get请求或post请求， app.get(), app.post()
-        c, path是服务器上的路径，是url中的路径部分，如 “/”  “/user”
-        d,callback当路由匹配成功是要执行一个函数，在这个函数中有两个非常重要的参数，req，res,  req是指incommingMessage, res是指serverResponse
+Express学习:
+  1，Express概念：
+        Express是基于Node.js平台，快速、开放、极简的web开发框架；web可分两类：做管理系统与开接口   
+  2，Express路由:
+      官方概念：路由是指如何定义应用的端点（URIs）以及如何响应客户端的请求。
+      民间概念：给一个请求，这个请求交给谁来处理，交给的过程就是路由
+      1) express中实现路由的方式：
+            针对应用级别的路由，在app对象上进行创建；
+            针对router实例对象的路由，在router对象上进行创建；
+      2) 创建一个针对应用级别的路由，是分步骤：
+            a, 通过express()创建一个app实例
+            b, METHOD是一个HTTP的请求方法，如get请求或post请求， app.get(), app.post()
+            c, 第一个参数path是服务器上的路径，是url中的路径部分，如 “/”  “/user”
+            d,第二个参数callback，当路由匹配成功是要执行一个函数，在这个函数中有两个非常重要的参数，req，res,  req是指incommingMessage, res是指serverResponse
+      3) 路由方式（主要）：
+         get:直接输入网址；href；src；表单form(method = get)
+         post：表单form(method = post)
+      4) 路由句柄:路由句柄就是一个回调函数，它存在两个参数：req（incommingmessage）它表示请求信息我们只能获取，不能修改；res（serverResponse）它表示响应对象，可以做服务器上的任何事情。
+           特点：
+            （1）对于一个路由句柄（可以理解为callback），可以设置多个
+            （2）当我们设置两个回调函数时，第二个回调函数并未起作用
+            （3）如果想要让第二个回调函数起作用，要用到第三个参数next，需要在第一个回调函数里调用next()
+      5) 回调函数参数：在express中的回调函数参数是在原生node的基础上进行再次封装，增加了新的属性和方法
+         req：是作为回调函数的第一个参数
+           （1）req中的属性query可以将查询字符串变成对象
+           （2）req中的属性path可以得到路径名
+         res：是作为回调函数的第二个参数
+            （1）res的send方法直接发送响应的内容，可以是普通字符串，也可以是html标签，不需要写其它的头信息
+            （2）res的sendFile方法可用来发送文件，我们可以用来发送一个html文件（里面存在css,js...），它使用时利用__dirname需要拼接上文件路径
+            （3）res的json方法可以用来发送一个json格式的数据，就是将发过来的数据都转成json格式，全部加上""
+            （4）res的redirect方法进行重定向，和之前vue中路由重定向相似
+            （5）res的render方法，它需要将依赖，包都要引进来，它是去渲染views视图中的模板，从而用来做系统
+  3，Express中间件：
+       中间件可以想成是回调函数，在每个回调函数中，存在3个参数，req,res,next。和路由句柄有相似之处
+       Express是一个自身功能极简，完全是由路由和中间件构成一个web开发框架；本质上一个Express应用就是在调用各种中间件
+     （1）中间件可以做什么？
+        执行任何代码
+        修改请求和响应对象
+        终结请求—响应循环
+        调用堆栈中的下一个中间件
+     （2）express中有哪些中间件？
+         应用级中间件：通过app对象来调用
+         路由级中间件：是指要利用express.Router对象来调用
+         错误处理中间件：它存在四个参数，多了个err，它需要在next函数中扔出一个错误，那么就会走下面的错误函数
+         内置中间件：express.static 负责托管静态资源的，也就是用来载入静态资源的
+         第三方中间件：真正开发时使用，主要好用的有：body-parser,cookie-parse,express-session
+     （3）应用级别中间件的使用：
+           格式：app.use([path],callback);
+           path是可不写的，这时它就说明所有的请求都会使用这个中间件，相当于路径为*    
+    注意点：
+    （1）在访问一个路由时会先访问其中间件，要想继续向下访问的话就要求next一下 
+    （2）每个路由都有其对应的中间件，中间件也只会控制对应的路由。比如 /XXX这个路由，它会有至少走两个中间件，一个是/ 一个是/XXX
+    （3）中间件在执行时是有顺序的，谁在前就先执行谁
+  4，应用生成器：脚手架
+    1) 创建项目流程：
+      （1）安装：npm install -g express-generator
+      （2）创建应用：express my -->进入项目：cd  myXXX-->安装依赖: npm install
+      （3）启动项目：npm start
+    2) 项目结构分析：
+      （1）bin中都是存放的可执行文件  www在它里面创建了一个默认端口为3000的服务器
+      （2）node_modules中都是一个模块或者包
+      （3）public中存放着一些静态资源。如imgs,js,css等
+      （4）routes存放的是一些路由相关文件，有二级路由
+      （5）views中存放着视图文件，都是一些模板，而在express中默认使用的是jade模板引擎，我们之前所说的html是ejs模板引擎，想要改变的话，可以在创建项目时加上-e
+      （6）app.js是项目入口文件
+      （7）package.json是项目的描述文件，里面存放着项目所需的第三方模块或者依赖
+  5，渲染分类：
+    1) 服务器渲染：服务器把真实数据渲染到views的模板里面，然后给客户端返回的就是一个真实数据，是渲染完毕的内容数据又称SSR
+    2) 客户端渲染：使用vue去请求api接口得到json数据，利用v-for将数据渲染出来
+    3) 前后端分离的基本都是客户端渲染，利用axios拿到数据在vue react中渲染数据
+    4) jsp  php  .net  做一个管理系统  都属于客户端渲染  后端利用views视图文件中的模板引擎来将真实数据渲染出来
 
-19，那些是get请求？那些是post请求？
-  get:直接输入网址；href；src；表单form(method = get)
-  post：表单form(method = post)
-web:做管理系统与开接口     
+Koa学习：
+  1，Koa概念：
+       Koa是一个新的web框架，由Express幕后的原班人马打造，致力于成为web应用和API开发领域中的一个更小、更富有表现力、更健壮的基石。
+       通过利用async函数，Koa帮你丢弃回调函数，并有力地增强错误处理。Koa并没有捆绑任何中间件，而是提供了一套优雅的方法，帮助您快速而愉快地编写服务端应用程序。
+  2，Koa实例上也有很多方法属性:koa建议使用koa封装的
+      1) 原生res,req指的是node上的，它也可在koa中访问，需要ctx.res.xxx或者ctx.req.xxx
+      2) koa封装了两个属性response和request，它想要访问其上面的方法属性要求ctx.response.xxx或者ctx.request.xxx
+      3) 对于原生的req存在的属性有url，却没有path这个属性，它只存在pathname，那也仅仅是通过url解析得到的和res上存在end方法但没有send方法，send方法是express上的，在koa上没有
+      4) 对于封装的属性request上存在url和path两个属性和response上面也存在end方法，但没有send方法。它们在访问时可通过直接访问这上面的方法或者去拿原生上的对应方法
+      5) 封装的属性上还有一个比较特殊的body,它是以赋值的形式将响应内容展示出来。ctx.response.body=xxx  代表响应内容   
+      6) 在koa中的最简访问形式  ctx.body = xxx  响应内容  ctx.url  得到网址  ctx.path  得到路径
+  3，Koa中间件：
+        在koa中没有路由默认情况下它会匹配到/，你要使用路由的话就要使用第三方的Koa中间件
+      小细节：
+        1) 在koa中与express是一样的，中间件都是从上向下的执行的
+        2) 在koa中，在一个中间件中调用next()  表示让下一个中间件执行
+        3) koa中间件原理就是洋葱模型：就是在调用时将每个next()换成下一个中间件，这样函数执行内容会发生变化。
+  4，koa中间件原理：
+     1) dispatch函数:来判断执行容器中的哪一个方法，在存在next时要求调用下一个中间件
+          首先会定义一个对象，里面有use这样一个方法，因为实际中use方法里的函数不会立即调用，所以在对象中的方法里会将函数全部推到一个容器里面，然后定义一个函数去执行容器里的方法函数；当存在next函数时，那么会在前面函数中传递参数，再次调用dispatch
+  5，Koa常见中间件：koa-views  koa-static  koa-router  koa-compose  koa-bodyparser
+     中间件本质上就是函数，当中间件中出现异步操作时，会破坏之前koa的洋葱模型
+     在中间件我们调用的next函数返回promise，它是一个异步函数，那么可将async和await配合使用来解决异步，而它们也仅仅是将promise状态转成普通数值而已，在遇见异步操作仍是没有啥变化，也没改变，等待异步的执行。
+     koa常见中间件（都是第三方模块）  -----> 查看第三方模块咋用的地方--->npm    github
 
-服务器渲染：服务器把真实数据渲染到模板里面，然后给客户端返回的就是一个真实数据又称SSR
-客户端渲染：使用vue去请求api接口得到json数据，利用v-for将数据渲染出来
-前后端分离的基本都是客户端渲染，利用axios拿到数据在vue react中渲染数据
-jsp php .net 做一个管理系统  都属于客户端渲染  后端利用模板引擎来将真实数据渲染出来
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
