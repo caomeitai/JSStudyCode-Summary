@@ -283,12 +283,23 @@ Koa学习：
 现在只需要知道什么是数据库，什么是集合，什么文档，怎么创建数据库，怎么创建一个集合，怎么创建一个文档，就行，下午写案例时，在案例中使用mongo，会再好一点
 
 
+利用koa2脚手架创建项目：
+ 创建项目步骤：
+     第一步：npm i koa-generator -g
+     第二步：koa2 mycms
+     第三步：cd mycms
+     第四步：npm install
+     第五步：npm start
+ 创建的项目包含：
+     前端：创建前端的入口路由文件
+     后台：创建后台的入口路由文件
+     api接口：创建api接口的入口路由文件
 
-
-
-
-
-
+鉴权：
+  cookie原理：cookie里面存放的是键值对，是浏览器端用来存储数据的一片区域，用来存储数据。当访问一个服务器时，服务器会给浏览器返回一堆信息，这一堆信息存放在cookie中，服务器给浏览器种植cookie。
+             当你再去请求服务器时，会带着一堆的cookie（一堆信息）  每次请求都会带上cookie，占带宽，不安全
+  session原理：存储数据，只是数据存储在服务器，session是基于cookie的，cookie中保存着服务器返回给浏览器的session_id，而非一堆数据信息，在以后的每次请求，都需要带着session_id
+  jwt主要靠token     vue时会返回token  Local Storage  
 
 
 
