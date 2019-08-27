@@ -1,4 +1,4 @@
-1，node:称之为 node; nodejs; node.js都是OK的
+﻿1，node:称之为 node; nodejs; node.js都是OK的
    前端：前端开发脱离不了node 
    应用： 
        作为前端的工具  一般来说都是脚手架  npm
@@ -303,31 +303,74 @@ Koa学习：
 
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+新的难点：jsonp  它是跨域的解决方案之一
+  json就是客户端与服务器之间传输数据的数据格式
+  跨域的解决方案：8-9种方案  （面试必备）
+    1，使用代理：浏览器跨域，（前端代码）可以在本地开启一个服务去请求数据
+    2，Cors 服务器端来配置别人来任意访问  （后端代码）
+    3，Jsonp （前后端代码都需要动）
+    4，Webpack  
+1，什么是jsonp？   
+  jsonp：json with packing的简写形式，将json数据包装起来并返回的一种方式---协议。利用这种协议就可以解决跨域
+         在使用jsonp实现跨域的时候，它是需要将json数据作为函数的参数，最终在服务端将包装好的字符串作为结果返回给浏览器端
+
+2，json与jsonp的区别？
+   json是字符串，是数据；jsonp是协议，是传递json数据的方式
+
+3，jsonp的使用场景？
+ 在使用jsonp的时候，需要确保：
+    有权限去编写服务端的代码（你有权利去改变后端的代码）
+    在浏览器端也需要写一些代码 （还需要有资格去动前端的代码）
+
+4，跨域问题的几种类型：协议，域名，端口有一个不一样就会产生跨域
+   第一种：直接复制文件路径，去打开文件；它们协议不一样  它走的是file协议
+         服务器：http://localhost:3000/newslist
+         客户端：file:///C:/Users/kanghuanying/Desktop/jsonp/1,jsonp%E8%B7%A8%E5%9F%9F%E4%B9%8Bbower.html
+   第二种：使用插件，直接open with live Server，vscode开启一台服务；它们端口不一样
+          服务器：http://localhost:3000/newslist
+          客户端：http://127.0.0.1:5500/1,jsonp%E8%B7%A8%E5%9F%9F%E4%B9%8Bbower.html
+   第三种：自己写一个express服务，获取数据；它们是因为端口不一样
+          服务器：http://localhost:3000/newslist
+          客户端：http://localhost:4000/   
+
+5，解决跨域：
+   datatype:json--->转成jsonp形式  出现语法错误（不想要让它报错，就需要服务器返回一个函数调用的字符串）  但实际上数据已经响应回来了
+   jsonp使用：后端代码与前端代码都需要动
+   服务器：http://localhost:3000/newslist
+   客户端：如果是jsonp请求，那么会在请求的地址后面加上callback
+         http://localhost:3000/newslist?callback=jQuery111304242870793902809_1566875161688&_=1566875161689
+  
+   在请求数据是datatype是json时会有跨域限制，在使用jsonp时就可以得到数据，客户端会在请求的url后面加上callback
+   jsonp请求回来返回得到的数据是一个json字符串，不是包装好的jsonp协议的字符串，但是在浏览器端是按照jsonp的协议来解析这个结果的，所以出现语法错误。
+   jsonp返回的不能是json字符串，必须是函数调用的字符串，将返回的json数据作为函数的参数
+   前端想要经过jsonp包装后的数据，那么需要把数据作为函数调用的参数
+
+6，小总结：
+   1）前端与后端如果不在同一域下，会有跨域限制。
+      解决方案：前端接收数据使用jsonp的形式接收，如果使用jsonp形式接收，请求的url后面会加上callback=“XXX”
+            后端要返回一个函数调用，函数名可以通过req.query.callback得到，把数据作为函数实参
+
+   2）在使用jq的ajax方法实现jsonp跨域，必须：
+        在浏览器端，设置datatype为jsonp；
+        在服务器端，必须以函数调用json字符串的形式返回作为字符串返回
+      let cb = req.query.callback   得到函数名
+      res.send(cd+"("+JSON.stringfy{数据内容}+")")
+   3）在express中，针对jsonp格式的返回，专门封装了一个jsonp方法：res.jsonp({数据内容})
+      express的语法糖：res.jsonp({数据内容})
+      当后端返回的数据是：res.jsonp({code:"1",msg:"xxx"})，前端要想得到数据，需要声明我接受的数据类型是jsonp形式的，在jq中声明是通过：datatype：jsonp来声明
+
+7，jsonp的原理
+ 跨域条件：1，ajax(axios) + 在浏览器发出请求；2，协议，端口，域名不一样
+ 1）jsonp解决跨域，并不是ajax发出的请求（XHR），所以它也就不存在跨域
+ 2）jsonp是script中的src发出的请求，src发出的二次请求没有跨域限制 
+    当在一个网址中出现src，href这些会发出二次请求
+ 3）jsonp的实现是通过动态的添加script标签，利用src发送http请求来实现的，前端会传一个callback回去，后端会将数据作为callback实参进行函数调用
+   不再利用ajax来发出请求，使用script标签中的src发出请求，首先需要创建一个script标签，标签里有地址，地址请求服务器，将需要请求的内容通过src请求回来，然后服务器将请求回来的内容给了浏览器，浏览器将内容渲染出来
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+传递id：如果是get请求，可以通过在路径后面添加？id="XXX"的形式
+        如果是post请求，要求使用隐藏框<input type="hidden" name="id" value="{{list._id}}">仅仅用来传值
 
 
 

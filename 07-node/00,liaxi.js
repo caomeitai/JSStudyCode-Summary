@@ -6,7 +6,12 @@ let server =  http.createServer((req,res)=>{
    let {pathname,query} = url.parse(req.url)
    if(pathname=="/shop"){
        let arr = []
-       
+       res.on("data",(chunk)=>{
+        arr.push(chunk)
+       })
+       res.on("end",()=>{
+           console.log(arr)
+       })
    }
    
 })

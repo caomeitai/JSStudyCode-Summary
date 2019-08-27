@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+
+</head>
+<body>
+    <!-- 按钮需要点击事件  写上id -->
+    <button id="btn">获取数据</button>
+</body>
+<script>
+// 在vue中，使用npm i axios   axios.get("路径").then(data=>{返回所需数据})
+// axios.get("xxx").then(data=>{})  ajax的新方式
+// 在jQuery中的老方式  $.ajax()
+
+    // 通过jQuery来拿到标签  注册点击事件
+  $("#btn").on("click",function(){
+    $.ajax({//配置信息  js代码  axios去拿数据会出现跨域问题
+     url:"http://localhost:3000/newslist",
+     type:"get",
+    //  dataType:"json", //数据类型
+     dataType:"jsonp", //数据类型  报错：Uncaught SyntaxError: Unexpected token :
+     success:function(res){
+       console.log(res)
+     }
+    })
+  })
+</script>
+</html>
