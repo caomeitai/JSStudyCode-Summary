@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../Vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="">
+            <p><label for="">姓名：</label><input type="text" value="" v-model="info.name" /></p>
+            <p>
+                <!-- 对于单标签最好加上结束标签 -->
+                <!-- 这里虽然双向绑定了模型与数据之间的关系，但为啥不加value就出不来？???????????????????????????????????????? -->
+                性别：<input type="radio" name="sex" value="男" v-model="info.sex" />男
+                <input type="radio" name="sex" value="女" v-model="info.sex" />女
+            </p>
+            <p><input type="checkbox" v-model="info.isagree" />同意</p>
+            <p>
+                兴趣爱好1：
+                <input type="checkbox" v-model="info.favoriate" value="book" />看书
+                <input type="checkbox" v-model="info.favoriate" value="music" />听音乐
+                <input type="checkbox" v-model="info.favoriate" value="tv" />追剧
+            </p>
+            <p>
+                兴趣爱好2：
+                <!-- 刚开始思路，直接使用v-for从data的favoriateAll中拿到数据,但发现单标签中不能使用v-for-->
+
+                <!-- <input v-for="(value,key,index) in favoriateAll" type="checkbox">{{value.value}} -->
+
+                <!-- 解决方法1：加个div,在div上去加v-for,浪费 -->
+                <!-- <div v-for="(item,key,index) in allfavoriate">
+                    <input type="checkbox">{{item.value}}
+                </div> -->
+
+                <!-- 解决方法2：使用template标签加v-for?????????????????????????????????? -->
+                <template v-for="(value,key,index) in allfavoriate">
+                <!-- 给对应标签value值绑上属性 -->
+                <input type="checkbox" :value="item.name"/>{{value.value}}
+                </template>
+            </p>
+            <p>
+                教育：
+                <select name="" id="" v-model="info.edu">
+                    <option value="-请选择-">-请选择-</option>
+                    <!-- 除去最初始的状态，下拉菜单 -->
+                    <!-- 这里的value值是相对应的教育中的值，加其(item)属性绑到value上来要用v-bind -->
+                    <option :value="item" v-for="(item) in eduOption">{{item}}</option>
+
+                </select>
+            </p>
+        </form>
+        <hr>
+        <p>你的信息是：</p>
+        {{info}}
+    </div>
+</body>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            allfavoriate: [
+                {
+                    "name": "book",
+                    "value": "看书"
+                },
+                {
+                    "name": "travel",
+                    "value": "旅行"
+                },
+                {
+                    "name": "sleep",
+                    "value": "睡觉"
+                },
+                {
+                    "name": "study",
+                    "value": "学习"
+                },
+            ],
+            eduOption: ["重点", "一本", "二本", "三本"],
+            info: {
+                name: "",
+                sex: "男",
+                isagree: false,
+                favoriate: ["book"],
+                edu: "-请选择-"
+            }
+        }
+    })
+</script>
+
+</html>

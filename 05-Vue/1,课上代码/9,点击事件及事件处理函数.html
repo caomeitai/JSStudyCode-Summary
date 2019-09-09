@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+    <style>
+      .plane{
+          width: 400px;
+          height: 400px;
+          border: 2px solid yellowgreen;
+      }
+      .plane h1{
+          background-color: skyblue;
+          height: 40px;
+      }
+      .plane h1 span{
+          float: right;
+          font-size: 12px;
+          color: pink;
+          height: 40px;
+          line-height: 40px;
+          margin-right: 10px;
+      }
+      .plane content{
+          background-color: blue;
+      }
+    </style>
+</head>
+<body>
+   <div id="app">
+       <!-- button是事件源，click是事件类型，f1是（点击之后发生了啥）监听器 -->
+       <button v-on:click="f1">注册</button>
+       <button id="btn">点击事件</button>
+       <div class="plane">
+           <!-- 增加一个点击事件，是为了使得内容与初始状态取反，
+            如果点击，那么如果刚开始是显示的，在实现点击以后，它应取反变为不显示 -->
+
+            <!-- 这是进行的简写 -->
+           <!-- <h1>标题<span v-on:click="isShow=!isShow">{{isShow?"收起":"展开"}}</span></h1> -->
+           <!-- 出现了函数调用 -->
+           <h1>标题<span v-on:click="f2">{{isShow ?"收起":"展开"}}</span></h1>
+
+           <!-- 使用v-show来判断下面内容是否会显示 -->
+           <div class="content" v-show="isShow">
+               <p>内容</p>
+               <p>内容</p>
+               <p>内容</p>
+               <p>内容</p>
+               <p>内容</p>
+           </div>
+       </div>
+   </div> 
+</body>
+<script>
+    let app = new Vue({
+        el:"#app",
+        data:{
+            isShow : true,
+        },
+        methods:{
+            // 就是在点击事件发生后出现了啥事？
+            f1(){
+                alert("注册成功了....")
+            },
+            f2(){
+                this.isShow=!this.isShow;
+            },
+        }
+
+    })
+    // 原始的点击事件,全部需要拿到id
+    // document.getElementById("btn").onclick=function(){
+    //     alert("最原始的点击事件");
+    // }
+    document.getElementById("btn").addEventListener("click",function(){
+        alert("另外的一种点击事件方式")
+    })
+</script>
+</html>

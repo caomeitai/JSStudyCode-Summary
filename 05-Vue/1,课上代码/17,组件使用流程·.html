@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <!-- 3，调用即可 -->
+       <yellow></yellow>
+       <my-head></my-head>
+    </div>
+    <div id="app2">
+       
+    </div>
+</body>
+<script>
+    //1,首先定义一个组件对象
+  let hello = {
+      template:"<div>这仅仅是定义一个组件对象，它是一个普通的对象，只不过里面有template标签</div>"
+  }
+    // 这是定义加注册合到了一块
+    // Vue.component("hello",{
+    //     template:"<div>我是全局定义组件</div>"
+    // })
+    let app1 = new Vue({
+        el: "#app1",
+        data: {
+            name: "tanni",
+            age: 12,
+        },
+        components:{
+            // 2，在下面注册一下，名字可以与定义时不同
+            "yellow":hello,
+
+            // 通过一步定义加注册完成
+            "my-head":{
+                template:"<div>定义加注册组件</div>"
+
+            }
+        }
+       
+        
+
+
+    })
+    
+</script>
+
+</html>

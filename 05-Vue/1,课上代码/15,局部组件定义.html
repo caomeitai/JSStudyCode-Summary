@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <my-head></my-head>
+    </div>
+    <div id="app2">
+        <!-- 局部组件定义在这里不能使用 -->
+        <my-head></my-head>
+    </div>
+</body>
+<script>
+    let app1 = new Vue({
+        el: "#app1",
+        data: {
+        },
+        components: {
+            // 这是局部组件定义
+            "my-head": {
+                template: "<div>这是局部组件定义，只能在对应区域适用</div>"
+            }
+
+        }
+    })
+    let app2 = new Vue({
+        el: "#app2"
+    })
+</script>
+
+</html>

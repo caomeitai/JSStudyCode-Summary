@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 这里面写的都是插值表达式{{}} -->
+        <h1>{{name}}</h1>
+        <p>今年{{age}}岁了</p>
+    </div>
+</body>
+<script>
+    // 构建vue实例
+   var app= new Vue({
+    //    el管理了app的边界
+       el:'#app',
+    //    data在这里是属性，那么就写上键值对，写一个对象；在后面组件中是方法，是函数
+       data:{
+           name:"tanni",
+           age:10,
+       }
+   })
+</script>
+</html>

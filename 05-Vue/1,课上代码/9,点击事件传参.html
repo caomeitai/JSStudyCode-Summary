@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button  v-on:click="f1">按钮</button> -->
+        <button  v-on:click="f2('helloworld')">按钮</button>
+        <!-- 早已了解点击事件，学会循环v-for -->
+        <!-- 使用循环来得到三个按钮 -->
+        <!-- 绑定一个函数，或者说方法，使得弹出下标 -->
+        <button v-for="(value,key,index) in 3"  v-on:click="f(value)">按钮{{value}}</button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+           isShow:true,
+        },
+        methods: {
+            // f1(){
+            //     alert("hello")
+            // },
+            // 传递参数,这里的参数是形参，需要传递实参才OK
+            f2(str){
+                alert(str)
+            },
+            // 写上一个方法使得每按一个按钮，得到相应的下标
+           f(value){
+               alert(value)
+           }
+        }
+    })
+   
+   
+</script>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+    <style>
+        .abc{
+            color: red;
+        }
+        .def{
+            background-color: blue;
+        }
+        g-h{
+            color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 直接使用{{}}插值表达式 -->
+        <!-- <h1>{{name}}</h1> -->
+        <!-- <p>今年{{age}}岁了</p> -->
+
+
+        <!-- 数据绑定相关指令 -->
+        <!-- 1,v-text相当于了{{}}插值表达式，它是{{}}的语法糖，但并不会渲染出来html标签，仅仅渲染出来数据 -->
+        <h1 v-text="name"></h1>
+        <h3 v-text="age"></h3>
+        <h3 v-text="nian"></h3>
+
+        <!-- 2,v-html数据绑定就是当你的属性上存在html标签，可以解析html标签 -->
+        <p v-html="nian"></p>
+
+        <!-- 3,v-model:双向数据绑定 -->
+        <input v-model="name" type="text">
+
+
+        <!--和属性相关指令 -->
+        <!-- v-bind:用于绑定html标签中的属性，相当于绑定了数据，它会跳转到哪里 -->
+        <!-- 对于一个标签的属性值（href就是a标签的属性值），不能使用插件表达式 -->
+        <!-- <a href="{{hrefname}}"></a> -->
+        <a v-bind:href="hrefname">百度一下</a>
+        <a :href="hrefname">百度一下</a>
+
+
+        <!--条件指令-->
+        <!-- v-if:用来控制一个元素是否显示 -->
+        <p v-if="isshow">这是在学习v-if</p>
+        <p v-if="score>=60">及格啦</p>
+
+        <!-- v-show:用来控制一个元素是否显示 -->
+        <p v-show="isshow">这是一个p标签</p>
+        <!-- "hello" is not defined -->
+        <!-- <p v-show="hello">这是一个p标签</p> -->
+
+        <!-- 以下这些都是被默认转化为false，除了1 -->
+        <p v-show="0">这是一个p标签</p>
+        <p v-show="-0">这是一个p标签</p>
+        <p v-show="false">这是一个p标签</p>
+        <p v-show="">这是一个p标签</p>
+        <p v-show="1">这是一个p标签</p>
+
+        <!-- v-show后面可以跟表达式 -->
+        <p v-show="3>2">v-show后面跟表达式是直接判断true或false</p>
+        <p v-show="3<2">v-show后面跟表达式是直接判断true或false</p>
+
+        <!-- v-if-else  v-if与v-else是紧挨着的，之间不能有其他元素 -->
+        <p v-if="score>=60">及格</p>
+        <p v-else>不及格</p>
+
+
+        <!-- v-else-if -->
+        <p v-if="score>=90">A</p>
+        <!-- 否则如果 -->
+        <p v-else-if="score>=80">B</p>
+        <p v-else-if="score>=70">C</p>
+        <p v-else>D</p>
+
+
+        <!-- 循环指令 -->
+        <!-- 当循环的是数组时 -->
+        <p v-for="(value,key,index) in links">{{value}}</p>
+        <p v-for="(value,key,index) in links">{{key}}</p>
+        <p v-for="(value,key,index) in links">{{index}}</p>
+        <p>这里是节点----------------------------------------------------</p>
+        <p v-for="(value,key,index) in links">
+            {{value.name}}连接到{{value.link}}
+        </p>
+
+        <!-- 当循环的是对象时 -->
+        <p v-for="(value,key,index) in obj">{{value}}</p>
+        <p v-for="(value,key,index) in obj">{{key}}</p>
+        <p v-for="(value,key,index) in obj">{{index}}</p>
+
+        <!-- 当循环对象是数时 -->
+        <p  v-for="(value,key,index) in num">
+                第一个参数:{{value}}
+                第二个参数:{{key}}
+                第三个参数:{{index}}
+        </p>
+
+        <!-- 特殊属性class -->
+        <p class="abc">这是class属性在css中的使用法</p>
+        <!-- 使用新学指令方法访问
+        因为是属性，而与属性相关的只有v-bind -->
+
+        <!-- ：class="数据(写在data中)" -->
+        <p :class="classname">这就是属性绑定</p>
+        <!-- ：class="三元运算符" -->
+        <p :class="isPass ? classname:''">三元运算符</p>
+        <!-- ：class="{类名：boolean}" -->
+        <p :class="{abc:false}">class="{类名：boolean}"</p>
+        <p :class="{abc:true}">class="{类名：boolean}"</p>
+        <p :class="{abc:3>2}">class="{类名：boolean}"</p>
+        <!-- ：class="{类名1：boolean,类名2：boolean}" -->
+        <p :class="{abc:true,def:true}">这是两个类名的集合</p>
+        <!-- 类名中有-，则需要使用引号将其类名包起来：class="['类名']" -->
+        <p :class="{'g-h':true}">这是一个p标签</p>
+        <p :class="['abc','def']">这是一个p标签</p>
+
+
+        <!-- 特殊属性style -->
+        <p style="color:violet">在css中学到的style属性</p>
+        <p :style="myStyle">这是特殊属性style</p>
+
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            name: "tanni",
+            nian: "<strong>wangcai</strong>",
+            age: 10,
+            hrefname: "http://www.baidu.com",
+            isshow: true,
+            //    hello:true,
+            score:57,
+            // links:[1,2,3],//当循环的仅仅是数组
+            // 当数组中的元素全部为对象时
+            links:[
+                    {name:"baidu",link:"http://www.baidu.com"},
+                    {name:"google",link:"http://www.google.com"},
+                    {name:"sina",link:"http://www.sina.com"},
+                ],
+            obj:{
+                name:"tanni",
+                age:10,
+            },
+            num:10,
+            classname:"abc",
+            isPass:true,
+            // 在写属性时，使用的是单引号
+            myStyle:{color:'red',backgroundColor:'blue'}
+
+        }
+    })
+</script>
+<script>
+    //  所学的所有指令：v-text相当于{{}},v-html，它可以解析HTML标签，建立数据连接,v-model，实现双向的数据绑定，在数据中改变视图中也会变;v-bind绑定某一属性v-bind：;v-if,v-show,判断元素是否显示v-if-else,v-else-if;
+    // v-for循环遍历;特殊属性class和style
+</script>
+
+</html>

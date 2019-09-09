@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Vue.js"></script>
+    <style>
+       .father{
+           width: 200px;;
+           height: 200px;
+           border: 2px solid plum;
+       }
+       .son{
+           width: 100px;
+           height: 100px;
+           border: 2px solid yellowgreen;
+       }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 1,阻止默认事件 -->
+
+        <!-- 阻止默认事件的发生,对于a标签来说，它会默认在点击时直接转到相应网址 -->
+        <a href="http://www.baidu.com"  v-on:click="f1($event)">百度一下</a>
+        <!-- 这里的事件对象是固定写法，且就是事件本身，里面包含很多信息，点击的坐标 -->
+        <button v-on:click="f2($event,'hello')">注册</button>
+
+        
+        <!-- 2,阻止冒泡事件 -->
+
+        <!-- 在默认情况下，只要点击是在父元素范围内就会调用相应方法，打印出父.... -->
+        <div class="father" @click="f3">
+            <div class="son" @click="f4">
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+   let app = new Vue({
+       el:"#app",
+       data:{
+
+       },
+       methods:{
+        // 这是阻止默认事件方法
+        f1(abc){
+            // 当传递过来对象事件时，将其打印出来，此时并未阻止默认事件
+            console.log(abc);//先验证一下,在不传递参数的情况下，打印出来undefined
+            // 在abc或者说对象事件上绑定一个preventDefault会阻止事件的发生
+            abc.preventDefault()
+        
+        },
+        f2(a,b){
+            console.log(a);
+            console.log(b)
+        },
+
+        // 这是与阻止事件冒泡相关的方法 
+        f3(){
+            // 这是在看默认情况下的冒泡是啥情况
+            console.log("我是父......")
+        },
+        f4(a){
+            console.log("我是子....")//在绑定事件以后，每当点击子元素范围内时，父元素事件也会发生
+            // 在abc或者说对象事件上绑定一个stopPropagation用来阻止事件冒泡
+            a.stopPropagation()
+
+        }
+
+       }
+   })
+</script>
+</html>

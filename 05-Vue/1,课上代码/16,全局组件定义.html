@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局组件定义</title>
+    <script src="./Vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <my-head></my-head>
+        {{msg}}
+
+    </div>
+    <div id="app2">
+      <my-head></my-head>
+    </div>
+</body>
+<script>
+    // 全局组件定义它可在任意定义好的范围内使用
+    Vue.component("my-head",{
+        template:"<div>我是全局组件定义，可在任意定义好的位置使用</div>"
+    })
+     let app1 = new Vue({
+         el:"#app1",
+         data:{
+             msg:"我到底是谁"
+
+         }
+     })
+     let app2 = new Vue({
+         el:"#app2",
+         data:{
+
+         }
+     })
+    
+</script>
+</html>
+
+
