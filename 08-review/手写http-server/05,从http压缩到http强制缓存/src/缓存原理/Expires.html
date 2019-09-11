@@ -1,0 +1,15 @@
+<script>
+//let d = new Date()//Wed Sep 11 2019 16:15:56 GMT+0800 (中国标准时间)
+
+//let d = Date.now()//1568189825082  时间戳
+
+//let d = new Date(Date.now())//Wed Sep 11 2019 16:19:24 GMT+0800 (中国标准时间)
+  
+//let d = new Date(Date.now()).toLocaleString()//2019/9/11 下午4:20:36
+
+//Wed, 11 Sep 2019 08:21:52 GMT---->这就是expires的格式
+
+//比正常时间延迟20秒左右
+  let d = new Date(Date.now()+1000*20).toGMTString()//Wed, 11 Sep 2019 08:23:40 GMT
+  console.log(d)
+</script>

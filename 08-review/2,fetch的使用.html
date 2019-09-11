@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fetch可设置请求方式，携带参数
+      fetch('http://localhost:3000/api',{
+          method:"GET",
+          headers:{
+              token:"tanni"
+          },
+        // 设置cookie时需要
+          credentials:"include"
+
+      }).then(res=>{
+         return res.json() //请求端口，已拿到数据
+      }).then(json=>{
+          console.log(json)
+      })   
+    </script>
+</body>
+</html>

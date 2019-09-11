@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fetch返回的是一个promise，.then的返回值return到下一个.then中
+        fetch('http://localhost:3000/api').then(res=>{
+           return res.json()//wangcai
+        }).then(json=>{
+            console.log(json) //wangcai
+        })
+    </script>
+</body>
+</html>

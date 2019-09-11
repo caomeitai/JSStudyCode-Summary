@@ -1,0 +1,11 @@
+// 来配置babel将ES6转成ES5的环境
+{
+    "presets": [
+        // 转换高级语言时需要的工具
+        ["@babel/preset-env",{
+            "targets":{//设置node的版本
+                "node":"current"
+            }
+        }]
+    ]
+}

@@ -1,0 +1,4 @@
+#! /usr/bin/env node
+// console.log("create httpServer")
+
+require("../dist/main.js")
