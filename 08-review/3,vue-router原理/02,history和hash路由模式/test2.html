@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- history路由模式  使用的是go -->
+    <a onClick="go('/home')">首页</a>
+    <a onClick="go('/about')">关于</a>
+    <div id="box"></div>
+</body>
+<script>
+    // history模式路由利用的是history，它与浏览器可以进行交互
+    function go(pathname){
+        // history的pushState方法
+       history.pushState({},null,pathname)//作用就是坑里内容变的时候，上面路径改变
+       box.innerHTML = pathname//在坑里得到路径
+    }
+    window.addEventListener("popstate",()=>{//当上面路径改变时，下面坑里内容改变
+        // console.log(location.pathname)//它算是改变了路径，那么也就可以走go
+       go(location.pathname)
+    })
+</script>
+</html>

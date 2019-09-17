@@ -44,32 +44,7 @@
   1）通过url路径的形式，可通过?name="wangcai"&age=12的方式携带参数；
   2）以form表单的形式传参，提交信息
   3）以设置header的形式，直接在header头中来传参，在配置项中headers:{参数}
- 6，HTTP请求方式及作用
-  1）简单请求：
-    GET:通常用于向服务器请求而获得某些资源
-    POST: 通常都是发送或提交数据给服务器
-    HEAD:代表请求资源的头部信息，并且这些头部与HTTP的GET方法请求时返回的一致；
-    该请求方法的一个使用场景：在下载一个大文件前先获取其大小再决定是否要下载，可以节约带宽资源
-
-  2）复杂请求：  
-    OPTIONS：试探请求，在真正发送请求时，先试探一下是否ok；用于获取目的资源所支持的通信选项
-    PUT：用于新增资源或者使用请求中的有效负载替换目标资源的表现形式
-    DELETE:用于删除指定的某些资源
-    TRACE：回显服务器收到的请求，主要用于测试或诊断
-    PATCH：用于对资源进行部分修改
-    CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器
-  
-  3）GET与POST的区别？
-   （1）数据传输的方式不同：GET请求通过URL传输数据，以pramas或query形式获取数据；而POST的数据是通过请求体body传输的，携带参数
-   （2）安全性不同：POST的数据因为在请求主体body内，有安全性保证；而GET的数据在URL中，通过历史记录、缓存很容易查到数据
-   （3）数据类型不同：GET只允许ASCII字符，而POST无限制
-   （4）GET无害：刷新、后退等浏览器操作GET请求是无害的，POST可能重复提交表单
-
-  4）PUT和POST的区别？
-    （1）两者相同点都是给服务器发送新增资源；
-    （2）PUT方法是幂等的，连续调用一次或多次的效果相同，无副作用；而POST方法是非幂等的；
-    （3）PUT的URL指向具体单一资源
-  
+ 
 
 
 
@@ -117,35 +92,7 @@
       4）使用npx babel src -d dist-->如果你不存在babel模块的话，就自动安装
       5）不能每写点代码就转化一次  npx babel src -d dist --watch来监控src下的文件（窗口不可关）
       6）不想总写上述命令过于麻烦，package.json中配置脚本，放在scriptions中，通过npm run xxx 执行
- 4，HTTP中的头
-  请求头：
-   1）If-Modified-Since:上一次修改内容的时间，与Last-Modified两者配合使用，来进行对比缓存分析   
-   2）if-none-match: 它是与Etag配合使用的。想要使用这个头，就必须修改文件；当你修改服务器上的文件时，请求头上会自动添加这个头
-         最初始时if-none-match是不存在的，当它存在时，说明你修改了文件中的内容（分为真实修改和假修改）。
-   3）Accept-Encodeing:一个文件到底能不能压缩，看有没有这个头
-         浏览器（客户端）告诉服务器它所支持的压缩格式（gzip,deflate,br），如果存在某种压缩格式就会解压缩 
-   4）User-Agent:在PC端和移动端都输入同一网址，会出现两个项目，通过头来判断      
-  响应头：
-   1）Content-Type:根据不同的文件类型来返回不同的响应头，它是在响应数据之前设置的 
-         1，在得知是文件时要求读取内容再响应回来（利用的是流的概念--->pipe管道）
-            mime.getType()根据不同的文件类型可自动转成不同的格式--->filepath(文件名)
-            设置的形式：res.setHeader("Content-Type",mime.getType(filepath)+";charset=utf8") 
-         2，在判断出是目录时要求将目录下文件读出来，并且渲染到模板上（返回一个网页）
-            设置的形式：res.setHeader("Content-Type","text/html;charset=utf-8") 
-         3，除了渲染主目录外，在其它文件夹渲染时注意路径的拼接；如果出现中文路径的话，
-         浏览器自动解析成编码：encodeURIComponent(pathname)
-         我们需要将中文再解码：pathname = decodeURIComponent(pathname)
-   2）Content-Encodeing: 在返回文件之前，响应时告诉浏览器服务器以什么格式压缩，以便浏览器可以解析文件
-         服务器告诉客户端它是以何种格式压缩的，然后返回给客户端  
-   3）Cache-Control:缓存控制---->强制缓存，告诉浏览器多久不要再来访问我
-      设置格式：res.setHeader("Cache-control","max-age=10")//再隔10秒才来访问我，时间过长，就一直从缓存中拿数据，即强制缓存
-               res.setHeader("Cache-control","no-cache")//走网络，但是有缓存，它是对比缓存
-               res.setHeader("Cache-control","no-store")//走网络，但不缓存     
-   4）Expires:和上面控制缓存差不多，需要设置时间---->强制缓存
-      设置格式：res.setHeader("Expires",new Date(Date.now()+1000*20).toGMTString())//隔多久来访问我   
-   5）Last-Modified:最后一次修改内容，时间的变化，与对比缓存有联系，它是与if-modified-dince配合使用
-   6）Etag：摘要缓存--->就好像是将文件进行加密处理一样，与if-none-match配合使用
-   7）Location:重定向到某个地方
+ 
 五、node应用
   1，写后端：api接口，ssr模板引擎
   2，作为前端的工具：npm来安装依赖
@@ -175,8 +122,8 @@
   2，摘要的长度是固定不变的
   3，相同内容的摘要是相同的，不同内容的摘要是不同的
   4，哈希算法（散列算法），crypyo.createHash--->进行摘要再转成base64的形式
-八、http总结	
- 如果你在PC端和移动端输入同一个网址http://www.taobao.com/，会出现两套不一样的项目
+
+ 
  	
 
 
@@ -197,8 +144,88 @@ HTTP需要准备的东西
    5，HTTP中的请求方法
    6，代理：反向代理，正向代理
    7，HTTPS 原理
+   8，模块化发展史ESmodule   commont规范
+   9，异步的发展史
 
    图解http--->图解tcp
+
+
+------------------HTTP全面学习----------------------
+1，HTTP请求方式及作用
+  1）简单请求：
+    GET:通常用于向服务器请求而获得某些资源
+    POST: 通常都是发送或提交数据给服务器
+    HEAD:代表请求资源的头部信息，并且这些头部与HTTP的GET方法请求时返回的一致；
+    该请求方法的一个使用场景：在下载一个大文件前先获取其大小再决定是否要下载，可以节约带宽资源
+
+  2）复杂请求：  
+    OPTIONS：试探请求，在真正发送请求时，先试探一下是否ok；用于获取目的资源所支持的通信选项
+    PUT：用于新增资源或者使用请求中的有效负载替换目标资源的表现形式
+    DELETE:用于删除指定的某些资源
+    TRACE：回显服务器收到的请求，主要用于测试或诊断
+    PATCH：用于对资源进行部分修改
+    CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器
+  
+  3）GET与POST的区别？
+   （1）数据传输的方式不同：GET请求通过URL传输数据，以pramas或query形式获取数据；而POST的数据是通过请求体body传输的，携带参数
+   （2）安全性不同：POST的数据因为在请求主体body内，有安全性保证；而GET的数据在URL中，通过历史记录、缓存很容易查到数据
+   （3）数据类型不同：GET只允许ASCII字符，而POST无限制
+   （4）GET无害：刷新、后退等浏览器操作GET请求是无害的，POST可能重复提交表单
+
+  4）PUT和POST的区别？
+    （1）两者相同点都是给服务器发送新增资源；
+    （2）PUT方法是幂等的，连续调用一次或多次的效果相同，无副作用；而POST方法是非幂等的，如果你调用多次就会产生多次结果；
+    （3）PUT的URL指向具体单一资源，而POST可以指向资源集合
+  
+  5）PUT和PATCH的区别？
+    （1）两者相同点都是给服务器发送修改资源，都是更新资源；
+    （2）PUT是那种直接覆盖资源的修改方法，可能需要携带无用信息；
+    （3）PATCH用来对已知资源进行局部更新，避免携带无用信息
+
+2，HTTP的请求报文是咋样的？
+ 请求报文由三部分组成：
+   请求行：请求方法（GET或POST）+URL（路径）+HTTP协议版本
+   请求头：它是由关键字/关键值对组成，每行一对，关键字与值用英文冒号":"分隔开
+     典型的请求头：Content-Type,User-Agent,Accept,Host...
+   请求体：(请求正文) post,put等请求携带的数据，参数
+
+3，HTTP的响应报文是啥样的？
+ 响应报文有三部分组成：
+   响应行：协议版本+状态码+状态码的原因短语组成--->HTP/1.1  200  OK
+   响应头：它是响应首部字段，也是由关键字/关键值对组成
+   响应体：服务器响应的数据
+   
+4，HTTP中的头
+  请求头：
+   1）If-Modified-Since:上一次修改内容的时间，与Last-Modified两者配合使用，来进行对比缓存分析   
+   2）if-none-match: 它是与Etag配合使用的。想要使用这个头，就必须修改文件；当你修改服务器上的文件时，请求头上会自动添加这个头
+         最初始时if-none-match是不存在的，当它存在时，说明你修改了文件中的内容（分为真实修改和假修改）。
+   3）Accept-Encodeing:一个文件到底能不能压缩，看有没有这个头
+         浏览器（客户端）告诉服务器它所支持的压缩格式（gzip,deflate,br），如果存在某种压缩格式就会解压缩 
+   4）User-Agent:在PC端和移动端都输入同一网址，会出现两个项目，通过头来判断      
+  响应头：
+   1）Content-Type:根据不同的文件类型来返回不同的响应头，它是在响应数据之前设置的 
+         1，在得知是文件时要求读取内容再响应回来（利用的是流的概念--->pipe管道）
+            mime.getType()根据不同的文件类型可自动转成不同的格式--->filepath(文件名)
+            设置的形式：res.setHeader("Content-Type",mime.getType(filepath)+";charset=utf8") 
+         2，在判断出是目录时要求将目录下文件读出来，并且渲染到模板上（返回一个网页）
+            设置的形式：res.setHeader("Content-Type","text/html;charset=utf-8") 
+         3，除了渲染主目录外，在其它文件夹渲染时注意路径的拼接；如果出现中文路径的话，
+         浏览器自动解析成编码：encodeURIComponent(pathname)
+         我们需要将中文再解码：pathname = decodeURIComponent(pathname)
+   2）Content-Encodeing: 在返回文件之前，响应时告诉浏览器服务器以什么格式压缩，以便浏览器可以解析文件
+         服务器告诉客户端它是以何种格式压缩的，然后返回给客户端  
+   3）Cache-Control:缓存控制---->强制缓存，告诉浏览器多久不要再来访问我
+      设置格式：res.setHeader("Cache-control","max-age=10")//再隔10秒才来访问我，时间过长，就一直从缓存中拿数据，即强制缓存
+               res.setHeader("Cache-control","no-cache")//走网络，但是有缓存，它是对比缓存
+               res.setHeader("Cache-control","no-store")//走网络，但不缓存     
+   4）Expires:和上面控制缓存差不多，需要设置时间---->强制缓存
+      设置格式：res.setHeader("Expires",new Date(Date.now()+1000*20).toGMTString())//隔多久来访问我   
+   5）Last-Modified:最后一次修改内容，时间的变化，与对比缓存有联系，它是与if-modified-dince配合使用
+   6）Etag：摘要缓存--->就好像是将文件进行加密处理一样，与if-none-match配合使用
+   7）Location:重定向到某个地方
+    
+
 
 
 
