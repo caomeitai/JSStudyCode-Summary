@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.common.dev.js"></script> -->
+    <script src="./MVVM.js"></script>
+    <title>MVVM</title>
+</head>
+<!-- 完成了MVVM，视图与数据结合：数据改变，视图更新。 -->
+<body>
+    <!-- 视图 -->
+    <div id="app">
+       <input type="text" v-model="school.name">
+       <!-- 利用插值表达式，它相当于v-text指令 -->
+       <div>{{school.name}}</div>
+       <div>{{school.age}}</div>
+       {{getNewName}}
+       <ul>
+           <li>HTML</li>
+           <li>CSS</li>
+       </ul>
+    </div>
+    <!-- 数据 -->
+    <script>
+        // 创建Vue实例
+        let vm = new Vue({
+            el: "#app",//管理的边界
+            data: {
+                school: {
+                    name: "beida",
+                    age: 122,
+                }
+            },
+            methods: {
+
+            },
+            computed: {
+                getNewName(){
+                    return this.school.name+"666"
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
