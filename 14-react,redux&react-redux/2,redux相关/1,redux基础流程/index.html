@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./redux.js"></script>
+</head>
+
+<body>
+    <script>
+        // 初始化状态 state
+        const initState = {
+            count: 0
+        }
+        // action1
+        const increatement = {
+            type: "INCREAMENT"
+        }
+        // action2
+        const decreatement = {
+            type: "DECREAMENT"
+        }
+
+        // 得到的reducer 是根据action得到reducer   返回格式与旧数据格式一致
+        function reducer(state = initState, action) {
+            switch (action.type) {
+                case "INCREAMENT":
+                    return {
+                        count: state.count + 1
+                    }
+                case "DECREAMENT":
+                    return {
+                        count: state.count - 1
+                    }
+                default:
+                    return state;    
+            }
+        }
+
+        // console.log(reducer)//ƒ reducer(state = initState, action){} 
+        // console.log(Redux)//{__DO_NOT_USE__ActionTypes: {…}, applyMiddleware: ƒ, bindActionCreators: ƒ, combineReducers: ƒ, compose: ƒ, …}
+        let store = Redux.createStore(reducer)
+        console.log(store)//{dispatch: ƒ, subscribe: ƒ, getState: ƒ, replaceReducer: ƒ, Symbol(observable): ƒ}
+        console.log(store.getState())
+        
+        // 订阅   当仓库中数据改变，会调用回调函数
+        store.subscribe(()=>{
+            console.log("现在的状态:",store.getState())//只有在数据改变时才调用
+        })
+
+        // 派发action 给管理员一个action
+        store.dispatch(increatement)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./redux.js"></script>
+</head>
+
+<body>
+    <script>
+        // 初始化状态
+        const initState = {
+            count: 0
+        }
+        // 相当于action creator
+        function increatement(flag) {
+            return {
+                type: "INCREAMENT",
+                flag
+            }
+        }
+
+        function decreatement(flag) {
+            return {
+                type: "DECREAMENT",
+                flag
+            }
+        }
+        //产生reducer
+        function reducer(state = initState, action) {
+            switch (action.type) {
+                case "INCREAMENT":
+                    return {
+                        count: state.count + action.flag
+                    }
+                case "DECREAMENT":
+                    return {
+                        count: state.count - action.flag
+                    }
+                default:
+                   return state
+            }
+        }
+        // 创建一个store
+        let store = Redux.createStore(reducer);
+        
+        // 数据改变，订阅发生，调用回调函数 获取状态
+        store.subscribe(() => {
+            console.log("现在的状态为:", store.getState())  // {count: 5}
+        })
+
+        // dispatch一个action  它是可以传递参数的
+        store.dispatch(decreatement(1));
+        store.dispatch(decreatement(2));
+        store.dispatch(decreatement(3));
+    </script>
+</body>
+
+</html>
