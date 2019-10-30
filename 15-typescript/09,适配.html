@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 代码渲染完毕之后调用
+       window.onload = function(){
+           console.log(document.documentElement.offsetWidth)//360  拿到的是要适配设备的宽度
+           let fs = (document.documentElement.offsetWidth/750)*100;
+           document.documentElement.style.fontSize = fs+"px";//得到字体大小就是是配置后能适当显示的大小
+           console.log(fs)//48px
+       }
+    </script>
+    <style>
+      html{
+          font-size: 100px;
+      }
+      .box{
+          width: 2rem;
+          height: 2rem;
+          background-color: purple;
+      }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 计算出字体大小为48px -->
+        防弹少年团！
+    </div>
+</body>
+</html>
