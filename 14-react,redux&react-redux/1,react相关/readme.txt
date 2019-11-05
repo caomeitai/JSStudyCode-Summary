@@ -29,5 +29,6 @@
         使用步骤：
           1）引入相关模块：import {Redirect,Switch} from "react-router-dom"
           2）使用：<Switch><Redirect from="/xxx" to="/xxxx"></Redirect></Switch>
+上面全部仅仅是与路由相关总结
 
 
