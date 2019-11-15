@@ -1,7 +1,7 @@
 // 仅仅是new上一个promise的类，它必有一个执行器，且中有两个参数，最初刚创建时它是处于等待态的
 
-// 利用promise主要解决：并发问题；链式调用问题；如果不存在promise，之前全部靠回调函数，而回调会产生回调地狱。
-// Promise是一个类，使用之前需要new，在new时需要给其传递一个执行器()=>{}，这个执行器会立即执行，在执行器中有两个参数：resolve，reject；二者都是函数，就可以将promise从等待态到成功态或者说失败态
+// 利用promise主要解决：异步并发问题；链式调用问题；如果不存在promise，之前全部靠回调函数，而回调会产生回调地狱。
+// Promise是一个类，使用之前需要new，在new时需要给其传递一个执行器executor()=>{}，这个执行器会立即执行，在执行器中有两个参数：resolve，reject；二者都是函数，就可以将promise从等待态到成功态或者说失败态
 // promise有一个then方法，如果是成功态，它会调用then中的第一个函数data，其参数就是成功的终值结果；如果失败的话，就调用then中的第二个函数err，其参数就是失败的原因。
 
 // 1，仅仅new上一个类而已，只是创建
@@ -28,6 +28,7 @@
 
 // let p = new Promise((resolve,reject)=>{
 //     reject("在家")
+//     throw new Error("在家")
 //  })
 //  console.log(p) //Promise { <rejected> '在家' }--->失败态
 
@@ -52,7 +53,7 @@
 //     console.log("没钱") //没钱
 //   })
 
-// 5，一个promise的状态只能从等待态到成功 或者 从成功到失败
+// 5，一个promise的状态只能从等待态到成功 或者 从等待态到失败态
 // let p = new Promise((resolve,reject)=>{
 //     resolve("有钱旅游")
 //     reject("没钱旅游")  //该代码未执行

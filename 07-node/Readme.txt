@@ -102,12 +102,12 @@
          利用promise主要解决：并发问题；链式调用问题；如果不存在promise，之前全部靠回调函数，而回调会产生回调地狱。
          1) Promise是一个类，使用之前需要new，在new时需要给其传递一个执行器executor()=>{}，这个执行器会立即执行，在执行器中有两个参数：resolve，reject；二者都是函数，就可以将promise从等待态pending到成功态success或者说失败态failed
          2) promise有一个then方法，如果是成功态，它会调用then中的第一个函数；为得到成功的终值结果，data就成为第一个函数的参数；如果失败的话，就调用then中的第二个函数；为得到失败的原因，err就成为第二个函数的参数。
-               如若在promise中扔出一个错误的话，那么也就代表着失败啦
-	     3) promise存在三种状态：pending,rejected,resolved		   
-         4) promise的状态只能从等待态到成功 或者 从成功到失败，不可能出现两种结果
-		 4）改变状态的方法：成功态：resolve函数，失败态：reject或者扔出一个错误
-         5) promise中有异步，在执行器内部可以写异步代码，也就是异步操作。比如：setTimeout,setInterval...
-         6) promise链式调用问题，首先是读取文件本身是异步操作，为解决它使用promise，封装一个函数来读取文件，那么函数调用时直接.then就代表着函数内部有promise
+               如若在promise中扔出一个错误的话，那么也就代表着失败啦  
+        3) promise存在三种状态：pending,rejected,resolved		   
+        4) promise的状态只能从等待态到成功 或者 从成功到失败，不可能出现两种结果  
+        4）改变状态的方法：成功态：resolve函数，失败态：reject或者扔出一个错误
+        5) promise中有异步，在执行器内部可以写异步代码，也就是异步操作。比如：setTimeout,setInterval...
+        6) promise链式调用问题，首先是读取文件本身是异步操作，为解决它使用promise，封装一个函数来读取文件，那么函数调用时直接.then就代表着函数内部有promise
            最终却又再次出现回调地狱，为解决它，使用promise链式调用，.then之后又是一个新的promise，可再次.then。
            如果在封装完函数，进行函数调用时返回的是promise，那么这个promise会执行，并且会采用其状态，也就是说接下来的.then将会是这个返回值promise的
          链式调用：如果在上一个then的第一个函数中返回的是一个普通值，会走到下一个then的第一个函数，return的这个普通值作为这个then的data；如果返回的是一个promise，会作为promise对象，接下来的then中的data和err都去promise对象中取。

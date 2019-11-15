@@ -44,9 +44,9 @@
 // })
 // // 会陷入到循环引用  就比如：我在等我吃饭  进入了死循环  可以想作  成为了错误事件
 // p1.then(data=>{
-//     console.log(data) //Chaining cycle detected for promise #<Promise>
+//     console.log(data) 
 // },err=>{
-//     console.log("走的是这里",err)
+//     console.log("走的是这里",err)//Chaining cycle detected for promise #<Promise>
 // })
 
 
