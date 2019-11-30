@@ -1,0 +1,125 @@
+<!-----------------------bind基本使用 ---------------->
+<!-----------------无参数传递 ----------------->
+<!-- <script>
+// bind:  1)改变this指向  2)bind返回一个绑定后的函数  3)函数不会自动调用，需要手动执行
+function f(){
+    console.log("f....")
+    console.log(this)
+}
+let obj = {name:"wangcai"}
+let newF = f.bind(obj)//得到的是新的函数，需要手动调用
+newF()
+</script> -->
+
+<!------------------ 参数传递 ------------------->
+<!-- <script>
+    function f(name, age) {
+        console.log(name, age)//hello xxx
+        console.log(this)//{name: "wangcai"}
+    }
+    let obj = {
+        name: "wangcai"
+    }
+    // 默认传参时，是先传递bind函数后的参数
+    // 再传绑定bind之后的函数的参数 
+    let newF = f.bind(obj, "hello") //hello
+    newF("xxx")
+</script> -->
+
+
+<!------------------------------- bind原理(借助了call或者说apply) -------------------------->
+<!-- <script>
+    function f() {
+        console.log("f....")
+        console.log(this)
+    }
+    // bind原理本质上是要返回新的函数，然后手动调用
+    // bind最终this也是指向被借用函数f
+    Function.prototype.bind = function(context){
+        // console.log(this)//this指的是函数f
+        const that = this
+        // 这里的return 返回给了newF
+        return function(){
+            console.log(this)//window  原因是bind由newF调用，从属于window
+            // 这里的return值却是给了newF调用之后结果
+            return that.call(context)//在新返回的函数中会自动调用借用的函数 
+        }
+    }
+
+    let obj = {
+        name: "wangcai"
+    }
+    let newF = f.bind(obj)
+    console.log(newF())//第二个return值
+</script> -->
+
+<!--------------------------------bind原理（参数传递:处理bind后的参数传递）---------------------->
+<!-- <script>
+    function f(name, age,a) {
+        console.log(name, age,a) 
+        console.log(this) 
+    }
+    Function.prototype.bind = function(context){
+        const that = this
+        // 将伪数组转成真实数组 arguments
+        // arguments上没有slice方法，借用需要call,返回新的数组
+        let newArr = Array.prototype.slice.call(arguments,1)
+        return function(){
+          // apply传参需要传递数组
+          return that.apply(context,newArr)
+        }
+    }
+    let obj = {
+        name: "wangcai"
+    }
+    let newF = f.bind(obj,"hello","world") 
+    newF("xxx")//hello world undefined
+</script> -->
+
+
+<!--------------------------------bind原理（参数传递:绑定bind后的参数传递）---------------------->
+<!-- <script>
+        function f(name, age,a) {
+            console.log(name, age,a) 
+            console.log(this) 
+        }
+        Function.prototype.bind = function(context){
+            const that = this
+            let newArr = Array.prototype.slice.call(arguments,1)
+            return function(){
+              //绑定bind之后的传参
+              let newArr1 = Array.prototype.slice.call(arguments)
+              // 将绑定bind之后的传参和bind后的参数连接到一块传递过去
+              return that.apply(context,newArr.concat(newArr1))
+            }
+        }
+        let obj = {
+            name: "wangcai"
+        }
+        let newF = f.bind(obj,"hello","world") 
+        newF("xxx")
+    </script> -->
+
+
+<!------------------绑定this之后的函数还可以被new  -->
+<script>
+//    function f(){
+//        console.log(this)//{name: "wangcai"}
+//        console.dir(this)//Object
+//    }
+//    let obj = {name:"wangcai"}
+//    let bindF = f.bind(obj)
+//    bindF()
+
+
+
+// function f(){
+//        console.log(this)//f {}
+//        console.dir(this)//f
+//    }
+//    let obj = {name:"wangcai"}
+//    let bindF = f.bind(obj)
+//    // 如果绑定的函数被new了，new出来的是对象
+//    // this就指向这个对象 ，this就指向instance
+//    let instance = new bindF()
+</script>

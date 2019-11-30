@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}---{{age}}</h1>
+    </div>
+    <script>
+        let vm = new Vue({
+            // el: "#app",
+            data() {
+                return {
+                    name: "tanni",
+                    age:{}
+                }
+            },
+            mounted() {
+                // 在mounted中修改数据，那么需要使用this
+                this.$set(this.age,"age",100)
+            },
+            // 存在于这里的$mount它代替了el:"#app",管理边界
+        }).$mount('#app')
+        //1，此时获取到的是新数据，再次在控制台修改数据，将不再会得到新的数据
+        // vm.name = "wangcai"
+        // console.log(vm.$el)
+
+        // 2，不管是在那里修改数据，都得不到视图更新之后的数值  
+        // vm.name = "wangcai"
+        // console.log(vm.$el)
+        // debugger
+
+        // 3，它是异步的，会拿到修改数据之后的$el；
+        //   处理时在控制台改变数据，拿不到更新之后的值
+        // vm.name = "wangcai"
+        // setTimeout(() => {
+        //     console.log(vm.$el)
+        // })
+
+        // 4，会出现数据变化，视图更新的渐进过程，最终值（不管是在哪里改变数据）都会是更新之后的值
+        // vm.name = "wangcai"
+        // setTimeout(() => {
+        //     console.log(vm.$el)
+        // })
+        // debugger
+
+
+        // $watch监控数据变化
+        // vm.$watch("name",function(newV,oldV){
+        //    console.log(newV)  //得到的一定是新值  
+        // })
+        // vm.name = 'angai'
+
+
+        // $nextTick 解决异步 获取到的是更新之后的数据
+        // vm.name="wancai"
+        //   vm.$nextTick(()=>{
+        //       console.log(vm.$el)
+        //   })
+
+
+        // $set 设置新的数据，它只适用于对象
+        // vm.$set(vm.age,"age",10)
+        // console.log(vm.$el)
+
+
+        // console.log(vm.$options)//挂载项
+        // console.log(vm.$data)//data数据
+    </script>
+</body>
+<!-- 
+    vm中常见的属性，方法：$el,$watch,$nextTick,$set
+    $data,$options,$mounted
+ -->

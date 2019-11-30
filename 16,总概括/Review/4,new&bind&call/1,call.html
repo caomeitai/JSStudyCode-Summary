@@ -1,0 +1,226 @@
+<!-- 
+    概念：call()方法使用一个指定的this值和单独给出的一个或多个参数来调用一个函数.
+    语法：fun.call(thisArg, arg1, arg2, ...)
+    返回值：使用调用者提供的this值的参数调用该函数的返回值，如果没有返回值，为undefined
+    作用：call可以改变当前函数的this的指向，还会使得call前面的函数自动调用
+ -->
+
+
+
+<!------------------call借用别的方法------------------------->
+<!-- <script>
+    function f() {
+        console.log("f....")
+    }
+    let obj = {}
+    // 使得obj其借用f方法
+    f.call(obj) //f...函数f自动调用
+</script> -->
+
+
+<!----------------call可以改变this指向----------------------->
+<!-- call可以改变call前面函数中this的指向，它会指向call方法中的第一个参数 -->
+<!-- <script>
+    function f() {
+        console.log(this)
+    }
+    f() //单纯调用函数，那么this指向window
+    let obj = {name:"wangcai"}
+    // this指向了obj这个对象
+    f.call(obj) //改变this指向，谁调用call，this就指向谁{name:"wangcai"}
+</script> -->
+
+<!------------- 给call方法传递参数 f.call(obj,xx,xx) --------------->
+<!-- <script>
+   function f(n1,n2){
+       return n1+n2
+   }
+   let obj ={};
+   console.log(f.call(obj,1,2))//3
+</script> -->
+
+<!----------- call与apply的区别（传递参数方式不同）------------------>
+<!-- <script>
+    function f(n1, n2) {
+        return n1 + n2
+    }
+    let obj = {}
+    // apply传递参数是以数组形式，call则是直接挨个传递就OK
+    console.log(f.call(obj, 1, 2)) //3
+    console.log(f.apply(obj, [1, 2])) //3
+</script> -->
+
+<!------------------call的第一个参数是基本数据类型 ------------------>
+<!-- 当首参为基本数据类型时，this的指向将会是创建这个基本数据类型的构造器 -->
+<!-- <script>
+    function f() {
+        console.log(this)
+    }
+    f()//window
+    f.call("wangcai")// String {"wangcai"}
+    f.call(12)// Number {12}
+</script> -->
+
+
+<!------------------call的第一个参数是函数数据类型 ------------------>
+<!-- <script>
+  function f(){
+      console.log("f...")
+      console.log(this)
+  }
+  function g(){
+      console.log("g...")
+  }
+  f.call(g)//this就指向g函数且打印出f...
+</script> -->
+<!----------------------- call的链式调用 ------------------->
+<!-- <script>
+    function f() {
+        console.log("f...")
+        console.log(this)
+    }
+
+    function g() {
+        console.log(this)//window
+        console.log("g...")
+    }
+    f.call.call(g) //就仅仅打印出g...，这样好像f函数就不走啦！跑的是g函数
+</script> -->
+
+
+
+<!--------------------call原理(函数借用) -------------------->
+<!-- <script>
+  function f(){
+      console.log("f...")
+      console.log(this)
+  }
+  // call原理反正还是借用原型上的函数，使其调用且改变this的指向
+  // call方法存在于所有的函数上面，所以给函数原型对象上加上call方法,这样函数都能拿到call方法   
+  Function.prototype.call = function(context){
+    //   console.log(context)//call方法传参，传给context  {name: "wangcai"}
+    //   console.log(this)//function f(){}
+    context.fn = this//它表示给obj上挂上要借用的函数f
+  }   
+
+  let obj = {name:"wangcai"}
+  f.call(obj)
+</script> -->
+
+<!--------------------call原理(函数传参) fn没有被删除(它应该看的是obj首参中的函数是否被删除) -------------------->
+<!-- <script>
+    function f(a, b) {
+        console.log("f..." + a + b)
+        console.log(this)
+        return a + b
+    }
+    // 参数传递，arguments来接收实参，将所有参数存到里面
+    Function.prototype.call = function (context) {
+        context.fn = this //它表示给obj上挂上要借用的函数f
+        // console.log(arguments)//Arguments(3) [{…}, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        let args = []
+        // 去掉首参，推到新数组中  伪数组进行遍历
+        for (let i = 1; i < arguments.length; i++) {
+            // args.push(arguments[i])
+            args.push('arguments[' + i + ']') //push进去的是字符串
+        }
+        // console.log(args)// [2, 3]
+        // console.log(args)// ["arguments[1]", "arguments[2]"]
+
+        // eval是全局函数，计算某个字符串，并执行其中的代码
+        // 将括号中当做js代码，然后调用fn传递参数为args
+        let r = eval('context.fn(' + args + ')')
+        delete context.fn;
+        return r;
+
+    }
+    let obj = {
+        name: "wangcai"
+    }
+    f.call(obj, 2, 3)
+    console.dir(obj)
+</script> -->
+
+
+<!--------------------call原理(函数传参)借用的函数未清空  ------------------------------->
+<!-- <script>
+    function f1() {
+        console.log("f1...", arguments)
+    }
+    function f2() {
+        console.log("f2...")
+    }
+    Function.prototype.call = function (context) {
+        context.fn = this //将f1挂到f2上
+        let args = []
+        for (let i = 1; i < arguments.length; i++) {
+            args.push("arguments[" + i + "]") //转成字符串
+            // args.puh(arguments[i])//[2,3]
+        }
+        // console.log(args) //["arguments[2]", "arguments[3]"]
+        // context.fn()//函数调用，但未传递参数
+        // context.fn(...args)//调用且传参
+    }
+    f1.call(f2, 2, 3)
+    // console.dir(f2)//里面存有fn  f1函数
+</script> -->
+
+<!--------------------call原理(函数传参)函数没有返回值；加上返回值 ------------------------->
+<!-- <script>
+    function f1() {
+        console.log("f1...", arguments)
+        // return arguments[0]
+    }
+    function f2() {
+        console.log("f2...")
+    }
+    Function.prototype.call = function (context) {
+        context.fn = this //将f1挂到f2上
+        let args = []
+        for (let i = 1; i < arguments.length; i++) {
+            args.push(arguments[i]) //转成字符串
+        }
+        // console.log(args)//[2,3]
+        let r = context.fn(...args)//f1... Arguments(2) [2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        delete context.fn
+        // return r
+    }
+    f1.call(f2, 2, 3)
+    // console.dir(f2)
+</script> -->
+
+<!-----------------------------------call原理  ------------------------->
+<script>
+    function f1(a,b,c) {
+        console.log("f1...")
+        return a+b+c
+    }
+    Function.prototype.call = function (context) {
+        // 处理context为空，即没有内容去借用函数,就是window
+        context = context ? Object(context):window
+        context.fn = this; 
+        let args = []
+        for (let i = 1; i < arguments.length; i++) {
+            args.push(arguments[i]) //转成字符串
+        }
+        let r = context.fn(...args) //f1... Arguments(2) [2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        delete context.fn
+        return r
+    }
+    let obj={};
+    // f1.call(obj, 1, 2, 3)//仅仅调用的话得不到函数返回值，需要打印
+   console.log( f1.call(obj,1, 2, 3))//6 想要得到函数调用返回值，就需要在封装的函数与借用的函数中都返回结果
+</script>
+
+
+<!-- <script>
+  // 它会解析代码，首先()中参数必须是字符串，在控制台打印
+  eval("console.log('hello world')")//hello world
+</script> -->
+
+
+<!-- 
+    call:  1)改变this的指向  2)自动调用函数，使其执行
+    apply: 1)改变this指向    2)也会自动调函数，它与call相比传递参数时要求以数组形式
+    bind:  1)改变this指向    2)函数不会自动调用，需要手动执行
+ -->

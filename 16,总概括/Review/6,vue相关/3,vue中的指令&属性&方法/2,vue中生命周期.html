@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中生命周期</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        // vue实例创建之后，就存在生命周期，从死到生；其本质就是生命周期中的钩子函数
+        // 生命周期和钩子函数的区别：
+        //    在一个生命周期中，有多个钩子函数，它们不需要我们去调用，vue框架会在合适的时间去调用这些函数
+        let vm = new Vue({
+            el: "#app",
+            // 在最初vue实例还未创建时，该函数就已调用
+            // 一般不会使用该钩子，在混入一些方法或者说属性，后面的组件都可以使用
+            // 就比如vue-router原理时，maxin混入方法，它是在挂载router到vue实例上时用到啦
+            // 而该钩子在混入时给每个组件添加特有属性
+            beforeCreate() {
+                // console.log(this) //Vue {_uid: 0, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: Vue, …}
+                console.log("beforeCreate...") //beforeCreate...
+            },
+            // 实例创建完毕，把方法和计算属性已经挂载到当前组件，且已经完成数据劫持了
+            // 但还不是真实DOM，可以进行ajax请求，却不能操作dom
+            created() {
+                // console.log(this)
+                console.log("created...")
+                // console.log(this.$el)//undefined  此时拿不到真实DOM
+            },
+            data() {
+                return {
+                    name: "wangcai"
+                }
+            },
+            // 渲染DOM元素之前
+            beforeMount() {
+                console.log("beforeMount...")
+            },
+            // 渲染完毕，此时已存在真实Dom可以进行ajax请求以及vm.$el拿到真实DOM
+            mounted() {
+                console.log("mounted...")
+                // console.log(this.$el)//<div id="app"><h1>wangcai</h1></div>
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate...")
+            },
+            // 在这里不可进行数据修改，否则会陷入死循环
+            updated() {
+                // this.name=Math.random()
+                console.log("updated....")
+            },
+            // 在这里可以清除绑定的属性或者方法，清空定时器计时器
+            beforeDestroy() {
+               console.log("beforeDestroy...")
+            },
+            destroyed() {
+                console.log("destroyed...")
+            },
+            methods: {},
+        })
+        vm.$destroy()//使用$destroy可销毁vue实例
+        console.log(vm)
+    </script>
+</body>
+<!-- 
+    生命周期：beforeCreate;created;beforeMount;Mounted;
+             beforeUpdate;updated;beforeDestory;destoryed
+ -->
+</html>

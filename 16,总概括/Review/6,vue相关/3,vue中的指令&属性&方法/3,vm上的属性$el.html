@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data(){
+                return {
+                    name:"tanni"
+                }
+            }
+        })
+        // 在这里的数据更新，会重新渲染dom元素，同时$el也会随之改变
+        // 但在控制台改变数据时就只会引起视图更新，$el不会改变，还是老数据
+        // vm.name="wangcai"//数据更新啦，dom元素会重新渲染的
+        // console.log(vm.$el)//wangcai  当再次在控制台改变数据时，得到的$el还是老数据
+        // vm.name="jintan"
+        // console.log(vm.$el)
+
+
+        // vue中数据更新是同步还是异步？答：异步的  
+        // vm.name="wangcai"
+        // console.log(vm.$el )//得到的真实dom元素不是更新之后的，它需要配合debugger使用得到tanni
+        // debugger //让其配合debugger来使用时，得到的打印数据会是最初的老数据（不管是在哪里改变数据控制台还是代码中）
+
+        // 想要获取到更新后的真实dom元素，需要在下一事件环中得到，也就是setTimeout满足异步解决
+        // 同样的，当不配合debugger使用时，在控制台改变数据不会引起打印的数据变化，得到的是老数据
+        // vm.name="wangcai"
+        // setTimeout(()=>{
+        //     console.log(vm.$el)
+        // })
+
+        // 它不再会打印出老数据，而是直接得到更新之后的数据
+        // vm.name="wangcai"
+        // setTimeout(()=>{
+        //     console.log(vm.$el)
+        // })
+        // debugger
+        
+        
+    </script>
+</body>

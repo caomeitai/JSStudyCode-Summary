@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: "tanni",
+                    age: {}
+                }
+            },
+            // mounted() {
+            //     // $set仅适用于对象，首参是要设置的对象，然后是设置的数据键名，再次是键值
+            //     this.$set(this.age, "age", 13)
+            // },
+        })
+        // vm.age=12  未在data中的数据不可获取,无法侦测
+        console.log(vm.$data) //获取data中数据
+        console.log(vm.$options) //获取到的是vue实例配置项：data,components,filters
+        // 在vue实例外，this的指向就发生了改变，需要改为vm
+        vm.$set(vm.$data,"age",100) //$set只适用于设置对象   
+    </script>
+</body>

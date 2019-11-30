@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中指令</title>
+</head>
+
+<body>
+    <!-- 
+      vue中常见指令：
+        v-text:相当于{{}}插值表达式
+        v-html:它会渲染其中的标签元素<h1></h1>
+        
+        v-once:它只会渲染一次数据，但数据改变时，并不会再次渲染数据
+        v-for:遍历数据，可以是数字，数组，对象完全都ok，它需要注意的是key的绑定情况
+
+        v-if:标签显示与否，它是注重的是有无
+        v-else:与v-if配合使用
+        v-show:标签显示与否，它是注重标签的样式有无
+
+        v-bind:单向绑定属性
+        v-on:绑定的是事件
+        v-model:实现双向数据绑定
+
+    -->
+    <div id="app">
+        <!-- 1，v-text指令，相当于插值表达式{{}} -->
+        <!-- 
+            <h1 v-text="name"></h1>
+            <h1>{{name}}</h1> 
+        -->
+
+
+        <!-- 2，v-html指令，它会将html标签中的内容解析渲染 -->
+        <!-- v-html指令尽量不要使用，它存在xss攻击：当输入js脚本，浏览器自动执行 -->
+        <!-- <h1 v-html="html"></h1> -->
+
+        <!-- 会出现xss攻击，也就是浏览器自动解析js代码执行 <img src onerror="alert(1)"> -->
+        <!-- <input type="text" v-model="demo">
+        <p>{{demo}}</p> -->
+
+
+        <!-- 3，v-once指令，它仅仅会渲染一次，而当数据被改变时，将不再渲染 -->
+        <!-- <h1 v-once>{{name}}</h1> -->
+
+
+        <!-- 4，v-for指令，遍历数据，谁循环就写在谁身上；:key的作用就是唯一标识，以便于domdiff -->
+        <!-- 
+            1，尽量不要使用index作为key，使用index在仅仅改变数据顺序时，会创建新的dom元素；
+            使用唯一的id作为key，内容不变仅仅改变顺序时，只需要交换数据位置，在进行domdiff是不会出现新dom元素创建情况
+         -->
+        <!-- <ul>
+            <li v-for="(color,index) in colors" :key="index">{{color}}</li>
+        </ul> -->
+
+        <!-- 2，存在多个li时，key只要不一样是唯一的就行啦，其中`{$xxx}`数据可以拿到 -->
+        <!-- <ul v-for="(item,index) in fruits">
+            <li :key="`name_${index}`">{{item.name}}</li>
+            <li :key="`color_${index}`">{{item.color}}</li>
+        </ul> -->
+
+        <!-- 3，使用template标签，避免不必要的渲染 -->
+        <!-- <template v-for="(item,index) in fruits">
+            <li :key="`name_${index}`">{{item.name}}</li>
+            <li :key="`color_${index}`">{{item.color}}</li>
+        </template> -->
+
+
+        <!-- 5，v-if指令，标签显示与否，注重的是标签DOM元素的有无  -->
+        <!-- v-if配合v-else指令使用，另外它可以作用于template标签 -->
+        <!-- <template v-if="isShow">
+            <span>OK</span>
+        </template>
+        <template v-else>
+            <span>不OK</span>
+        </template> -->
+
+        <!-- 
+            v-if配合v-for为何不可以？
+            答：v-for比v-if优先级更高一些，那就意味着v-if将分别重复的运用于每个v-for循环中 
+            解决上述问题方法：
+              1，将v-for或者v-if其中一者放在更高一级的ul标签中；
+              2，将v-if的数据放到计算属性computed中；
+              3，当你想要目的是有条件的跳过循环的执行，可以将v-if放到外层元素或者template标签上
+        -->
+        <!-- <ul>
+            <li v-if="isShow" v-for="(color,index) in colors">{{color}}</li>
+        </ul> -->
+
+
+        <!-- 6，v-show指令，控制标签显示与否，注重的是样式的有无display: none，它一直都存在DOM元素 -->
+        <!-- v-show指令必须作用于真实的dom元素，template标签v-show是不起作用的 -->
+        <!-- <template v-show="isShow">
+            <span>OK</span>
+        </template>
+        <template v-show="!isShow">
+            <span>不OK</span>
+        </template> -->
+
+        <!-- <div v-show="isShow">
+            <span>OK</span>
+        </div>
+        <div v-show="!isShow">
+            <span>不OK</span>
+        </div> -->
+
+
+        <!-- 7，v-bind指令，实现单向数据绑定 -->
+        <!-- title="name"这仅仅是title属性，属性值是name字符串 -->
+        <!-- <p title="name">wangcai</p>  -->
+
+        <!-- 想要属性值是下面定义的data中的name值 -->
+        <!-- 下面几种方法是不ok的 -->
+        <!-- <p title="{{name}}">wangcai</p> -->
+        <!-- <p title={{name}}>wangcai</p> -->
+
+        <!-- v-bind without argument expects an Object or Array value -->
+        <!-- <p v-bind="name">wangcai</p> -->
+
+        <!-- ok，得到data中的属性值: title="tanni" -->
+        <!-- 在绑定属性时，除了v-bind:属性名="属性值"这种方法以外，
+             还可以下面这样，跟$attrs一样去传递一个对象，里面写着属性值:属性名 
+        -->
+        <!-- <p v-bind:title="name">wangcai</p>
+        <p v-bind="{title:name}">wangcai</p>
+        <p :title="name">wangcai</p> -->
+
+
+        <!-- 8，v-on指令，实现事件绑定，它可以与$listeners相比较，它同样可以传递对象，里面放的就是事件名与监听器 -->
+        <!-- 绑定的是点击事件click -->
+        <!-- <button v-on:click="change">事件绑定v-on</button>
+        <button @click="change">事件绑定@</button> -->
+
+
+        <!-- 9，v-model指令，实现双向数据绑定，它是属性value与事件input的语法糖；它仅需要名字一定是value和input事件就行 -->
+        <!-- <input v-bind:value="name" v-on:input="change"></input> -->
+        <!-- <input :value="name" @input="change"></input> -->
+
+        <!-- <input v-bind:value="value" v-on:input="change">{{value}}</input> -->
+        <!-- <input :value="value" @input="change">{{value}}</input> -->
+
+        <!-- 最终v-model的代码 -->
+        <!-- <input v-model="value">{{value}}</input> -->
+
+
+        <!-- 10，当存在相同的标签或者说是DOM元素时，它不会重新渲染DOM元素；想要让它进行对比，找到不同之后重新渲染，可以加上不同的key -->
+        <template v-if="isShow">
+            <span>OK</span>
+            <input type="text" key="1" >
+        </template>
+        <template v-else>
+            <span>不OK</span>
+            <input type="text" key="2">
+        </template>
+
+
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: "tanni",
+                    html: '<h1>hello</h1>',
+                    demo: "",
+                    colors: ['red', 'green', 'blue', 'purple'],
+                    fruits: [{
+                        name: "苹果",
+                        color: "red"
+                    }, {
+                        name: "橘子",
+                        color: "orange"
+                    }, {
+                        name: "香蕉",
+                        color: "yellow"
+                    }],
+                    isShow: false,
+                    value: "wangcai"
+                }
+            },
+            methods: {
+                change(e) {
+                    // console.log(e)//事件对象
+                    console.log("change...")
+                    this.value = e.target.value
+
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

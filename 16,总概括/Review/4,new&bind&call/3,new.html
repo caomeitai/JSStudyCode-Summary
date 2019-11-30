@@ -1,0 +1,73 @@
+<script>
+    // ------------------------------- new原理  
+    // new是关键字 不是方法，只能通过函数来实现
+    // shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+    // function Person(name) {
+    //     this.name = name
+    // }
+    // Person.prototype.say = function () {
+    //     console.log("say...")
+    // }
+
+    // function myNew() {
+    //     // console.log(arguments)//Arguments(2) [ƒ, "wangcai", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    //     let Constructor = [].shift.call(arguments) //这样就拿到Person函数
+    //     // 类在new完之后得到一个对象   obj对象中有方法和属性
+    //     let obj = {}
+    //     // console.dir(obj.__proto__)//Object
+    //     // console.log(Constructor.prototype)//{say: ƒ, constructor: ƒ}
+    //     obj.__proto__ = Constructor.prototype//拿到原型上的方法
+    //     // console.log(arguments)//Arguments ["wangcai", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    //     Constructor.apply(obj,arguments)//拿到Person上的属性
+    //     return obj
+    // }
+
+    // let p = myNew(Person, "wangcai")
+    // console.log(p.name)
+    // p.say()
+
+    // let p = new Person ("wangcai")
+    // console.log(p.name)//wangcai
+    // p.say()//say...
+
+
+   //-----------------------------------------new原理完善 
+    //当你new上Person一个构造器时返回一个对象 
+   function Person(name) {
+        this.name = name
+        return{}
+
+    }
+    Person.prototype.say = function () {
+        console.log("say...")
+    }
+    function myNew() {
+        let Constructor = [].shift.call(arguments) 
+        let obj = {}
+        obj.__proto__ = Constructor.prototype 
+        // 这里的r就是上面返回的新对象  如果没有返回值则apply得到undefined
+        let r = Constructor.apply(obj, arguments) 
+        console.log(r)
+        // 当构造器没有返回值时，返回obj,存在返回值{}时，就返回Object空对象
+        return r instanceof Object ? r : obj
+        // return obj
+    }
+    let p = myNew(Person, "wangcai")
+    console.log(p)
+    console.log(p.name)
+    p.say()
+    // let p = new Person()
+    // console.log(p)
+    // console.log(p.name)
+    // p.say()
+
+
+
+// ------------------------ new内部做什么？
+// new 究竟做了什么？
+    // 创建一个新对象
+    // 将新对象的_proto_指向构造函数的prototype对象
+    // 将构造函数的作用域赋值给新对象 （也就是this指向新对象）
+    // 执行构造函数中的代码（为这个新对象添加属性）
+    // 返回新的对象
+</script>

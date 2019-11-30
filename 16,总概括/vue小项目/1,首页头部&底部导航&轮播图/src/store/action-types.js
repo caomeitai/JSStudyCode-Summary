@@ -1,0 +1,3 @@
+export  const SET_CATEGORY = "SET_CATEGORY";
+export  const SET_CURRENT_MOVIE = "SET_CURRENT_MOVIE"
+export  const SET_SLIDES = "SET_SLIDES"

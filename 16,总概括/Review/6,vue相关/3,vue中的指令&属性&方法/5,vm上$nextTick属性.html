@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: "tanni"
+                }
+            },
+        })
+        // 监测数据
+        // vm.$watch("name", function (newV, oldV) {
+        //     console.log(newV) 
+        // })
+        vm.name = "wangcai"
+        // 视图更新是异步的，最后得到的可能不是更新后新数据
+        // 要想获取新的dom元素，就只能在下一事件环中得到  setTimeout宏任务，.then的微任务
+        vm.$nextTick(()=>{
+            // $nextTick属性，相当于setTimeout定时器这些异步操作
+            console.log(vm.$el.innerHTML)
+        })   
+    </script>
+</body>

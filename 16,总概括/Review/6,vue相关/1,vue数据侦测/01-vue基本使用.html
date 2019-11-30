@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>vue基本使用</title>
+</head>
+
+<body>
+    <!-- 数据改变，视图更新；视图改变，数据也会变化！ -->
+    <!-- 这里是视图View -->
+    <div id="app">
+        <h1>{{age}}</h1>
+    </div>
+</body>
+<script>
+    // 这里是数据Model
+    // 获取数据时，因为vm实例代理了data,直接vm.name就可获取到数据
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            // name: "Tanni"
+            // age:{number:12}
+            // age:{number:{counter:12}}
+            age:[1,2,3]
+        }
+    })
+</script>
+
+</html>

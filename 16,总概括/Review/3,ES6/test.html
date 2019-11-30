@@ -1,0 +1,82 @@
+<script>
+    // 内存泄漏：在浏览器中生成快照，在Memory中搜索map会存在数据，从而导致内存的泄漏 
+    // let map = new Map([
+    //     ["name", "tanni"],
+    //     ["age", 12]
+    // ])
+    // let obj = {
+    //     "address": "住所"
+    // }
+    // map.set(obj, "zhengzhou")
+    // obj = null
+    // console.log(map) // Map {'name' => 'tanni','age' => 12,{ address: '住所' } => 'zhengzhou' } 
+
+
+
+    // 声明类来判断内存泄漏
+    // class Dog {}
+    // let dog = new Dog()
+    // let map = new Map([
+    //     ["name", "tanni"],
+    //     ["age", 12]
+    // ])
+    // // console.log(dog)//Dog{}
+    // map.set(dog, "nan")
+    // console.log(map) //Map { 'name' => 'tanni', 'age' => 12, Dog {} => 'nan' }
+    // // dog = null
+    // console.log(map) //Map { 'name' => 'tanni', 'age' => 12, Dog {} => 'nan' }
+
+
+
+    // WeakMap
+    // class Dog {}
+    // let dog = new Dog()
+    // // WeakMap的键必须是对象
+    // let map = new WeakMap();
+    // map.set(dog, "nan")
+    // console.log(map)//WeakMap {Dog => "nan"}
+    // dog = null
+    // console.log(map)//WeakMap {Dog => "nan"}
+
+    // ES6静态属性
+    // class Animal {
+    //     static a = 110;
+    //     constructor(name) {
+    //         //实例属性
+    //         this.name = name
+    //     }
+    //     // 公共属性
+    //     get age() {
+    //         return 12
+    //     }
+    // }
+    // let a = new Animal("tanni")
+    // console.log(Animal.a)//110
+
+
+    // 箭头函数this指向
+    // let a = 120
+    // let obj = {
+    //     a: 666,
+    //     f: function () {
+    //         setTimeout(function () {
+    //             console.log(this) //window
+    //             console.log(this.a) //undefined  原因是let不挂到window上
+    //         }, 1000)
+    //     }
+    // }
+    // obj.f()
+
+    let a = 120
+    let obj = {
+        a: 666,
+        // 与上面同理，this在往上跑一层 obj的外边就是window，看是let还是var
+        f: () => {
+            setTimeout(() => {
+                console.log(this) //window
+                console.log(this.a) //undefined
+            }, 1000)
+        }
+    }
+    obj.f()
+</script>

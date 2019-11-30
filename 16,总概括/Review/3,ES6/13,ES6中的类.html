@@ -1,0 +1,68 @@
+<!---------------------- 类的最基本内容 ------------------>
+<!-- <script>
+   class Animal{
+       constructor(name){
+         this.name = name
+         this.age = 12
+       }
+   }
+   let a = new Animal("tanni")
+   console.log(a.name)//tanni
+   console.log(a.age)//12
+   console.log(a.hasOwnProperty("name"))//true
+</script> -->
+
+<!-----------------------访问器------------------------->
+<!-- <script>
+    class Animal {
+        constructor(name) {
+            this.name = name
+        }
+        get age(){
+            return 122
+        }
+    }
+    let a = new Animal("tanni")
+    console.log(a.name) //tanni
+    console.log(a.hasOwnProperty("name")) //true
+
+    // 看看访问器的值以及属于啥属性
+    console.log(a.age)//122
+    console.log(Animal.age)//undefined
+    console.log(a.hasOwnProperty("age")) //false
+    console.log(a.__proto__.hasOwnProperty("age")) //true
+</script> -->
+
+<!--------------------------------- 静态属性--------------------->
+<!-- 静态属性定义static  调用的话就是用类名.直接调用 -->
+<script>
+    class Animal {
+        // 定义静态属性和静态方法
+        static a = 120
+        static eat() {
+            console.log("eat...")
+        }
+        constructor(name) {
+            // 构造器中的是实例属性
+            this.name = name
+        }
+        // 公共方法存在于原型对象上
+        say() {
+            console.log("say...")
+        }
+        get age() {
+            return 123
+        }
+    }
+    let obj = new Animal("tanni")
+    // 调用的话就是用类名.直接调用
+    console.log(Animal.a)//120
+    console.log(Animal.eat())//eat...
+
+    // console.log(obj.a)//undefined
+    // console.log(obj.eat())//obj.eat is not a function
+
+    // 静态属性不属于实例属性，也不属于公共属性
+    console.log(obj.hasOwnProperty("a"))//false
+    console.log(obj.__proto__.hasOwnProperty("a"))//false
+</script>

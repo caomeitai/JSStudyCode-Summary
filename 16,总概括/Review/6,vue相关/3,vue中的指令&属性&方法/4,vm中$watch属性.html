@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: "tanni"
+                }
+            },
+        })
+        // watch方法就是监测data中的数据变化，首参是要检测的数据属性xxx，然后就是回调函数
+        // 通过$watch得到的值肯定是更新过之后的值，数据发生改变，会调用回调函数
+        vm.$watch("name", function (newV, oldV) {
+            console.log(newV)//这里新值监测只能通过控制台
+        })
+        vm.name="wangcai"
+        console.log(vm.$el)//一存在debugger就会是旧值
+        // vm.$el.innerHTML得到的值是更新前的值 
+        console.log(vm.$el.innerHTML)//<h1>tanni</h1>
+        debugger
+    </script>
+</body>
