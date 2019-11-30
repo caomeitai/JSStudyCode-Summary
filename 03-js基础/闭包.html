@@ -37,7 +37,7 @@
 
 
     // 点击事件问题解决方案：
-// 定义一个变量拿到li的元素的名字，即获得每一个li存放在lis中
+   // 定义一个变量拿到li的元素的名字，即获得每一个li存放在lis中
     //  var lis =document.getElementsByTagName("li")
     // //  for 循环会立即执行
     // for(var i=0;i<lis.length;i++){
@@ -63,6 +63,7 @@
 //     // 保存拿到元素的下标
 //      lis[i].index=i;
 //      lis[i].onclick = function(){
+//          console.log(this)//事件源
 //         //  console.log(lis[i].index);//Cannot read property 'index' of undefined
 //         // 在监听器中事件源需要使用this写代码
 //         console.log(this.index);

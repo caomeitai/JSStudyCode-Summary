@@ -8,12 +8,14 @@
     
 </body>
 <script>
-   let a  = 1;
+   let a  = 1;//全局变量
    let f = function(){
-       let a = 2;
-       let b = 1;
+       let a = 2;//局部变量
+       let b = 1;//局部变量
+	   //f1属于局部函数
        let f1 = function(){
-           let c = 1;
+           let c = 1;//局部变量
+		   //f11属于局部函数
            let f11 = function(){
                console.log(a,b,c)
            }
